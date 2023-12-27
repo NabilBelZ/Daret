@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -50,7 +51,11 @@ public class UserServiceImpl implements UserService {
 
             if (passwordService.verifyPassword(userDto.getPassword(), storedUser.getPassword())) {
                 session.setAttribute("userId", storedUser.getId());
-                return "redirect:/home";
+                if(storedUser.getRole().equals("admin")){
+                    return "redirect:/adminDashboard";
+                }else{
+                    return "redirect:/userDashboard";
+                }
             } else {
                 model.addAttribute("connectionError", "Email or password invalid");
                 return "login";

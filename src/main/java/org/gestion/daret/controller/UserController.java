@@ -56,4 +56,15 @@ public class UserController {
     public String homePage(Model model, HttpSession session){
         return userService.homeRedirection(model, session);
     }
+
+
+    @GetMapping("/adminDashboard")
+    public String redirectionAdminDashboard(){
+        return "adminDashboard";
+    }
+
+    @GetMapping("/userDashboard")
+    public String redirectionUserDashboard(){
+        return "userDashboard";
+    }
 }
