@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Login</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            /*background-image: linear-gradient(45deg, rgba(223, 72, 129, 0.1), rgba(196, 48, 215, 0.1));*/
+            background-image: url(/images/NY2.png);
+            background-size: cover;
+    
+        }
+        .wrapper{
+            width: 400px;
+            background-color: white;
+            border-radius: 50px;
+            box-shadow: rgba(223, 72, 129, 0.12) 0px 2px 4px 0px, rgba(196, 48, 215, 0.32) 0px 2px 16px 0px;
+        }
+        .image{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid pink;
+            text-align: center;
+        }
+        .image img{
+            width: 60%;
+        }
+        h1{
+            text-align: center;
+            margin: 20px 0px;
+        }
+        .text-input{
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .text-input input{
+            width: 90%;
+            height: 7vh;
+            background-color: transparent;
+            border: 1px solid black;
+            border-radius: 15px;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .text-input i{
+            position: absolute;
+            right: 40px;
+            top: 15px;
+        }
+        .text-input input::placeholder{
+            color: #222;
+            font-size: 15px;
+            font-weight: 400;
+        }
+        .btn{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 6vh;
+            margin-bottom: 15px;
+        }
+        .btn button{
+            width: 70%;
+            height: 100%;
+            border-radius: 20px;
+            border: none;
+            font-size: 15px;
+            font-weight: 600;
+            background-image: linear-gradient(45deg, #df4881, #c430d7);
+            margin-top: 15px;
+        }
+        .btn button:hover{
+            cursor: pointer;
+        }
+        .register-link{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 20px;
+        }
+        .register-link p{
+            font-size: 15px;
+        }
+        .register-link a{
+            text-decoration: none;
+            color: #222;
+            font-weight: 600;
+        }
+        .register-link a:hover{
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <form th:action="@{/registration_process}" method="post" th:object="${user}">
+            <div class="image">
+                <a th:href="@{/}"><img src="/images/logo.png"></a>
+            </div>
+            <h1>Create Account</h1>
+            <h3 th:text="${error}" style="text-align: center; color: red; padding-bottom: 10px;"></h3>
+            <div class="text-input">
+                <input type="text" placeholder="FirstName" th:field="*{firstname}" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="text-input">
+                <input type="text" placeholder="LastName" th:field="*{lastname}" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="text-input">
+                <input type="email" placeholder="E-mail" th:field="*{email}" required>
+                <i class='bx bxs-envelope'></i>
+            </div>
+
+            <div class="text-input">
+                <input type="password" placeholder="Password" th:field="*{password}" required minlength="5">
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div class="text-input">
+                <input type="password" placeholder="Confirm Password" name="passConfirmation" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div class="btn">
+                <button type="submit">Register</button>
+            </div>
+            <div class="register-link">
+                <p>You have an account? <a th:href="@{/login}">Login</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

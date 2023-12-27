@@ -1,0 +1,77 @@
+package org.gestion.daret.services.impl;
+
+import jakarta.servlet.http.HttpSession;
+import org.gestion.daret.dto.UserDto;
+import org.gestion.daret.models.User;
+import org.gestion.daret.repository.UserRepository;
+import org.gestion.daret.services.PasswordService;
+import org.gestion.daret.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.NoSuchElementException;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+    private final UserRepository userRepository;
+    private final PasswordService passwordService;
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository, PasswordService passwordService) {
+        this.userRepository = userRepository;
+        this.passwordService = passwordService;
+    }
+
+    @Override
+    public String RegistrationProcess(UserDto userDto, String passConfirmation, Model model) {
+        if (userDto.getPassword().equals(passConfirmation)) {
+            User user = new User();
+            user.setId(userDto.getId());
+            user.setFirstname(userDto.getFirstname());
+            user.setLastname(userDto.getLastname());
+            user.setEmail(userDto.getEmail());
+            user.setPassword(passwordService.hashPassword(userDto.getPassword())); // Fixed variable name
+            userRepository.save(user);
+            return "registration_success";
+        } else {
+            model.addAttribute("error", "The entered confirmation password does not match the provided password.");
+            return "register";
+        }
+    }
+
+    @Override
+    public String LoginProcess(UserDto userDto, Model model, HttpSession session) {
+        try {
+            User storedUser = userRepository.findByEmail(userDto.getEmail())
+                    .orElseThrow(() -> new NoSuchElementException("User not found"));
+
+            if (passwordService.verifyPassword(userDto.getPassword(), storedUser.getPassword())) {
+                session.setAttribute("userId", storedUser.getId());
+                return "redirect:/home";
+            } else {
+                model.addAttribute("connectionError", "Email or password invalid");
+                return "login";
+
+            }
+        } catch (NoSuchElementException ex) {
+            model.addAttribute("connectionError", "Email or password invalid");
+            return "login";
+        }
+    }
+
+    @Override
+    public String homeRedirection(Model model, HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        if(userId != null){
+            User storedUser = userRepository.findById(userId).orElse(null);
+            model.addAttribute("user", storedUser);
+            return "home";
+        }else{
+            return "redirect:/login";
+        }
+    }
+
+}

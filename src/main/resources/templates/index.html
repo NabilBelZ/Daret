@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARET</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+        .hero{
+            width: 100%;    
+            min-height: 100vh;
+            background-image: url(/images/background.png);
+            background-position: center;
+            background-size: cover;
+        }
+        nav{
+            padding: 10px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            height: 10vh;
+            width: 100%;
+            box-shadow: rgba(0, 0, 0, 0.20) 0px 1px 4px -1px;
+            border-radius: 10px;
+        }
+        nav img{
+            width: 140px;
+        }
+        nav ul{
+            margin-left: 25px;
+        }
+        nav ul li{
+            display: inline-block;
+            list-style: none;
+            margin: 0px 30px;
+        }
+        nav ul li a{
+            text-decoration: none;
+            color: #222;
+            font-size: 17px;
+        }
+        .buttons a{
+            margin-right: 25px;
+            color: #222;
+        }
+        .buttons .sign-up{
+            text-decoration: none;
+            background-image: linear-gradient(45deg, #df4881, #c430d7);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .buttons .sign-in{
+            text-decoration: none;
+            padding: 10px 30px;
+            background-image: linear-gradient(45deg, #df4881, #c430d7);
+            border-radius: 30px;
+            border-top-right-radius: 0px;
+            color: #fff;
+            font-size: 16px;
+            transition: 0.5s ease;
+        }
+        .buttons .sign-in:hover{
+            border-top-right-radius: 30px;
+            transition: 0.5s ease;
+        }
+        .content{
+            margin-top: 4%;
+            margin-left: 3%;
+            max-width: 600px;
+        }
+        .content h1{
+            font-size: 70px;
+            color: #222;
+            animation-delay: 0.5s;
+        }
+        .content p{
+            color: #333;
+            font-size: 20px;
+            margin-top: 6%;
+            margin-bottom: 11%;
+            animation-delay: 0.7s;
+        }
+        .content .join-now{
+            text-decoration: none;
+            padding: 20px 50px;
+            background-image: linear-gradient(45deg, #df4881, #c430d7);
+            border-radius: 30px;
+            border-top-right-radius: 0px;
+            color: #fff;
+            font-size: 20px;
+            transition: 0.5s ease;
+            font-weight: 600;
+            animation-delay: 1s;
+        }
+        .join-now:hover{
+            border-top-right-radius: 30px;
+            transition: 0.5s ease;
+        }
+        .feature-img{
+            width: 750px;
+            position: absolute;
+            bottom: 0;
+            right: 0%;
+            animation-delay: 1s;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: moveup 1.1s linear forwards;
+        }
+        .anim{
+            opacity: 0;
+            transform: translateY(30px);
+            animation: moveup 0.5s linear forwards;
+        }
+
+        @keyframes moveup{
+            100%{
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <nav>
+            <a href=""><img src="/images/logo.png" alt="logo"></a>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">About us</a></li>
+                <li><a href="">Contact</a></li>
+            </ul>
+            <div class="buttons">
+                <a href="/register" class="sign-up">Create account</a>
+                <a href="/login" class="sign-in">Login</a>
+            </div>
+        </nav>
+        <div class="content">
+            <h1 class="anim">Prendre part à une tontine.</h1>
+            <p class="anim">Participer à une tontine implique contribuer régulièrement à un fonds commun avec d'autres membres, dans le but de recevoir périodiquement des sommes d'argent ou des avantages, en rotation, au sein du groupe.</p>
+            <a href="" class="join-now anim">Join Now</a>
+        </div>
+        <img src="/images/happy_women.png" class="feature-img" alt="happy">
+    </div>
+</body>
+</html>
