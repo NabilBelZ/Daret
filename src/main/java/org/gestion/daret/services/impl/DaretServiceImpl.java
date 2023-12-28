@@ -34,12 +34,13 @@ public class DaretServiceImpl implements DaretService {
         daret.setDateFin(daretDto.getDateFin());
         daret.setPeriode(daretDto.getPeriode());
         daret.setMontantTotal(daretDto.getMontantTotal());
-        daret.setNbParticipant(0);
-        daret.setTourDeRole(new ArrayList<>());
-        daret.setParticipations(new ArrayList<>());
+        daret.setEtat(true);
+        //daret.setNbParticipant(0);
+      //  daret.setTourDeRole(new ArrayList<>());
+       // daret.setParticipations(new ArrayList<>());
         daretRepository.save(daret);
         model.addAttribute("msgSuccess", "Felicitation ! Daret Créee avec succes !");
-        return "redirect:/adminDashboard";
+        return "adminDashboard";
     }
 
     @Override

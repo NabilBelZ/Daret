@@ -28,7 +28,7 @@ public class Daret {
     private float montant;
     private float montantTotal;
     private boolean etat;
-    private int nbParticipant;
+    private int nbParticipant = 0;
     @OneToMany
     private List<Tour> tourDeRole;
     @OneToMany

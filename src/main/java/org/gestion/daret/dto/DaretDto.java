@@ -23,5 +23,5 @@ public class DaretDto {
     private Date dateFin;
     private float montant;
     private float montantTotal;
-
+    private boolean etat;
 }
