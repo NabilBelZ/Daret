@@ -8,7 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 public interface UserService {
-    public String RegistrationProcess(UserDto userDto, String passConfirmation, Model model);
+    public String RegistrationProcess(UserDto userDto, String passConfirmation, Model model, HttpSession session);
     public String LoginProcess(UserDto userDto, Model model, HttpSession session);
     public String homeRedirection(Model model, HttpSession session);
+
+    public String seDeconnecter(HttpSession session);
+
 }

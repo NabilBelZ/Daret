@@ -9,6 +9,7 @@ import java.util.Date;
 public interface DaretService {
 
     public String createDaret(DaretDto daretDto, Model model);
-    public String readDaret(DaretDto DaretDto, Model model, HttpSession session);
-    public String updateDaret(Model model, HttpSession session);
+    public String readDaret(DaretDto DaretDto, Model model);
+    public String updateDaret(DaretDto DaretDto, Model model);
+    public String deleteDaret(DaretDto DaretDto, Model model);
 }

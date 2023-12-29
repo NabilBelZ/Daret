@@ -26,4 +26,7 @@ public class UserDto {
     @Column(nullable = false, length = 30)
     private String password;
 
+    @Column(nullable = false, length = 30)
+    private String role;
+
 }

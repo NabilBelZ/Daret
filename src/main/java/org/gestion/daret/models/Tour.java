@@ -19,8 +19,10 @@ public class Tour {
     private Date dateDebut;
     private Date dateFin;
     private String periode;
-    @OneToMany
-    private List<Membre> membre;
+    //@ManyToOne
+    //private Membre membre;
     @ManyToOne
     private Daret daret;
+    @ManyToOne
+    private Participation participation;
 }

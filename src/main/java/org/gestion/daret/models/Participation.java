@@ -15,11 +15,11 @@ public class Participation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idParticipation;
-    @OneToOne
+    @ManyToOne
     private Daret daret;
-    @OneToMany
+    @ManyToMany
     private List<Membre> membre;
     private float montantParticipation;
-    @OneToMany
+    @OneToMany(mappedBy = "participation")
     private List<Tour> tours;
 }

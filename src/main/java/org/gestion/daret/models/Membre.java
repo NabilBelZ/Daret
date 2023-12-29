@@ -17,12 +17,12 @@ public class Membre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idMembre;
-    @OneToOne
+    @ManyToOne
     private User user;
 
   // private Daret daret;
-    @OneToMany
-    private List<Tour> tourDeRole;
-    @OneToMany
+   // @OneToMany(mappedBy = "membre")
+   // private List<Tour> tourDeRole;
+    @ManyToMany
     private List<Participation> participations;
 }

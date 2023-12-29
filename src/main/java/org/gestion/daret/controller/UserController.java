@@ -38,8 +38,8 @@ public class UserController {
     }
 
     @PostMapping("/registration_process")
-    public String processRegistration(@ModelAttribute("user") UserDto userDto, @RequestParam("passConfirmation") String passConfirmation, Model model){
-        return userService.RegistrationProcess(userDto, passConfirmation, model);
+    public String processRegistration(@ModelAttribute("user") UserDto userDto, @RequestParam("passConfirmation") String passConfirmation, Model model, HttpSession session){
+        return userService.RegistrationProcess(userDto, passConfirmation, model, session);
     }
 
     @GetMapping("/login")
@@ -65,6 +65,13 @@ public class UserController {
 
     @GetMapping("/userDashboard")
     public String redirectionUserDashboard(){
+
         return "userDashboard";
     }
+
+    @GetMapping("/seDeconnecter")
+    public String seDeconnecterProcess(HttpSession session){
+        return userService.seDeconnecter(session);
+    }
+
 }

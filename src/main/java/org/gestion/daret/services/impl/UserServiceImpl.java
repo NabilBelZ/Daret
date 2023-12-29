@@ -27,15 +27,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String RegistrationProcess(UserDto userDto, String passConfirmation, Model model) {
+    public String RegistrationProcess(UserDto userDto, String passConfirmation, Model model, HttpSession session) {
         if (userDto.getPassword().equals(passConfirmation)) {
             User user = new User();
             user.setId(userDto.getId());
             user.setFirstname(userDto.getFirstname());
             user.setLastname(userDto.getLastname());
             user.setEmail(userDto.getEmail());
-            user.setPassword(passwordService.hashPassword(userDto.getPassword())); // Fixed variable name
+            user.setPassword(passwordService.hashPassword(userDto.getPassword()));
             userRepository.save(user);
+            session.setAttribute("role", userDto.getRole());
             return "registration_success";
         } else {
             model.addAttribute("error", "The entered confirmation password does not match the provided password.");
@@ -77,6 +78,11 @@ public class UserServiceImpl implements UserService {
         }else{
             return "redirect:/login";
         }
+    }
+
+    public String seDeconnecter(HttpSession session){
+        session.removeAttribute("userId");
+        return "redirect:/login";
     }
 
 }

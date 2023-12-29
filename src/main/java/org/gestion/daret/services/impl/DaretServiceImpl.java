@@ -34,6 +34,7 @@ public class DaretServiceImpl implements DaretService {
         daret.setDateFin(daretDto.getDateFin());
         daret.setPeriode(daretDto.getPeriode());
         daret.setMontantTotal(daretDto.getMontantTotal());
+        daret.setDescription(daretDto.getDescription());
         daret.setEtat(true);
         //daret.setNbParticipant(0);
       //  daret.setTourDeRole(new ArrayList<>());
@@ -44,12 +45,18 @@ public class DaretServiceImpl implements DaretService {
     }
 
     @Override
-    public String readDaret(DaretDto DaretDto, Model model, HttpSession session) {
+    public String readDaret(DaretDto DaretDto, Model model) {
         return null;
     }
 
     @Override
-    public String updateDaret(Model model, HttpSession session) {
+    public String updateDaret(DaretDto DaretDto, Model model) {
         return null;
     }
+
+    @Override
+    public String deleteDaret(DaretDto DaretDto, Model model) {
+        return null;
+    }
+
 }

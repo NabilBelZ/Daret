@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
 
+import java.util.List;
+
 @Data @NoArgsConstructor @AllArgsConstructor
 @Entity
 @Table(name = "users")
@@ -29,4 +31,6 @@ public class User {
     @Column(nullable = false)
     private String role = "user";
 
+    // @OneToMany(mappedBy = "user")  bhal hnaya khdama dak cascade hit ila mshna user aytmsho les membre
+   // private List<Membre> membres;
 }

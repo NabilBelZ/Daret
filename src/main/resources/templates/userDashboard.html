@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -39,7 +39,7 @@
 <div class="page d-flex">
   <div class="sidebar bg-white p-20 p-relative">
     <div class="logo">
-      <a href=""><img src="/images/logo.png"></a>
+      <a href="/home"><img src="/images/logo.png"></a>
     </div>
     <ul>
       <li>
@@ -55,21 +55,21 @@
         </a>
       </li>
       <li>
-        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="courses.html">
+        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="tontines.html">
           <i class="fa-solid fa-diagram-project fa-fw"></i>
           <span>Tontines</span>
-        </a>
-      </li>
-      <li>
-        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="friends.html">
-          <i class="fa-regular fa-circle-user fa-fw"></i>
-          <span>Utilisateurs</span>
         </a>
       </li>
       <li>
         <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="settings.html">
           <i class="fa-solid fa-gear fa-fw"></i>
           <span>Settings</span>
+        </a>
+      </li>
+      <li>
+        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/seDeconnecter">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>se déconnecter</span>
         </a>
       </li>
     </ul>
