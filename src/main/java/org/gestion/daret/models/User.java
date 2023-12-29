@@ -31,6 +31,6 @@ public class User {
     @Column(nullable = false)
     private String role = "user";
 
-    // @OneToMany(mappedBy = "user")  bhal hnaya khdama dak cascade hit ila mshna user aytmsho les membre
-   // private List<Membre> membres;
+    @OneToMany(mappedBy = "user") // bhal hnaya khdama dak cascade hit ila mshna user aytmsho les membre
+   private List<Membre> membres;
 }
