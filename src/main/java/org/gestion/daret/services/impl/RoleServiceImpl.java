@@ -10,15 +10,16 @@ import java.net.http.HttpRequest;
 @Service
 public class RoleServiceImpl implements RoleService {
     @Override
-    public String CheckRole(HttpSession session, Model model){
+    public String CheckRole(HttpSession session){
 
         String role = (String) session.getAttribute("role");
 
         if (role != null && role.equals("admin")) {
-            return "page-restreinte";
-        } else {
-            model.addAttribute("message", "Accès interdit. Vous n'avez pas les autorisations nécessaires.");
-            return "erreur";
+            return "adminDashboard";
+        } else if(role != null && role.equals("user")) {
+            return "userDashboard";
+        }else {
+            return "login";
         }
     }
 }

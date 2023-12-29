@@ -5,6 +5,7 @@ import org.gestion.daret.dto.UserDto;
 import org.gestion.daret.models.User;
 import org.gestion.daret.repository.UserRepository;
 import org.gestion.daret.services.PasswordService;
+import org.gestion.daret.services.RoleService;
 import org.gestion.daret.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
 
     @GetMapping("/")
     public String indexPage(){
@@ -59,13 +63,12 @@ public class UserController {
 
 
     @GetMapping("/adminDashboard")
-    public String redirectionAdminDashboard(){
-        return "adminDashboard";
+    public String redirectionAdminDashboard(HttpSession session){
+        return roleService.CheckRole(session);
     }
 
     @GetMapping("/userDashboard")
     public String redirectionUserDashboard(){
-
         return "userDashboard";
     }
 

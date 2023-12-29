@@ -6,6 +6,6 @@ import org.springframework.ui.Model;
 import java.net.http.HttpRequest;
 
 public interface RoleService {
-    public String CheckRole(HttpSession session, Model model);
+    public String CheckRole(HttpSession session);
 
 }
