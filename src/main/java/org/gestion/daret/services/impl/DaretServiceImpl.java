@@ -1,5 +1,6 @@
 package org.gestion.daret.services.impl;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.gestion.daret.dto.DaretDto;
 import org.gestion.daret.models.Daret;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.net.http.HttpRequest;
 import java.util.ArrayList;
 
 @Service
@@ -59,4 +61,20 @@ public class DaretServiceImpl implements DaretService {
         return null;
     }
 
+    @Override
+    public String redirectionAjout(DaretDto daretDto, Model model) {
+        //Object nom = request.getAttribute("nom");
+        //Object description = request.getAttribute("description");
+        model.addAttribute("nom", daretDto.getNom());
+        model.addAttribute("description", daretDto.getDescription());
+        return "2emeform";
+    }
+    @Override
+    public String getInfo2emeForm(Model model) {
+        String nom = (String) model.getAttribute("nom");
+        String description = (String) model.getAttribute("description");
+        model.addAttribute("nom", nom);
+        model.addAttribute("description", description);
+        return "ajouterDaret";
+    }
 }

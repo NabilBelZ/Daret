@@ -1,5 +1,6 @@
 package org.gestion.daret.services;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.gestion.daret.dto.DaretDto;
 import org.springframework.ui.Model;
@@ -12,4 +13,7 @@ public interface DaretService {
     public String readDaret(DaretDto DaretDto, Model model);
     public String updateDaret(DaretDto DaretDto, Model model);
     public String deleteDaret(DaretDto DaretDto, Model model);
+
+    public String redirectionAjout(DaretDto daretDto, Model model);
+    public String getInfo2emeForm(Model model);
 }

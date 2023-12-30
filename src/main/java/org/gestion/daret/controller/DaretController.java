@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,5 +37,14 @@ public class DaretController {
     @PostMapping("/createDaret")
     public String createDaret(@ModelAttribute("daret") DaretDto daretDto, Model model){
         return daretService.createDaret(daretDto, model);
+    }
+
+    @PostMapping("/redirectionAjout")
+    public String redirectionAjoutDaret(@ModelAttribute("daret") DaretDto daretDto, Model model){
+        return daretService.redirectionAjout(daretDto, model);
+    }
+    @GetMapping("/2emeform")
+    public String GetInfoFrom2Daret(Model model){
+        return daretService.getInfo2emeForm(model);
     }
 }
