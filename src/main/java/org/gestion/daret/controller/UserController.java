@@ -68,8 +68,8 @@ public class UserController {
     }
 
     @GetMapping("/userDashboard")
-    public String redirectionUserDashboard(){
-        return "userDashboard";
+    public String redirectionUserDashboard(HttpSession session){
+        return roleService.CheckRole(session);
     }
 
     @GetMapping("/seDeconnecter")

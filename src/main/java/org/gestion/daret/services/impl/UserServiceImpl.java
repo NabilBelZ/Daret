@@ -53,8 +53,10 @@ public class UserServiceImpl implements UserService {
             if (passwordService.verifyPassword(userDto.getPassword(), storedUser.getPassword())) {
                 session.setAttribute("userId", storedUser.getId());
                 if(storedUser.getRole().equals("admin")){
+                    session.setAttribute("role", storedUser.getRole());
                     return "redirect:/adminDashboard";
                 }else{
+                    session.setAttribute("role", storedUser.getRole());
                     return "redirect:/userDashboard";
                 }
             } else {
@@ -81,8 +83,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public String seDeconnecter(HttpSession session){
-        session.removeAttribute("userId");
-        return "redirect:/login";
+        session.invalidate();
+        return "login";
     }
 
 }
