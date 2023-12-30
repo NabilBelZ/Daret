@@ -14,7 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.net.http.HttpRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class DaretServiceImpl implements DaretService {
@@ -32,17 +35,30 @@ public class DaretServiceImpl implements DaretService {
         daret.setIdDaret(daretDto.getIdDaret());
         daret.setNom(daretDto.getNom());
         daret.setMontant(daretDto.getMontant());
-        daret.setDateDemarrage(daretDto.getDateDemarrage());
-        daret.setDateFin(daretDto.getDateFin());
+        //daret.setDateDemarrage(daretDto.getDateDemarrage());
+        //daret.setDateFin(daretDto.getDateFin());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date dateDemarrage = dateFormat.parse(daretDto.getDateDemarrage());
+            Date dateFin = dateFormat.parse(daretDto.getDateFin());
+
+            // Set the Date objects in the Daret entity
+            daret.setDateDemarrage(dateDemarrage);
+            daret.setDateFin(dateFin);
+        } catch (ParseException e) {
+            // Handle parsing exception if needed
+            e.printStackTrace();
+            }
         daret.setPeriode(daretDto.getPeriode());
         daret.setMontantTotal(daretDto.getMontantTotal());
-        daret.setDescription(daretDto.getDescription());
+        String cleanedDescription = daretDto.getDescription().replaceAll("<p>", "").replaceAll("</p>", "");
+        daret.setDescription(cleanedDescription);
         daret.setEtat(true);
         //daret.setNbParticipant(0);
       //  daret.setTourDeRole(new ArrayList<>());
        // daret.setParticipations(new ArrayList<>());
         daretRepository.save(daret);
-        model.addAttribute("msgSuccess", "Felicitation ! Daret Créee avec succes !");
+        model.addAttribute("msgSuccess", "Félicitations ! La Daret a été créée avec succès !");
         return "adminDashboard";
     }
 
@@ -62,19 +78,20 @@ public class DaretServiceImpl implements DaretService {
     }
 
     @Override
-    public String redirectionAjout(DaretDto daretDto, Model model) {
-        //Object nom = request.getAttribute("nom");
-        //Object description = request.getAttribute("description");
-        model.addAttribute("nom", daretDto.getNom());
-        model.addAttribute("description", daretDto.getDescription());
-        return "2emeform";
+    public String redirectionAjout(DaretDto daretDto, Model model, HttpSession session) {
+        session.setAttribute("nom", daretDto.getNom());
+        session.setAttribute("description", daretDto.getDescription());
+        return "redirect:/2emeform";
     }
     @Override
-    public String getInfo2emeForm(Model model) {
-        String nom = (String) model.getAttribute("nom");
-        String description = (String) model.getAttribute("description");
+    public String getInfo2emeForm(Model model, HttpSession session) {
+        //Object nom = request.getAttribute("nom");
+        //Object description = request.getAttribute("description");
+        String nom = (String) session.getAttribute("nom");
+        String description = (String) session.getAttribute("description");
         model.addAttribute("nom", nom);
         model.addAttribute("description", description);
+
         return "ajouterDaret";
     }
 }

@@ -1,5 +1,6 @@
 package org.gestion.daret.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.gestion.daret.dto.DaretDto;
 import org.gestion.daret.dto.UserDto;
 import org.gestion.daret.models.Daret;
@@ -10,6 +11,7 @@ import org.gestion.daret.services.PasswordService;
 import org.gestion.daret.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +20,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@RestController
-@RequestMapping("/gestionDaret/")
+@Controller
+
 public class DaretController {
 
     @Autowired
@@ -27,6 +29,9 @@ public class DaretController {
 
     @Autowired
     private DaretService daretService;
+    @Autowired
+    private UserService userService;
+
     //@GetMapping("darets")
     //public ResponseEntity<List<Daret>> getDaret(){
       // List<Daret>  darets = new ArrayList<>();
@@ -40,11 +45,15 @@ public class DaretController {
     }
 
     @PostMapping("/redirectionAjout")
-    public String redirectionAjoutDaret(@ModelAttribute("daret") DaretDto daretDto, Model model){
-        return daretService.redirectionAjout(daretDto, model);
+    public String redirectionAjoutDaret(@ModelAttribute("daret") DaretDto daretDto, Model model, HttpSession session){
+        return daretService.redirectionAjout(daretDto, model, session);
     }
     @GetMapping("/2emeform")
-    public String GetInfoFrom2Daret(Model model){
-        return daretService.getInfo2emeForm(model);
+    public String GetInfoFrom2Daret(Model model, HttpSession session){
+        return daretService.getInfo2emeForm(model, session);
+    }
+    @GetMapping("/ajouterDaret")
+    public String CreateDaretPage(){
+        return "ajouterDaret";
     }
 }

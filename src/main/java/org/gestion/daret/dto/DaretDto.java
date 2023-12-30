@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.gestion.daret.models.Participation;
 import org.gestion.daret.models.Tour;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -20,8 +21,11 @@ public class DaretDto {
     private int idDaret;
     private String nom;
     private String periode;
-    private Date dateDemarrage;
-    private Date dateFin;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private String dateDemarrage;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private String dateFin;
     private float montant;
     private float montantTotal;
     private String description;

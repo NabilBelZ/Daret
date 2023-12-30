@@ -14,6 +14,6 @@ public interface DaretService {
     public String updateDaret(DaretDto DaretDto, Model model);
     public String deleteDaret(DaretDto DaretDto, Model model);
 
-    public String redirectionAjout(DaretDto daretDto, Model model);
-    public String getInfo2emeForm(Model model);
+    public String redirectionAjout(DaretDto daretDto, Model model, HttpSession session);
+    public String getInfo2emeForm(Model model, HttpSession session);
 }

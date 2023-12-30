@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="hamza dbani">
     <meta name="generator" content="Hugo 0.84.0">
-    <title>Ajouter une Daret</title>
+    <title>Créer une Daret</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/navbar-static/">
 
@@ -20,6 +20,13 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/framework.css" />
+    <link rel="stylesheet" href="css/master.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
+
 
     <style>
         .bd-placeholder-img {
@@ -53,18 +60,34 @@
             margin-left: 550px;
         }
         h1{
-            text-align: center;
-            margin-left: 150px;
             color: #DF4881FF;
+            transform: translateX(100px);
+
         }
         .insc{
             text-align: right;
             margin-top: -30px;
+
         }
+        .inscform{
+            margin-top: 20px;
+            height: 697px;
+            margin-bottom: 20px;
 
-
+        }
+        .page h1::before {
+            background-color: white;
+            width: 120px;
+        }
+        .page h1::after {
+            background-color: rgb(255, 255, 255);
+            width: 40px;
+        }
+        .page h1{
+            margin-bottom: 10px;
+        }
         .button-1 {
-            background-color: #EA4C89;
+            background-color: #DF4881FF;
             border-radius: 8px;
             border-style: none;
             box-sizing: border-box;
@@ -77,7 +100,7 @@
             height: 40px;
             line-height: 20px;
             list-style: none;
-            margin-left: 278px;
+            margin-left: 240px;
             outline: none;
             padding: 10px 16px;
             position: relative;
@@ -88,6 +111,7 @@
             user-select: none;
             -webkit-user-select: none;
             touch-action: manipulation;
+            transform: translateY(-40px);
         }
         #lbl{
             margin-top: 10px;
@@ -107,10 +131,51 @@
         #lbl5{
             margin-top: 10px;
         }
+        #lbl6{
+            margin-top: 10px;
+        }
         .button-1:hover,
         .button-1:focus {
             background-color: #F082AC;
         }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #df4881ab;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #df4881ab;
+        }
+        .logo{
+            width: 230px;
+            height: 75px;
+            transform: translateY(-15px);
+        }
+        .logo img{
+            width: 80%;
+            height: 100%;
+        }
+        .page{
+            background-color: #ffc0cb2b;
+        }
+        .welcome, .latest-news, .quick-draft, .targets{
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        #form{
+            transform: translateY(-55px);
+        }
+        .modal-header{
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1rem ;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 0px;
+            border-top-left-radius: calc(0.3rem - 1px);
+            border-top-right-radius: calc(0.3rem - 1px);
+
+        }
+
     </style>
     <link href="navbar-top.css" rel="stylesheet">
 
@@ -125,73 +190,158 @@
 
 </head>
 <body>
-<main class="main">
-    <div class="container">
-
-        <div class="inscform">
-
-            <form th:action="@{/createDaret}" method="post"  th:object="${daret}">
-
-                <div class="modal-header">
-                    <h1 class="modal-title" id="exampleModalLabel">Ajouter une Daret</h1>
-
-                </div>
-
-
-
-                <!-- Display nom and description from the model -->
-                <div class="row">
-                    <div class="form-group col-12">
-                        <label id="lbl" class="mb-2">Titre</label><br>
-                        <input type="text"  class="form-control" placeholder="Titre" th:field="*{nom}" value="${nom}" readonly>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-12">
-                        <label id="lbl1" class="mb-2">Description</label>
-                        <textarea id="mytextarea"  rows="6" cols="35" th:field="*{description}" readonly>${description}</textarea>
-                    </div>
-                </div>
-
-                <!-- Form fields for additional information -->
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label id="lbl2" class="mb-2">Montant</label><br>
-                        <input type="text"  class="form-control" placeholder="Montant" th:field="*{montant}">
-                    </div>
-                    <div class="form-group col-6">
-                        <label id="lbl3" class="mb-2">Montant Total</label><br>
-                        <input type="text"  class="form-control" placeholder="Montant Total" th:field="*{montantTotal}">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label id="lbl4" class="mb-2">Date Début</label><br>
-                        <input type="date" th:field="*{dateDemarrage}" class="form-control">
-                    </div>
-                    <div class="form-group col-6">
-                        <label id="lbl5" class="mb-2">Date Fin</label><br>
-                        <input type="date" th:field="*{dateFin}" class="form-control">
-                    </div>
-                </div>
-
-
-
-
-                <br>
-                <div class="row">
-                    <div class="form-group col-6">
-                        <input type="submit" class="button-1" value="Enregistrer">
-                    </div>
-                </div>
-            </form>
+<div class="page d-flex">
+    <div class="sidebar bg-white p-20 p-relative">
+        <div class="logo">
+            <a href=""><img src="/images/logo.png"></a>
+        </div>
+        <ul>
+            <li>
+                <a class="active d-flex align-center fs-14 c-black rad-6 p-10" href="userDashboard.html">
+                    <i class="fa-regular fa-chart-bar fa-fw"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="profile.html">
+                    <i class="fa-regular fa-user fa-fw"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li>
+                <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="tontines.html">
+                    <i class="fa-solid fa-diagram-project fa-fw"></i>
+                    <span>Tontines</span>
+                </a>
+            </li>
+            <li>
+                <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/ajouterDaret">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Créer une tontine</span>
+                </a>
+            </li>
+            <li>
+                <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="friends.html">
+                    <i class="fa-regular fa-circle-user fa-fw"></i>
+                    <span>Liste des utilisateurs</span>
+                </a>
+            </li>
+            <li>
+                <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="settings.html">
+                    <i class="fa-solid fa-gear fa-fw"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li>
+                <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/seDeconnecter">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>se déconnecter</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="content w-full">
+        <!-- Start Head -->
+        <div class="head bg-white p-15 between-flex">
+            <div class="search p-relative">
+                <input class="p-10" type="search" placeholder="Type A Keyword" />
+            </div>
+            <div class="icons d-flex align-center">
+                  <span class="notification p-relative">
+                    <i class="fa-regular fa-bell fa-lg"></i>
+                  </span>
+                <img src="imgs/avatar.png" alt="" />
+            </div>
         </div>
 
-    </div>
-</main>
+        <main class="main">
+            <div class="container">
+
+                <div class="inscform">
+
+                    <form class="" id="form" name="" method="post" th:action="@{/createDaret}" th:object="${daret}">
+
+                        <div class="modal-header">
+                            <h1 class="modal-title" id="exampleModalLabel">Créer une Daret</h1>
+
+                        </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+                        <div class="formTl3">
+                            <!-- Display nom and description from the model -->
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <label id="lbl" class="mb-2">Titre</label><br>
+                                    <input type="text" name="nom" class="form-control" placeholder="Titre" th:value="${nom}" >
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <label id="lbl1" class="mb-2">Description</label>
+                                    <textarea id="mytextarea" name="description" rows="6" cols="35" th:utext="${description}"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Form fields for additional information -->
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label id="lbl2" class="mb-2">Montant</label><br>
+                                    <input type="text" name="montant" class="form-control" placeholder="Montant">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label id="lbl3" class="mb-2">Montant Total</label><br>
+                                    <input type="text" name="montantTotal" class="form-control" placeholder="Montant Total">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label id="lbl4" class="mb-2">Date De Demarrage</label><br>
+                                    <input type="date" name="dateDemarrage" class="form-control">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label id="lbl5" class="mb-2">Date De Fin</label><br>
+                                    <input type="date" name="dateFin" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <label id="lbl6" class="mb-2">Période (en jours)</label><br>
+                                    <input type="text" name="periode" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <br>
+
+
+                            <br>
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <input type="submit" class="button-1" value="Enregistrer">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </main>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+        <script>
+            function calculerPeriode() {
+                var dateDemarrage = new Date(document.getElementsByName("dateDemarrage")[0].value);
+                var dateFin = new Date(document.getElementsByName("dateFin")[0].value);
+                var differenceEnMilliseconds = dateFin - dateDemarrage;
+                var differenceEnJours = differenceEnMilliseconds / (1000 * 60 * 60 * 24);
+                document.getElementsByName("periode")[0].value = differenceEnJours;
+            }
+
+            document.getElementsByName("dateDemarrage")[0].addEventListener("change", calculerPeriode);
+            document.getElementsByName("dateFin")[0].addEventListener("change", calculerPeriode);
+        </script>
+
+
 
 
 
