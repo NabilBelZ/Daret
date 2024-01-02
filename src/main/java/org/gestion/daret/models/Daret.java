@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.gestion.daret.models.Participation;
 import org.gestion.daret.models.Tour;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,7 @@ public class Daret {
     private int idDaret;
     private String nom;
     private String periode;
+    private String periodeTour;
   //  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "UTC")
     private Date dateDemarrage;
 

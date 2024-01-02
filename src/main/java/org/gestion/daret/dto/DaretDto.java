@@ -21,6 +21,7 @@ public class DaretDto {
     private int idDaret;
     private String nom;
     private String periode;
+    private String periodeTour;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String dateDemarrage;
 
@@ -30,4 +31,5 @@ public class DaretDto {
     private float montantTotal;
     private String description;
     private boolean etat;
+    private int nbParticipant = 0;
 }

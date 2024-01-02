@@ -39,11 +39,11 @@
 <div class="page d-flex">
   <div class="sidebar bg-white p-20 p-relative">
     <div class="logo">
-      <a href=""><img src="/images/logo.png"></a>
+      <a href="/adminDashboard"><img src="/images/logo.png"></a>
     </div>
     <ul>
       <li>
-        <a class="active d-flex align-center fs-14 c-black rad-6 p-10" href="userDashboard.html">
+        <a class="active d-flex align-center fs-14 c-black rad-6 p-10" href="/adminDashboard">
           <i class="fa-regular fa-chart-bar fa-fw"></i>
           <span>Dashboard</span>
         </a>
@@ -51,19 +51,19 @@
       <li>
         <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="profile.html">
           <i class="fa-regular fa-user fa-fw"></i>
-          <span>Profile</span>
+          <span>Profil</span>
         </a>
       </li>
       <li>
-        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="tontines.html">
+        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/tontines">
           <i class="fa-solid fa-diagram-project fa-fw"></i>
-          <span>Tontines</span>
+          <span>Liste des Darets</span>
         </a>
       </li>
       <li>
         <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/ajouterDaret">
           <i class="fa-solid fa-plus"></i>
-          <span>Créer une tontine</span>
+          <span>Créer une Daret</span>
         </a>
       </li>
       <li>
@@ -81,7 +81,7 @@
       <li>
         <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/seDeconnecter">
           <i class="fa-solid fa-arrow-right-from-bracket"></i>
-          <span>se déconnecter</span>
+          <span>Se déconnecter</span>
         </a>
       </li>
     </ul>
@@ -102,7 +102,7 @@
     <!-- End Head -->
 
     <h1 class="p-relative">Dashboard</h1>
-    <h3 th:text="${msgSuccess}" style="text-align: center; color: green; "></h3>
+    <!--<h3 th:text="${msgSuccess}" style="text-align: center; color: green; "></h3>-->
     <div class="wrapper d-grid gap-20">
       <!-- Start Welcome Widget -->
       <div class="welcome bg-white rad-10 txt-c-mobile block-mobile">
