@@ -1,14 +1,14 @@
 package org.gestion.daret.controller;
 
 import jakarta.servlet.http.HttpSession;
+import org.gestion.daret.dto.UserDto;
 import org.gestion.daret.models.User;
 import org.gestion.daret.repository.UserRepository;
 import org.gestion.daret.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -51,8 +51,30 @@ public class AdminController {
     }
 
     @GetMapping("/profile")
-    public String profileRedirection(){
+    public String profileRedirection(HttpSession session, Model model) throws Exception{
+        String email = (String) session.getAttribute("email");
+        User user = userRepository.findByEmail(email).orElseThrow(()-> new Exception("user not found"));
+        model.addAttribute("user", user);
         return "profile";
+    }
+
+    @PostMapping("/modifierInfoUser_process")
+    public String modifierInfoUser(HttpSession session, @ModelAttribute("user") UserDto userDto) throws Exception{
+        int userId = (Integer) session.getAttribute("userId");
+        User user = userRepository.findById(userId).orElseThrow(()-> new Exception("user not found"));
+        user.setFirstname(userDto.getFirstname());
+        user.setLastname(userDto.getLastname());
+        if(user.getEmail().equals(userDto.getEmail())){
+            user.setEmail(userDto.getEmail());
+            userRepository.save(user);
+            return "redirect:/profile";
+        }else{
+            user.setEmail(userDto.getEmail());
+            userRepository.save(user);
+            return "redirect:/seDeconnecter";
+        }
+
+
     }
 
 }

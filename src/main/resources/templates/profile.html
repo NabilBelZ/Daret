@@ -52,19 +52,19 @@
     </div>
     <ul>
       <li>
-        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="userDashboard.html">
+        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/adminDashboard">
           <i class="fa-regular fa-chart-bar fa-fw"></i>
           <span>Dashboard</span>
         </a>
       </li>
       <li>
-        <a class="active d-flex align-center fs-14 c-black rad-6 p-10" href="profile">
+        <a class="active d-flex align-center fs-14 c-black rad-6 p-10" href="/profile">
           <i class="fa-regular fa-user fa-fw"></i>
           <span>Profile</span>
         </a>
       </li>
       <li>
-        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="tontines.html">
+        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/tontines">
           <i class="fa-solid fa-diagram-project fa-fw"></i>
           <span>Tontines</span>
         </a>
@@ -115,7 +115,7 @@
       <div class="overview bg-white rad-10 d-flex align-center">
         <div class="avatar-box txt-c p-20">
           <img class="rad-half mb-10" src="imgs/avatar.png" alt="" />
-          <h3 class="m-0">Osama Elzero</h3>
+          <h3 class="m-0" th:text="${user.lastname} + ' ' + ${user.firstname}"></h3>
           <p class="c-grey mt-10">Level 20</p>
           <div class="level rad-6 bg-eee p-relative">
             <span style="width: 100%;"></span>
@@ -128,15 +128,15 @@
             <h4 class="c-grey fs-15 m-0 w-full">General Information</h4>
             <div class="fs-14">
               <span class="c-grey">Nom:</span>
-              <span>bellaliz</span>
+              <span th:text="${user.lastname}"></span>
             </div>
             <div class="fs-14">
               <span class="c-grey">Prénom:</span>
-              <span>nabil</span>
+              <span th:text="${user.firstname}"></span>
             </div>
             <div class="fs-14">
               <span class="c-grey">E-mail:</span>
-              <span>nabilbellaliz@gmail.com</span>
+              <span th:text="${user.email}"></span>
             </div>
             <div class="fs-14">
               <script>
@@ -160,19 +160,21 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="toggle()"></button>
                       </div>
                       <div class="modal-body">
-                        <div class="row">
-                          <label class="form-label" for="">Nom :</label>
-                          <input class="form-control" type="text">
-                        </div>
-                        <div class="row">
-                          <label class="form-label" for="">Prénom :</label>
-                          <input  class="form-control" type="text">
-                        </div>
-                        <div class="row">
-                          <label class="form-label"  for="">E-mail :</label>
-                          <input  class="form-control" type="text">
-                        </div>
-                        <input type="submit" value="Enrengistrer" class="btn btn-primary" style="margin-left: 150px; margin-top: 20px;">
+                        <form th:action="@{/modifierInfoUser_process}" method="post" th:object="${user}">
+                          <div class="row">
+                            <label class="form-label">Nom :</label>
+                            <input class="form-control" type="text" th:field="*{firstname}">
+                          </div>
+                          <div class="row">
+                            <label class="form-label">Prénom :</label>
+                            <input  class="form-control" type="text" th:field="*{lastname}">
+                          </div>
+                          <div class="row">
+                            <label class="form-label">E-mail :</label>
+                            <input  class="form-control" type="text" th:field="*{email}">
+                          </div>
+                          <input type="submit" value="Enrengistrer" class="btn btn-primary" style="margin-left: 150px; margin-top: 20px;">
+                        </form>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="toggle()" >Close</button>
@@ -220,19 +222,21 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="toggle_pers_info()"></button>
                       </div>
                       <div class="modal-body">
-                        <div class="row">
-                          <label class="form-label" for="">Date de naissance :</label>
+                        Les données sont statiques.
+                        <!-- <div class="row">
+                          <label class="form-label">Date de naissance :</label>
                           <input class="form-control" type="text">
                         </div>
                         <div class="row">
-                          <label class="form-label" for="">Numéro Tel :</label>
+                          <label class="form-label">Numéro Tel :</label>
                           <input  class="form-control" type="text">
                         </div>
                         <div class="row">
-                          <label class="form-label"  for="">Pays :</label>
+                          <label class="form-label">Pays :</label>
                           <input  class="form-control" type="text">
                         </div>
                         <input type="submit" value="Enrengistrer" class="btn btn-primary" style="margin-left: 150px; margin-top: 20px;">
+                      -->
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="toggle_pers_info()" >Close</button>
@@ -281,19 +285,21 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="toggle_billing()"></button>
                       </div>
                       <div class="modal-body">
-                        <div class="row">
-                          <label class="form-label" for="">Payment Method :</label>
+                        Les données sont statiques.
+                         <!-- <div class="row">
+                          <label class="form-label">Payment Method :</label>
                           <input class="form-control" type="text">
                         </div>
                         <div class="row">
-                          <label class="form-label" for="">E-mail :</label>
+                          <label class="form-label">E-mail :</label>
                           <input  class="form-control" type="text">
                         </div>
                         <div class="row">
-                          <label class="form-label"  for="">Subscription :</label>
+                          <label class="form-label">Subscription :</label>
                           <input  class="form-control" type="text">
                         </div>
                         <input type="submit" value="Enrengistrer" class="btn btn-primary" style="margin-left: 150px; margin-top: 20px;">
+                      -->
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="toggle_billing()" >Close</button>

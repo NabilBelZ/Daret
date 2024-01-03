@@ -8,25 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @AllArgsConstructor @NoArgsConstructor
+@Data
 public class UserDto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id;
-
-    @Column(nullable = false, length = 50)
     private String firstname;
-
-    @Column(nullable = false, length = 50)
     private String lastname;
-
-    @Column(nullable = false,unique = true, length = 100)
     private String email;
-
-    @Column(nullable = false, length = 30)
     private String password;
-
-    @Column(nullable = false, length = 30)
     private String role;
 
 }
