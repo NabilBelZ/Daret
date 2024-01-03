@@ -31,6 +31,9 @@ public class User {
     @Column(nullable = false)
     private String role = "user";
 
+    @Column(nullable = false)
+    private Boolean status = true;
+
     @OneToMany(mappedBy = "user") // bhal hnaya khdama dak cascade hit ila mshna user aytmsho les membre
    private List<Membre> membres;
 }

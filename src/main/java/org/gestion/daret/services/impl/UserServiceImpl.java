@@ -54,9 +54,11 @@ public class UserServiceImpl implements UserService {
                 session.setAttribute("userId", storedUser.getId());
                 if(storedUser.getRole().equals("admin")){
                     session.setAttribute("role", storedUser.getRole());
+                    session.setAttribute("email", storedUser.getEmail());
                     return "redirect:/adminDashboard";
                 }else{
                     session.setAttribute("role", storedUser.getRole());
+                    session.setAttribute("email", storedUser.getEmail());
                     return "redirect:/userDashboard";
                 }
             } else {
