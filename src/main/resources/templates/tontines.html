@@ -24,6 +24,21 @@
     td span{
       margin-bottom: 20px;
     }
+    .tt{
+      color: #DF4881FF;
+    }
+    .oo{
+      color: #f5c2c7;
+    }
+    .mm{
+      color: grey;
+    }
+    .pp{
+      color: green;
+    }
+    .nn{
+      color: red;
+    }
     table{
       text-align: center;
 
@@ -185,13 +200,15 @@
           <tr th:each="daret : ${darets}">
             <td th:text="${daret.nom}"></td>
             <td th:text="${daret.description}"></td>
-            <td th:text="${daret.montant}"></td>
-            <td th:text="${daret.montantTotal}"></td>
+            <td class="mm" th:text="${daret.montant}"></td>
+            <td class="oo" th:text="${daret.montantTotal}"></td>
             <td th:text="${daret.dateDemarrage}"></td>
             <td th:text="${daret.dateFin}"></td>
-            <td th:text="${daret.periode}"></td>
-            <td th:text="${daret.periodeTour}"></td>
-            <td th:text="${daret.nbParticipant}"></td>
+            <td class="pp" th:text="${daret.periode}"></td>
+            <td class="tt" th:text="${daret.periodeTour}"></td>
+            <td ><span th:style="${daret.nbParticipant == 0 ? 'color: red;' : 'color: green;'}"
+                                                                  th:text="${daret.nbParticipant}">
+</span></td>
            <td>  <!--${daret.montantTotal > daret.participations.stream().mapToDouble(p -> p.getMontant()).sum()}and
                       ${daret.montantTotal <= daret.participations.stream().mapToDouble(p -> p.getMontant()).sum()} and
                  -->

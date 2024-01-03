@@ -23,6 +23,15 @@
       height: 75px;
       transform: translateY(-15px);
     }
+    .button-1:hover,
+    .button-1:focus {
+      background-color: #F082AC;
+      color: #FFFFFF;
+    }.button-2:hover,
+     .button-2:focus {
+       background-color: #F082AC;
+       color: #FFFFFF;
+     }
     .logo img{
       width: 80%;
       height: 100%;
@@ -32,6 +41,67 @@
     }
     .welcome, .latest-news, .quick-draft, .targets{
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+    h1{
+      color: #DF4881FF;
+
+    }
+    .page h1::after {
+      background-color: #DF4881FF;
+      width: 40px;
+
+    }
+    .button-2{
+      background-color: #DF4881FF;
+      border-radius: 8px;
+      border-style: none;
+      box-sizing: border-box;
+      color: #FFFFFF;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 500;
+      height: 30px;
+      line-height: 20px;
+      list-style: none;
+      margin-left: 473px;
+      outline: none;
+      padding: 5px 16px 3px 16px ;
+      position: relative;
+      text-align: center;
+      text-decoration: none;
+      transition: color 100ms;
+      vertical-align: baseline;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      transform: translateY(50px);
+    }
+    .button-1{
+    background-color: #DF4881FF;
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    height: 30px;
+    line-height: 20px;
+    list-style: none;
+    margin-left: 438px;
+    outline: none;
+    padding: 3px 10px 3px 10px ;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: color 100ms;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    transform: translateY(0px);
     }
   </style>
 </head>
@@ -108,8 +178,8 @@
       <div class="welcome bg-white rad-10 txt-c-mobile block-mobile">
         <div class="intro p-20 d-flex space-between bg-eee">
           <div>
-            <h2 class="m-0">Welcome</h2>
-            <p class="c-grey mt-5">Elzero</p>
+            <h2 style="color: #DF4881FF" class="m-0">Welcome</h2>
+            <h2  style="color: black"class="c-grey mt-5">Elzero</h2>
           </div>
           <img class="hide-mobile" src="imgs/welcome.png" alt="" />
         </div>
@@ -119,17 +189,17 @@
           <div>80 <span class="d-block c-grey fs-14 mt-10">Projects</span></div>
           <div>$8500 <span class="d-block c-grey fs-14 mt-10">Earned</span></div>
         </div>
-        <a href="profile.html" class="visit d-block fs-14 bg-blue c-white w-fit btn-shape">Profile</a>
+        <a href="profile.html" class="button-2">Profil</a>
       </div>
       <!-- End Welcome Widget -->
       <!-- Start Quick Draft Widget -->
       <div class="quick-draft p-20 bg-white rad-10">
-        <h2 class="mt-0 mb-10">Créer une tontine</h2>
-        <p class="mt-0 mb-20 c-grey fs-15">Établir une tontine de manière extrêmement rapide</p>
+        <h2 style="color: #DF4881FF" class="mt-0 mb-10">Créer une tontine</h2>
+        <p  style="color: black"class="mt-0 mb-20 c-grey fs-15">Établir une tontine de manière extrêmement rapide</p>
         <form th:action="@{/redirectionAjout}" method="post">
           <input class="d-block mb-20 w-full p-10 b-none bg-eee rad-6" type="text" name="nom" placeholder="Titre" />
           <textarea class="d-block mb-20 w-full p-10 b-none bg-eee rad-6" name="description" placeholder="Description"></textarea>
-          <input class="save d-block fs-14 bg-blue c-white b-none w-fit btn-shape" type="submit" value="Continue" />
+          <input class="button-1" type="submit" value="Continuer" />
         </form>
       </div>
       <!-- End Quick Draft Widget -->
@@ -225,98 +295,7 @@
 
 
     <!-- Start Projects Table -->
-    <div class="projects p-20 bg-white rad-10 m-20">
-      <h2 class="mt-0 mb-20">Tontines</h2>
-      <div class="responsive-table">
-        <table class="fs-15 w-full">
-          <thead>
-          <tr>
-            <td>Titre</td>
-            <td>Date de lancement</td>
-            <td>Date d'arrêt</td>
-            <td>Prix</td>
-            <td>Team</td>
-            <td>Status</td>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>Ministry Wikipedia</td>
-            <td>10 May 2022</td>
-            <td>Ministry</td>
-            <td>$5300</td>
-            <td>
-              <img src="imgs/team-01.png" alt="" />
-              <img src="imgs/team-02.png" alt="" />
-              <img src="imgs/team-03.png" alt="" />
-              <img src="imgs/team-05.png" alt="" />
-            </td>
-            <td>
-              <span class="label btn-shape bg-orange c-white">Pending</span>
-            </td>
-          </tr>
-          <tr>
-            <td>Elzero Shop</td>
-            <td>12 Oct 2021</td>
-            <td>Elzero Company</td>
-            <td>$1500</td>
-            <td>
-              <img src="imgs/team-01.png" alt="" />
-              <img src="imgs/team-02.png" alt="" />
-              <img src="imgs/team-05.png" alt="" />
-            </td>
-            <td><span class="label btn-shape bg-blue c-white">In Progress</span></td>
-          </tr>
-          <tr>
-            <td>Bouba App</td>
-            <td>05 Sep 2021</td>
-            <td>Bouba</td>
-            <td>$800</td>
-            <td>
-              <img src="imgs/team-02.png" alt="" />
-              <img src="imgs/team-03.png" alt="" />
-            </td>
-            <td><span class="label btn-shape bg-green c-white">Completed</span></td>
-          </tr>
-          <tr>
-            <td>Mahmoud Website</td>
-            <td>22 May 2021</td>
-            <td>Mahmoud</td>
-            <td>$600</td>
-            <td>
-              <img src="imgs/team-01.png" alt="" />
-              <img src="imgs/team-02.png" alt="" />
-            </td>
-            <td><span class="label btn-shape bg-green c-white">Completed</span></td>
-          </tr>
-          <tr>
-            <td>Sayed Website</td>
-            <td>24 May 2021</td>
-            <td>Sayed</td>
-            <td>$300</td>
-            <td>
-              <img src="imgs/team-01.png" alt="" />
-              <img src="imgs/team-03.png" alt="" />
-            </td>
-            <td><span class="label btn-shape bg-red c-white">Rejected</span></td>
-          </tr>
-          <tr>
-            <td>Arena Application</td>
-            <td>01 Mar 2021</td>
-            <td>Arena Company</td>
-            <td>$2600</td>
-            <td>
-              <img src="imgs/team-01.png" alt="" />
-              <img src="imgs/team-02.png" alt="" />
-              <img src="imgs/team-03.png" alt="" />
-              <img src="imgs/team-04.png" alt="" />
-            </td>
-            <td><span class="label btn-shape bg-green c-white">Completed</span></td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+
     <!-- End Projects Table -->
   </div>
 </div>
