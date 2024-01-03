@@ -43,8 +43,6 @@ public class DaretController {
     @PostMapping("/createDaret")
     public String createDaret(@ModelAttribute("daret") DaretDto daretDto, RedirectAttributes redirectAttributes){
         return daretService.createDaret(daretDto, redirectAttributes);
-
-
     }
 
     @PostMapping("/redirectionAjout")
