@@ -33,6 +33,17 @@
         .welcome, .latest-news, .quick-draft, .targets{
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
+        .page h1::before {
+            background-color: white;
+
+        }
+        .page h1::after {
+            background-color: #f5c2c7;
+
+        }
+h2{
+    color: #DF4881FF;
+}
     </style>
 </head>
 <body>
@@ -51,25 +62,25 @@
             <li>
                 <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/profile">
                     <i class="fa-regular fa-user fa-fw"></i>
-                    <span>Profile</span>
+                    <span>Profil</span>
                 </a>
             </li>
             <li>
                 <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/tontines">
                     <i class="fa-solid fa-diagram-project fa-fw"></i>
-                    <span>Tontines</span>
+                    <span>Liste Des Darets</span>
                 </a>
             </li>
             <li>
                 <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/ajouterDaret">
                     <i class="fa-solid fa-plus"></i>
-                    <span>Créer une tontine</span>
+                    <span>Créer Une Daret</span>
                 </a>
             </li>
             <li>
                 <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/listUsers">
                     <i class="fa-regular fa-circle-user fa-fw"></i>
-                    <span>Liste des utilisateurs</span>
+                    <span>Liste Des Utilisateurs</span>
                 </a>
             </li>
             <li>
@@ -81,7 +92,7 @@
             <li>
                 <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/seDeconnecter">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                    <span>se déconnecter</span>
+                    <span>Se déconnecter</span>
                 </a>
             </li>
         </ul>
@@ -101,7 +112,7 @@
         </div>
         <!-- End Head -->
 
-        <h1 class="p-relative">Dashboard</h1>
+        <h1 class="p-relative" style="color: #DF4881FF";>Dashboard</h1>
         <h3 th:text="${msgSuccess}" style="text-align: center; color: green; "></h3>
         <div class="wrapper d-grid gap-20">
             <!-- Start Welcome Widget -->
@@ -109,7 +120,7 @@
                 <div class="intro p-20 d-flex space-between bg-eee">
                     <div>
                         <h2 class="m-0">Welcome</h2>
-                        <p class="c-grey mt-5">Elzero</p>
+                        <h2 class="c-black mt-5">Elzero</h2>
                     </div>
                     <img class="hide-mobile" src="imgs/welcome.png" alt="" />
                 </div>
@@ -119,17 +130,17 @@
                     <div>80 <span class="d-block c-grey fs-14 mt-10">Projects</span></div>
                     <div>$8500 <span class="d-block c-grey fs-14 mt-10">Earned</span></div>
                 </div>
-                <a href="/profile" style="background-color: #ff3784;" class="visit d-block fs-14 bg-blue c-white w-fit btn-shape">Profile</a>
+                <a href="/profile" style="background-color: #DF4881FF; margin-top: 70px" class="visit d-block fs-14 bg-blue c-white w-fit btn-shape">Profile</a>
             </div>
             <!-- End Welcome Widget -->
             <!-- Start Quick Draft Widget -->
             <div class="quick-draft p-20 bg-white rad-10">
                 <h2 class="mt-0 mb-10">Créer une tontine</h2>
-                <p class="mt-0 mb-20 c-grey fs-15">Établir une tontine de manière extrêmement rapide</p>
+                <p class="mt-0 mb-20 c-black fs-15">Établir une tontine de manière extrêmement rapide</p>
                 <form th:action="@{/redirectionAjout}" method="post">
                     <input class="d-block mb-20 w-full p-10 b-none bg-eee rad-6" type="text" name="nom" placeholder="Titre" />
                     <textarea class="d-block mb-20 w-full p-10 b-none bg-eee rad-6" name="description" placeholder="Description"></textarea>
-                    <input  style="background-color: #ff3784;" class="save d-block fs-14 bg-blue c-white b-none w-fit btn-shape" type="submit" value="Continue" />
+                    <input  style="background-color: #DF4881FF;" class="save d-block fs-14 bg-blue c-white b-none w-fit btn-shape" type="submit" value="Continue" />
                 </form>
             </div>
             <!-- End Quick Draft Widget -->
@@ -176,7 +187,7 @@
             <!-- Start Targets Widget -->
             <div class="targets p-20 bg-white rad-10">
                 <h2 class="mt-0 mb-10">Statistique</h2>
-                <p class="mt-0 mb-20 c-grey fs-15">Statistique de l'année</p>
+                <p class="mt-0 mb-20 c-black fs-15">Statistique de l'année</p>
                 <div class="target-row mb-20 blue center-flex">
                     <div class="icon center-flex">
                         <i class="fa-solid fa-dollar-sign fa-lg c-blue"></i>

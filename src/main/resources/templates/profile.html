@@ -42,6 +42,23 @@
     .row{
       padding-left: 75px;
     }
+    .page h1::before {
+      background-color: white;
+
+    }
+    .page h1::after {
+      background-color: #f5c2c7;
+
+    }
+     h1{
+      font-size: 2em;
+      font-weight: bold;
+    }
+     h2{
+       font-size: 1.5em;
+       color: #DF4881FF;
+       font-weight: bold;
+     }
   </style>
 </head>
 <body>
@@ -60,19 +77,19 @@
       <li>
         <a class="active d-flex align-center fs-14 c-black rad-6 p-10" href="/profile">
           <i class="fa-regular fa-user fa-fw"></i>
-          <span>Profile</span>
+          <span>Profil</span>
         </a>
       </li>
       <li>
         <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/tontines">
           <i class="fa-solid fa-diagram-project fa-fw"></i>
-          <span>Tontines</span>
+          <span>Liste Des Darets</span>
         </a>
       </li>
       <li>
         <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/ajouterDaret">
           <i class="fa-solid fa-plus"></i>
-          <span>Créer une tontine</span>
+          <span>Créer Une Daret</span>
         </a>
       </li>
       <li>
@@ -90,7 +107,7 @@
       <li>
         <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/seDeconnecter">
           <i class="fa-solid fa-arrow-right-from-bracket"></i>
-          <span>se déconnecter</span>
+          <span>Se déconnecter</span>
         </a>
       </li>
     </ul>
@@ -109,7 +126,7 @@
       </div>
     </div>
     <!-- End Head -->
-    <h1 class="p-relative">Profile</h1>
+    <h1 class="p-relative" style="color: #DF4881FF";>Profil</h1>
     <div class="profile-page m-20">
       <!-- Start Overview -->
       <div class="overview bg-white rad-10 d-flex align-center">
@@ -173,7 +190,7 @@
                             <label class="form-label">E-mail :</label>
                             <input  class="form-control" type="text" th:field="*{email}">
                           </div>
-                          <input type="submit" value="Enrengistrer" class="btn btn-primary" style="margin-left: 150px; margin-top: 20px;">
+                          <input type="submit" value="Enregistrer" class="btn btn-primary" style="margin-left: 150px; margin-top: 20px;">
                         </form>
                       </div>
                       <div class="modal-footer">
@@ -318,7 +335,7 @@
       <!-- Start Other Data -->
       <div class="activities p-20 bg-white rad-10 mt-20">
         <h2 class="mt-0 mb-10">Dernière participation</h2>
-        <p class="mt-0 mb-20 c-grey fs-15">dernière participation de l'utilisateur</p>
+        <p class="mt-0 mb-20 c-black fs-15">Dernière participation de l'utilisateur</p>
         <div class="activity d-flex align-center txt-c-mobile">
           <img src="imgs/activity-01.png" alt="" />
           <div class="info">
