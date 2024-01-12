@@ -2,8 +2,11 @@ package org.gestion.daret.controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.gestion.daret.dto.UserDto;
+import org.gestion.daret.models.Daret;
 import org.gestion.daret.models.User;
+import org.gestion.daret.repository.DaretRepository;
 import org.gestion.daret.repository.UserRepository;
+import org.gestion.daret.services.DaretService;
 import org.gestion.daret.services.PasswordService;
 import org.gestion.daret.services.RoleService;
 import org.gestion.daret.services.UserService;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -29,6 +34,9 @@ public class UserController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private DaretRepository daretRepository;
 
     @GetMapping("/")
     public String indexPage(){
@@ -76,5 +84,18 @@ public class UserController {
     public String seDeconnecterProcess(HttpSession session){
         return userService.seDeconnecter(session);
     }
+
+    @GetMapping("/listeTontines")
+    public String listeDesTontines(HttpSession session, Model model){
+        List<Daret> tontines = daretRepository.findAll();
+        model.addAttribute("tontines", tontines);
+        return "listeTontines";
+    }
+
+    @GetMapping("/tontineDetails")
+    public String DetailsTontine(HttpSession session){
+        return "tontineDetails";
+    }
+
 
 }
