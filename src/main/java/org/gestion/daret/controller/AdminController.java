@@ -2,14 +2,19 @@ package org.gestion.daret.controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.gestion.daret.dto.UserDto;
+import org.gestion.daret.models.Daret;
 import org.gestion.daret.models.User;
+import org.gestion.daret.repository.DaretRepository;
 import org.gestion.daret.repository.UserRepository;
+import org.gestion.daret.services.RoleService;
 import org.gestion.daret.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Controller
@@ -17,6 +22,22 @@ public class AdminController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    RoleService roleService;
+
+    @Autowired
+    DaretRepository daretRepository;
+
+    @GetMapping("/adminDashboard")
+    public String redirectionAdminDashboard(HttpSession session, Model model) throws Exception{
+        List<Daret> tontines = daretRepository.findAll();
+        model.addAttribute("tontines", tontines);
+        int userId = (Integer) session.getAttribute("userId");
+        User user = userRepository.findById(userId).orElseThrow(()-> new Exception("user not found"));
+        model.addAttribute("user", user);
+        return roleService.CheckRole(session);
+    }
 
     @GetMapping("/listUsers")
     public String afficherUsers(HttpSession session, Model model){
@@ -50,31 +71,8 @@ public class AdminController {
         return "redirect:/listUsers";
     }
 
-    @GetMapping("/profile")
-    public String profileRedirection(HttpSession session, Model model) throws Exception{
-        String email = (String) session.getAttribute("email");
-        User user = userRepository.findByEmail(email).orElseThrow(()-> new Exception("user not found"));
-        model.addAttribute("user", user);
-        return "profile";
-    }
-
-    @PostMapping("/modifierInfoUser_process")
-    public String modifierInfoUser(HttpSession session, @ModelAttribute("user") UserDto userDto) throws Exception{
-        int userId = (Integer) session.getAttribute("userId");
-        User user = userRepository.findById(userId).orElseThrow(()-> new Exception("user not found"));
-        user.setFirstname(userDto.getFirstname());
-        user.setLastname(userDto.getLastname());
-        if(user.getEmail().equals(userDto.getEmail())){
-            user.setEmail(userDto.getEmail());
-            userRepository.save(user);
-            return "redirect:/profile";
-        }else{
-            user.setEmail(userDto.getEmail());
-            userRepository.save(user);
-            return "redirect:/seDeconnecter";
-        }
 
 
-    }
+
 
 }

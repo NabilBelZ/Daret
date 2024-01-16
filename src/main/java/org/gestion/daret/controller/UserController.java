@@ -70,11 +70,6 @@ public class UserController {
     }
 
 
-    @GetMapping("/adminDashboard")
-    public String redirectionAdminDashboard(HttpSession session){
-        return roleService.CheckRole(session);
-    }
-
     @GetMapping("/userDashboard")
     public String redirectionUserDashboard(HttpSession session){
         return roleService.CheckRole(session);
@@ -96,6 +91,51 @@ public class UserController {
     public String DetailsTontine(HttpSession session){
         return "tontineDetails";
     }
+
+
+    @PostMapping("/modifierInfoUser_process")
+    public String modifierInfoUser(HttpSession session, @ModelAttribute("user") UserDto userDto) throws Exception{
+        int userId = (Integer) session.getAttribute("userId");
+        User user = userRepository.findById(userId).orElseThrow(()-> new Exception("user not found"));
+        user.setFirstname(userDto.getFirstname());
+        user.setLastname(userDto.getLastname());
+        if(user.getEmail().equals(userDto.getEmail())){
+            user.setEmail(userDto.getEmail());
+            userRepository.save(user);
+            return "redirect:/profile";
+        }else{
+            user.setEmail(userDto.getEmail());
+            userRepository.save(user);
+            return "redirect:/seDeconnecter";
+        }
+    }
+
+    @PostMapping("/modifierMotdePasse_process")
+    public String editPassword(HttpSession session, @ModelAttribute("user") UserDto userDto, Model model,@RequestParam String oldPassword)
+            throws Exception{
+        int userId = (Integer) session.getAttribute("userId");
+
+        User user = userRepository.findById(userId).orElseThrow(()-> new Exception("user not found"));
+
+        if(passwordService.verifyPassword(oldPassword, user.getPassword())){
+            user.setPassword(passwordService.hashPassword(userDto.getPassword()));
+            userRepository.save(user);
+            return "redirect:/seDeconnecter";
+        }
+        else{
+            model.addAttribute("password_error", true);
+            return "profile";
+        }
+    }
+
+    @GetMapping("/profile")
+    public String profileRedirection(HttpSession session, Model model) throws Exception{
+        String email = (String) session.getAttribute("email");
+        User user = userRepository.findByEmail(email).orElseThrow(()-> new Exception("user not found"));
+        model.addAttribute("user", user);
+        return "profile";
+    }
+
 
 
 }

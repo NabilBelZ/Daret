@@ -120,13 +120,13 @@
                 <div class="intro p-20 d-flex space-between bg-eee">
                     <div>
                         <h2 class="m-0">Welcome</h2>
-                        <h2 class="c-black mt-5">Elzero</h2>
+                        <h2 class="c-black mt-5" th:text="${#strings.capitalize(user.lastname)}"></h2>
                     </div>
                     <img class="hide-mobile" src="imgs/welcome.png" alt="" />
                 </div>
                 <img src="imgs/avatar.png" alt="" class="avatar" />
                 <div class="body txt-c d-flex p-20 mt-20 mb-20 block-mobile">
-                    <div>Osama Elzero <span class="d-block c-grey fs-14 mt-10">Developer</span></div>
+                    <div> <span th:text="${user.firstname + ' ' + user.lastname}"></span><span class="d-block c-grey fs-14 mt-10">Developer</span></div>
                     <div>80 <span class="d-block c-grey fs-14 mt-10">Projects</span></div>
                     <div>$8500 <span class="d-block c-grey fs-14 mt-10">Earned</span></div>
                 </div>
@@ -149,15 +149,16 @@
             <!-- Start Latest News Widget -->
             <div class="latest-news p-20 bg-white rad-10 txt-c-mobile">
                 <h2 class="mt-0 mb-20">Dernière tontine</h2>
-                <div class="news-row d-flex align-center">
-                    <img src="imgs/news-01.png" alt="" />
+                <div class="news-row d-flex align-center" th:each="tontine : ${tontines}">
+                    <img th:if="${tontine.idDaret % 2 == 0}" src="imgs/news-01.png"/>
+                    <img th:if="${tontine.idDaret % 2 != 0}" src="imgs/news-02.png"/>
                     <div class="info">
-                        <h3>Created SASS Section</h3>
-                        <p class="m-0 fs-14 c-grey">New SASS Examples & Tutorials</p>
+                        <h3 th:text="${tontine.nom}">Created SASS Section</h3>
+                        <p class="m-0 fs-14 c-grey" th:text="${tontine.description}"></p>
                     </div>
-                    <div class="btn-shape bg-eee fs-13 label">3 Days Ago</div>
+                    <div class="btn-shape bg-eee fs-13 label" th:text="${#dates.format(tontine.dateDemarrage, 'dd-MM-yyyy')}"></div>
                 </div>
-                <div class="news-row d-flex align-center">
+                <!-- <div class="news-row d-flex align-center">
                     <img src="imgs/news-02.png" alt="" />
                     <div class="info">
                         <h3>Changed The Design</h3>
@@ -180,7 +181,7 @@
                         <p class="m-0 fs-14 c-grey">Many New Payment Gateways Added</p>
                     </div>
                     <div class="btn-shape bg-eee fs-13 label">9 Days Ago</div>
-                </div>
+                </div> -->
             </div>
             <!-- End Latest News Widget -->
 
