@@ -18,8 +18,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
+<<<<<<< HEAD
 
 
+=======
+    <script>
+        function searchDaret() {
+            let searchBar_daret = document.querySelector('.searchBar').value.toUpperCase();
+            let courses = document.querySelectorAll('.course');
+            let daretNom = document.getElementsByTagName('h4');
+            let coursesList = document.querySelector('.courses-page');
+
+            for (let i = 0; i < courses.length; i++) {
+                if (daretNom[i].innerHTML.toUpperCase().indexOf(searchBar_daret) >= 0) {
+                    courses[i].style.display = "";
+                    coursesList.insertBefore(courses[i], coursesList.firstChild);
+                } else {
+                    courses[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+>>>>>>> origin/main
     <style>
         .logo{
             width: 230px;
@@ -88,12 +108,9 @@
         <div class="head bg-white p-15 between-flex">
             <a href="/" th:if="${session.role == null}"><img src="images/logo.png" style="width: 150px;"></a>
             <div class="search p-relative">
-                <input class="p-10" type="search" placeholder="Type A Keyword" />
+                <input class="searchBar p-10" type="text" placeholder="Nom Daret" onkeyup="searchDaret()"/>
             </div>
             <div class="icons d-flex align-center" th:if="${session.role}">
-            <span class="notification p-relative">
-              <i class="fa-regular fa-bell fa-lg"></i>
-            </span>
                 <img src="imgs/avatar.png" alt="" />
             </div>
         </div>
@@ -121,13 +138,12 @@
                     <a href="#" style="color: white;" data-bs-toggle="modal" th:data-bs-target="'#participationModal' + ${tontine.id}" >Participer à cette Daret</a>
                     </span>
                     <span class="c-grey">
-                <i class="fa-regular fa-user"></i>
-                950
-            </span>
-                    <span class="c-grey">
-                <i class="fa-solid fa-dollar-sign"></i>
-                165
-            </span>
+                        <i class="fa-regular fa-user"></i>
+                        950
+                    </span>
+                    <span class="c-grey" th:text="${tontine.montantTotal} + ' Dh'">
+                        <!-- <i class="fa-solid fa-dollar-sign"></i> -->
+                    </span>
                 </div>
                 <div class="modal fade" th:id="'participationModal' + ${tontine.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="participationModalLabel" aria-hidden="true">
                     <div class="modal-dialog">

@@ -215,8 +215,8 @@
               <span>(+212) 6 64 73 65 15</span>
             </div>
             <div class="fs-14">
-              <span class="c-grey">Pays:</span>
-              <span>Maroc</span>
+              <span class="c-grey">Mot de passe:</span>
+              <span>*********</span>
             </div>
             <div class="fs-14">
               <script>
@@ -239,7 +239,21 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="toggle_pers_info()"></button>
                       </div>
                       <div class="modal-body">
-                        Les données sont statiques.
+                        <form th:action="@{/modifierMotdePasse_process}" method="post" th:object="${user}">
+                          <script th:if="${password_error}">
+                            alert('Mot de passe incorrect');
+                            window.location.href="/profile";
+                          </script>
+                          <div class="row">
+                            <label class="form-label">Ancien mot de passe :</label>
+                            <input class="form-control" type="text" name="oldPassword">
+                          </div>
+                          <div class="row">
+                            <label class="form-label">Nouveau mot de passe :</label>
+                            <input class="form-control" type="text" th:field="*{password}">
+                          </div>
+                          <input type="submit" value="Enregistrer" class="btn btn-primary" style="margin-left: 150px; margin-top: 20px;">
+                        </form>
                         <!-- <div class="row">
                           <label class="form-label">Date de naissance :</label>
                           <input class="form-control" type="text">
