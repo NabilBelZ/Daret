@@ -62,13 +62,13 @@ public class DaretController {
         return daretService.listeDarets(model);
     }
     @GetMapping("/deleteDaret/{id}")
-    public String SupprimerDaret(@PathVariable("id") int idDaret, RedirectAttributes redirectAttributes){
-        return daretService.deleteDaret(idDaret, redirectAttributes);
+    public String SupprimerDaret(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
+        return daretService.deleteDaret(id, redirectAttributes);
 
     }
     @GetMapping("/modifierDaret/{id}")
-    public String redirectionModificationDaret(@PathVariable("id") int idDaret, Model model){
-        DaretDto daretDto = daretService.getDaretDetails(idDaret);
+    public String redirectionModificationDaret(@PathVariable("id") int id, Model model){
+        DaretDto daretDto = daretService.getDaretDetails(id);
         model.addAttribute("daret", daretDto);
         return "modifierDaret";
     }
@@ -77,8 +77,8 @@ public class DaretController {
         return daretService.updateDaret(daretDto, redirectAttributes);
     }
     @GetMapping("/afficherDaret/{id}")
-    public String redirectionAffichageDaret(@PathVariable("id") int idDaret, Model model){
-        DaretDto daretDto = daretService.getDaretDetails(idDaret);
+    public String redirectionAffichageDaret(@PathVariable("id") int id, Model model){
+        DaretDto daretDto = daretService.getDaretDetails(id);
         model.addAttribute("daret", daretDto);
         return "afficherDaret";
     }

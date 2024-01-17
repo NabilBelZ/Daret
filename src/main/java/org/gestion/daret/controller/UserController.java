@@ -87,7 +87,7 @@ public class UserController {
 
     @GetMapping("/listeTontines")
     public String listeDesTontines(HttpSession session, Model model){
-        List<Daret> tontines = daretRepository.findAll();
+        List<Daret> tontines = daretRepository.findAllByEtatIsTrueOrderByIdDesc();
         model.addAttribute("tontines", tontines);
         return "listeTontines";
     }
