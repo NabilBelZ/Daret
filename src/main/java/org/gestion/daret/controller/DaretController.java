@@ -30,6 +30,7 @@ public class DaretController {
 
     @Autowired
     private DaretService daretService;
+
     @Autowired
     private UserService userService;
 
@@ -57,10 +58,13 @@ public class DaretController {
     public String CreateDaretPage(){
         return "ajouterDaret";
     }
+
+
     @GetMapping("/tontines")
     public String AfficherlisteDarets(Model model) {
         return daretService.listeDarets(model);
     }
+
     @GetMapping("/deleteDaret/{id}")
     public String SupprimerDaret(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
         return daretService.deleteDaret(id, redirectAttributes);

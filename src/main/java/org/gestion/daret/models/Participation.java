@@ -17,6 +17,10 @@ public class Participation {
     private int id;
     @ManyToOne
     private Daret daret;
+
+    @ManyToOne
+    private User user;
+
     @ManyToMany
     private List<Membre> membre;
     private float montantParticipation;

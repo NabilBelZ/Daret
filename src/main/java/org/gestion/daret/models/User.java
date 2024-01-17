@@ -1,6 +1,7 @@
 package org.gestion.daret.models;
 
 import jakarta.persistence.*;
+import jakarta.servlet.http.Part;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,4 +37,7 @@ public class User {
 
     @OneToMany(mappedBy = "user") // bhal hnaya khdama dak cascade hit ila mshna user aytmsho les membre
    private List<Membre> membres;
+
+    @OneToMany(mappedBy = "user")
+    private List<Participation> participation;
 }
