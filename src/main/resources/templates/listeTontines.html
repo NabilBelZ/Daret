@@ -57,7 +57,7 @@
         </div>
         <ul>
             <li>
-                <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/adminDashboard">
+                <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/userDashboard">
                     <i class="fa-regular fa-chart-bar fa-fw"></i>
                     <span>Dashboard</span>
                 </a>
@@ -69,9 +69,15 @@
                 </a>
             </li>
             <li>
+                <a class=" d-flex align-center fs-14 c-black rad-6 p-10" href="/mesParticipations">
+                    <i class="fa-solid fa-diagram-project fa-fw"></i>
+                    <span>Mes participations</span>
+                </a>
+            </li>
+            <li>
                 <a class="active d-flex align-center fs-14 c-black rad-6 p-10" href="/listeTontines">
                     <i class="fa-solid fa-diagram-project fa-fw"></i>
-                    <span>Tontines</span>
+                    <span>Darets</span>
                 </a>
             </li>
             <li th:if="${session.role eq 'admin'}">

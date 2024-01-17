@@ -95,7 +95,10 @@ public class UserController {
     public String DetailsTontine(HttpSession session){
         return "tontineDetails";
     }
-
+    @GetMapping("/mesParticipations")
+    public String mesParticipations(){
+        return "mesParticipations";
+    }
 
     @PostMapping("/modifierInfoUser_process")
     public String modifierInfoUser(HttpSession session, @ModelAttribute("user") UserDto userDto) throws Exception{

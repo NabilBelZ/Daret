@@ -57,6 +57,9 @@ public class ParticipationController {
         }
         return "redirect:/listeTontines";
     }
-
+@GetMapping("/listDemandesParticipation")
+    public String listeDesDemandesParticipations(){
+        return "listDemandesParticipation";
+}
 
 }

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="css/all.min.css" />
+  <link rel="stylesheet" href="css/framework.css" />
+  <link rel="stylesheet" href="css/master.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
+  <style>
+    ::-webkit-scrollbar-thumb {
+      background-color: #df4881ab;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #df4881ab;
+    }
+    .logo{
+      width: 230px;
+      height: 75px;
+      transform: translateY(-15px);
+    }
+    .logo img{
+      width: 80%;
+      height: 100%;
+    }
+    .page{
+      background-color: #ffc0cb2b;
+    }
+    .welcome, .latest-news, .quick-draft, .targets{
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="page d-flex">
+  <div class="sidebar bg-white p-20 p-relative">
+    <div class="logo">
+      <a href="/"><img src="/images/logo.png"></a>
+    </div>
+    <ul>
+      <li>
+        <a class=" d-flex align-center fs-14 c-black rad-6 p-10" href="/userDashboard">
+          <i class="fa-regular fa-chart-bar fa-fw"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/profile">
+          <i class="fa-regular fa-user fa-fw"></i>
+          <span>Profil</span>
+        </a>
+      </li>
+      <li>
+        <a class="active d-flex align-center fs-14 c-black rad-6 p-10" href="/mesParticipations">
+          <i class="fa-solid fa-diagram-project fa-fw"></i>
+          <span>Mes participations</span>
+        </a>
+      </li>
+      <li>
+        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/listeTontines">
+          <i class="fa-solid fa-diagram-project fa-fw"></i>
+          <span>Darets</span>
+        </a>
+      </li>
+      <!-- <li>
+        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="settings.html">
+          <i class="fa-solid fa-gear fa-fw"></i>
+          <span>Settings</span>
+        </a>
+      </li> -->
+      <li>
+        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/seDeconnecter">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Se déconnecter</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="content w-full">
+    <!-- Start Head -->
+    <div class="head bg-white p-15 between-flex">
+      <div class="search p-relative">
+        <input class="p-10" type="search" placeholder="Type A Keyword" />
+      </div>
+      <div class="icons d-flex align-center">
+        <img src="imgs/avatar.png" />
+      </div>
+    </div>
+    <h1 class="p-relative">Mes Participations</h1>
+    </div>
+</div>
+</body>
+</html>

@@ -68,8 +68,14 @@
       <a href=""><img src="/images/logo.png"></a>
     </div>
     <ul>
-      <li>
+      <li th:if="${session.role eq 'admin'}">
         <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/adminDashboard">
+          <i class="fa-regular fa-chart-bar fa-fw"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li th:if="${session.role eq 'user'}">
+        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/userDashboard">
           <i class="fa-regular fa-chart-bar fa-fw"></i>
           <span>Dashboard</span>
         </a>
@@ -81,21 +87,28 @@
         </a>
       </li>
       <li th:if="${session.role eq 'admin'}">
+      <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/ajouterDaret">
+        <i class="fa-solid fa-plus"></i>
+        <span>Créer une daret</span>
+      </a>
+    </li>
+      <li th:if="${session.role eq 'admin'}">
         <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/tontines">
           <i class="fa-solid fa-diagram-project fa-fw"></i>
-          <span>Liste Des Darets</span>
+          <span>Liste des darets</span>
+        </a>
+      </li>
+
+      <li th:if="${session.role eq 'user'}">
+        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/mesParticipations">
+          <i class="fa-solid fa-diagram-project fa-fw"></i>
+          <span>Mes participations</span>
         </a>
       </li>
       <li th:if="${session.role eq 'admin'}">
-        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/ajouterDaret">
-          <i class="fa-solid fa-plus"></i>
-          <span>Créer Une Daret</span>
-        </a>
-      </li>
-      <li>
-        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/tontines">
-          <i class="fa-solid fa-diagram-project fa-fw"></i>
-          <span>Mes participations</span>
+        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/listDemandesParticipation">
+          <i class="fa-regular fa-circle-user fa-fw"></i>
+          <span >Liste des demandes de participation</span>
         </a>
       </li>
       <li th:if="${session.role eq 'admin'}">
@@ -110,6 +123,12 @@
           <span>Settings</span>
         </a>
       </li> -->
+      <li th:if="${session.role eq 'user'}">
+        <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/listeTontines">
+          <i class="fa-solid fa-diagram-project fa-fw"></i>
+          <span>Darets</span>
+        </a>
+      </li>
       <li>
         <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/seDeconnecter">
           <i class="fa-solid fa-arrow-right-from-bracket"></i>
