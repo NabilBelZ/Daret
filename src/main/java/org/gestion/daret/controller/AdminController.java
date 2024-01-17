@@ -9,6 +9,7 @@ import org.gestion.daret.repository.UserRepository;
 import org.gestion.daret.services.RoleService;
 import org.gestion.daret.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AbstractDependsOnBeanFactoryPostProcessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,14 +31,20 @@ public class AdminController {
     DaretRepository daretRepository;
 
     @GetMapping("/adminDashboard")
-    public String redirectionAdminDashboard(HttpSession session, Model model) throws Exception{
+    public String redirectionAdminDashboard(HttpSession session, Model model) throws Exception {
+
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId != null && userId != 0) {
+            User user = userRepository.findById(userId).orElseThrow(() -> new Exception("User not found"));
+            model.addAttribute("user", user);
+        }
+
         List<Daret> tontines = daretRepository.findAllByEtatIsTrueOrderByIdDesc();
         model.addAttribute("tontines", tontines);
-        int userId = (Integer) session.getAttribute("userId");
-        User user = userRepository.findById(userId).orElseThrow(()-> new Exception("user not found"));
-        model.addAttribute("user", user);
+
         return roleService.CheckRole(session);
     }
+
 
     @GetMapping("/listUsers")
     public String afficherUsers(HttpSession session, Model model){

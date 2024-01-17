@@ -126,7 +126,7 @@
                 </div>
                 <img src="imgs/avatar.png" alt="" class="avatar" />
                 <div class="body txt-c d-flex p-20 mt-20 mb-20 block-mobile">
-                    <div> <span th:text="${user.firstname + ' ' + user.lastname}"></span><span class="d-block c-grey fs-14 mt-10">Developer</span></div>
+                    <div> <span th:text="${#strings.capitalize(user.firstname) + ' ' + #strings.capitalize(user.lastname)}"></span> <span class="d-block c-grey fs-14 mt-10">Developer</span></div>
                     <div>80 <span class="d-block c-grey fs-14 mt-10">Projects</span></div>
                     <div>$8500 <span class="d-block c-grey fs-14 mt-10">Earned</span></div>
                 </div>

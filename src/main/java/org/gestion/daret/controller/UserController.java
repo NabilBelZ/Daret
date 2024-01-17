@@ -70,7 +70,12 @@ public class UserController {
 
 
     @GetMapping("/userDashboard")
-    public String redirectionUserDashboard(HttpSession session){
+    public String redirectionUserDashboard(HttpSession session, Model model) throws Exception{
+        Integer userId = (Integer) session.getAttribute("userId");
+        if(userId != null && userId != 0){
+            User user = userRepository.findById(userId).orElseThrow(()-> new Exception("user not found!"));
+            model.addAttribute("user", user);
+        }
         return roleService.CheckRole(session);
     }
 
@@ -110,14 +115,19 @@ public class UserController {
     }
 
     @PostMapping("/modifierMotdePasse_process")
-    public String editPassword(HttpSession session, @ModelAttribute("user") UserDto userDto, Model model,@RequestParam String oldPassword)
+    public String editPassword(HttpSession session, Model model,@RequestParam(name="oldPassword") String oldPassword,
+                               @RequestParam(name = "newPassword") String newPassword)
             throws Exception{
         int userId = (Integer) session.getAttribute("userId");
 
         User user = userRepository.findById(userId).orElseThrow(()-> new Exception("user not found"));
 
         if(passwordService.verifyPassword(oldPassword, user.getPassword())){
-            user.setPassword(passwordService.hashPassword(userDto.getPassword()));
+            user.setLastname(user.getLastname());
+            user.setFirstname(user.getFirstname());
+            user.setRole(user.getRole());
+            user.setStatus(user.getStatus());
+            user.setPassword(passwordService.hashPassword(newPassword));
             userRepository.save(user);
             return "redirect:/seDeconnecter";
         }
