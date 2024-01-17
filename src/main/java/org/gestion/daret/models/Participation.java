@@ -14,7 +14,7 @@ import java.util.List;
 public class Participation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idParticipation;
+    private int id;
     @ManyToOne
     private Daret daret;
     @ManyToMany
@@ -22,4 +22,5 @@ public class Participation {
     private float montantParticipation;
     @OneToMany(mappedBy = "participation")
     private List<Tour> tours;
+    private boolean etat;
 }

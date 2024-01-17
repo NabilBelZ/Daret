@@ -5,12 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Courses</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="css/all.min.css" />
     <link rel="stylesheet" href="css/framework.css" />
     <link rel="stylesheet" href="css/master.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
+
+
     <style>
         .logo{
             width: 230px;
@@ -91,22 +100,26 @@
         <!-- End Head -->
         <h1 class="p-relative">Liste des tontines</h1>
 
-
+        <h3 th:text="${msgsuccess}" style="text-align: center; color: green; "></h3>
         <div class="courses-page d-grid m-20 gap-20">
             <div class="course bg-white rad-6 p-relative" th:each="tontine: ${tontines}">
 
-                <img class="cover" th:if="${tontine.idDaret % 2 == 0}" src="imgs/course-05.jpg"/>
-                <img class="cover" th:if="${tontine.idDaret % 2 != 0}" src="imgs/course-01.jpg" th:unless="${tontine.idDaret % 2 == 0}"/>
+                <img class="cover" th:if="${tontine.id % 2 == 0}" src="imgs/course-05.jpg"/>
+                <img class="cover" th:if="${tontine.id % 2 != 0}" src="imgs/course-01.jpg" th:unless="${tontine.id % 2 == 0}"/>
 
 
                 <img class="instructor" src="imgs/team-01.png"/>
 
                 <div class="p-20">
+                    <input type="hidden" name="id" th:value="${tontine.id}">
                     <h4 class="m-0" th:text="${tontine.nom}"></h4>
                     <p class="description c-grey mt-15 fs-14" th:text="${tontine.description}"></p>
                 </div>
                 <div class="info p-15 p-relative between-flex">
-                    <span class="title bg-blue c-white btn-shape"><a href="/tontineDetails" style="color: white;">Tontine Info</a></span>
+                    <!-- <span style="background-color: #DF4881FF" class="title bg-green c-white btn-shape"><a href="/tontineDetails" style="color: white;">Participer à cette Daret</a></span>-->
+                    <span style="background-color: #DF4881FF" class="title bg-green c-white btn-shape" >
+                    <a href="#" style="color: white;" data-bs-toggle="modal" th:data-bs-target="'#participationModal' + ${tontine.id}" >Participer à cette Daret</a>
+                    </span>
                     <span class="c-grey">
                 <i class="fa-regular fa-user"></i>
                 950
@@ -116,10 +129,122 @@
                 165
             </span>
                 </div>
+                <div class="modal fade" th:id="'participationModal' + ${tontine.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="participationModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="participationModalLabel">Participer à cette Daret</h5>
+                                <button type="button" class="btn-close"  data-bs-dismiss="modal" aria-label="Close">
+
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form th:action="@{/participer}" th:object="${participation}" method="post">
+                                    <input type="hidden"  th:name="id" th:value="${tontine.id}"/>
+                                    <input type="hidden" th:id="'m' + ${tontine.id}" th:name="tontine.montant" th:value="${tontine.montant}"/>
+                                    <div class="form-group">
+                                        <label >Pourcentage du montant de participation :</label>
+                                        <br>
+                                        <select class="form-control" th:onchange="'calc(' + ${tontine.id} + ')'" th:id="'s' + ${tontine.id}" name="pourcentage">
+
+                                            <option selected disabled>Choisissez le pourcentage du montant de participation</option>
+                                            <option value="200">Double (200%)</option>
+                                            <option value="100">100%</option>
+                                            <option value="75">75%</option>
+                                            <option value="50">50%</option>
+                                            <option value="25">25%</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label >Montant de participation :</label>
+                                        <br>
+                                        <input style="color: green" type="text" class="form-control montantParticipation" name="montantParticipation" readonly>
+                                    </div>
+                                    <br>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary tahiri"  data-bs-dismiss="modal">Fermer</button>
+                                        <button type="submit" class="btn btn-success">Envoyer la demande</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
 
     </div>
 </div>
+
+
+
+
+<!-- Ajoutez ce script à la fin de votre page juste avant la balise </body> -->
+<script>
+    // Fonction pour ouvrir le modal et initialiser les données
+    function openParticipationModal(id, montant) {
+        // Réinitialisez les champs du formulaire
+
+
+        // Définissez les valeurs initiales
+        document.querySelector('input[name="tontine.id"]').value = id;
+        document.querySelector('input[name="tontine.montant"]').value = montant;
+
+        // Ouvrez le modal
+        var modal = new bootstrap.Modal(document.getElementById('participationModal'));
+        modal.show();
+    }
+
+    // Fonction pour fermer le modal
+    function closeParticipationModal() {
+        // Fermez le modal
+        var modal = new bootstrap.Modal(document.getElementById('participationModal'));
+
+
+    }
+
+
+    for (let i of document.querySelectorAll('.tahiri')){
+        i.addEventListener("click", function (){
+            let tahiri = document.querySelectorAll('.montantParticipation')
+            for(let z of tahiri){
+
+                z.value = '';
+            }
+        })
+    }
+    function calc(e){
+
+
+        var pourcentage = parseFloat(document.getElementById("s"+ e).value);
+        var montantInitial = parseFloat(document.getElementById("m"+ e).value);
+
+        if (!isNaN(pourcentage) && !isNaN(montantInitial)) {
+            var montantParticipation = (pourcentage / 100) * montantInitial;
+            let tahiri = document.querySelectorAll('.montantParticipation')
+                for(let x of tahiri){
+
+                    x.value = montantParticipation.toFixed(2);
+                   }
+
+        }
+    }
+
+    // Événement déclenché lorsqu'un pourcentage est sélectionné
+
+        // Calculez le montant de participation en fonction du pourcentage choisi
+
+</script>
+
+
+
 </body>
+
+
+<!-- The rest of your HTML -->
+
+
+
 </html>

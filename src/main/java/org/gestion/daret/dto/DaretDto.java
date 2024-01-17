@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DaretDto {
-    private int idDaret;
+    private int id;
     private String nom;
     private String periode;
     private String periodeTour;

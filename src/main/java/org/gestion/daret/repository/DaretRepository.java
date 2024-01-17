@@ -9,12 +9,12 @@ import java.util.Optional;
 
 @Repository
 public interface DaretRepository extends JpaRepository<Daret, Integer> {
-    Optional<Daret> findByIdDaret(int idDaret);
+    Optional<Daret> findById(int id);
 
 
-    List<Daret> findAllByEtatIsTrueOrderByIdDaretDesc();
+    List<Daret> findAllByEtatIsTrueOrderByIdDesc();
 
 
 
-//Optional<Daret> save();
+ //Optional<Daret> save();
 }

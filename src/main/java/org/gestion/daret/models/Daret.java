@@ -18,7 +18,7 @@ import java.util.List;
 public class Daret {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idDaret;
+    private int id;
     private String nom;
     private String periode;
     private String periodeTour;

@@ -13,10 +13,10 @@ public interface DaretService {
     public String createDaret(DaretDto daretDto, RedirectAttributes redirectAttributes);
     public String readDaret(DaretDto DaretDto, Model model);
     public String updateDaret(DaretDto daretDto, RedirectAttributes redirectAttributes);
-    public String deleteDaret(int idDaret,  RedirectAttributes redirectAttributes);
+    public String deleteDaret(int id,  RedirectAttributes redirectAttributes);
     public String listeDarets(Model model);
     public String redirectionAjout(DaretDto daretDto, Model model, HttpSession session);
     public String getInfo2emeForm(Model model, HttpSession session);
 
-    public DaretDto getDaretDetails(int idDaret);
+    public DaretDto getDaretDetails(int id);
 }

@@ -16,7 +16,7 @@ import java.util.List;
 public class Membre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idMembre;
+    private int id;
     @ManyToOne
     private User user;
 

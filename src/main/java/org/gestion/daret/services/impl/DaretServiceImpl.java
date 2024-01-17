@@ -36,7 +36,7 @@ public class DaretServiceImpl implements DaretService {
     @Override
     public String createDaret(DaretDto daretDto, RedirectAttributes redirectAttributes) {
         Daret daret = new Daret();
-        daret.setIdDaret(daretDto.getIdDaret());
+        daret.setId(daretDto.getId());
         daret.setNom(daretDto.getNom());
         daret.setMontant(daretDto.getMontant());
         //daret.setDateDemarrage(daretDto.getDateDemarrage());
@@ -71,7 +71,7 @@ public class DaretServiceImpl implements DaretService {
     }
     @Override
     public String listeDarets(Model model){
-        List<Daret> darets = daretRepository.findAllByEtatIsTrueOrderByIdDaretDesc();;
+        List<Daret> darets = daretRepository.findAllByEtatIsTrueOrderByIdDesc();;
         model.addAttribute("darets", darets);
         return "tontines";
     }
@@ -83,8 +83,8 @@ public class DaretServiceImpl implements DaretService {
 
     @Override
     public String updateDaret(DaretDto daretDto, RedirectAttributes redirectAttributes) {
-            int idDaret = daretDto.getIdDaret();
-            Optional<Daret> optionalDaret = daretRepository.findByIdDaret(idDaret);
+            int id = daretDto.getId();
+            Optional<Daret> optionalDaret = daretRepository.findById(id);
             if (optionalDaret.isPresent()) {
                 Daret daret = optionalDaret.get();
                 daret.setNom(daretDto.getNom());
@@ -114,9 +114,9 @@ public class DaretServiceImpl implements DaretService {
 
 
     @Override
-    public String deleteDaret(int idDaret ,RedirectAttributes redirectAttributes) {
+    public String deleteDaret(int id ,RedirectAttributes redirectAttributes) {
 
-        Optional<Daret> optionalDaret = daretRepository.findByIdDaret(idDaret);
+        Optional<Daret> optionalDaret = daretRepository.findById(id);
         optionalDaret.ifPresent(daret -> {
             daret.setEtat(false);
             daretRepository.save(daret);
@@ -144,8 +144,8 @@ public class DaretServiceImpl implements DaretService {
     }
 
     @Override
-    public DaretDto getDaretDetails(int idDaret) {
-        Optional<Daret> optionalDaret = daretRepository.findByIdDaret(idDaret);
+    public DaretDto getDaretDetails(int id) {
+        Optional<Daret> optionalDaret = daretRepository.findById(id);
         if (optionalDaret.isPresent()){
             Daret daret = optionalDaret.get();
             return convertToDto(daret);
@@ -156,7 +156,7 @@ public class DaretServiceImpl implements DaretService {
 
     private DaretDto convertToDto(Daret daret) {
         DaretDto daretDto = new DaretDto();
-        daretDto.setIdDaret(daret.getIdDaret());
+        daretDto.setId(daret.getId());
         daretDto.setNom(daret.getNom());
         daretDto.setMontant(daret.getMontant());
 

@@ -15,7 +15,7 @@ import java.util.List;
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idTour;
+    private int id;
     private Date dateDebut;
     private Date dateFin;
     private String periode;
