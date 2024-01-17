@@ -83,7 +83,7 @@ public class UserController {
     public String listeDesTontines(HttpSession session, Model model){
         List<Daret> tontines = daretRepository.findAllByEtatIsTrueOrderByIdDesc();
         model.addAttribute("tontines", tontines);
-        return "listeTontinesORIGINAL";
+        return "listeTontines";
     }
 
     @GetMapping("/tontineDetails")
