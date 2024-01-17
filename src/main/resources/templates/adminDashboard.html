@@ -150,8 +150,8 @@
             <div class="latest-news p-20 bg-white rad-10 txt-c-mobile">
                 <h2 class="mt-0 mb-20">Dernière tontine</h2>
                 <div class="news-row d-flex align-center" th:each="tontine : ${tontines}">
-                    <img th:if="${tontine.idDaret % 2 == 0}" src="imgs/news-01.png"/>
-                    <img th:if="${tontine.idDaret % 2 != 0}" src="imgs/news-02.png"/>
+                    <img th:if="${tontine.id % 2 == 0}" src="imgs/news-01.png"/>
+                    <img th:if="${tontine.id % 2 != 0}" src="imgs/news-02.png"/>
                     <div class="info">
                         <h3 th:text="${tontine.nom}">Created SASS Section</h3>
                         <p class="m-0 fs-14 c-grey" th:text="${tontine.description}"></p>
