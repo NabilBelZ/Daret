@@ -31,7 +31,7 @@ public class AdminController {
 
     @GetMapping("/adminDashboard")
     public String redirectionAdminDashboard(HttpSession session, Model model) throws Exception{
-        List<Daret> tontines = daretRepository.findAll();
+        List<Daret> tontines = daretRepository.findAllByEtatIsTrueOrderByIdDesc();
         model.addAttribute("tontines", tontines);
         int userId = (Integer) session.getAttribute("userId");
         User user = userRepository.findById(userId).orElseThrow(()-> new Exception("user not found"));
