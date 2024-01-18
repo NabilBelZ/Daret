@@ -59,13 +59,11 @@ public class ParticipationServiceImpl implements ParticipationService {
 
         Optional<Participation> optionalParticipation = participationRepository.findById(id);
         optionalParticipation.ifPresent(participation -> {
-            if (participation.getEtat() == 0) {
+            if (participation.getEtat() == 0 || participation.getEtat() == 1) {
                 participation.setEtat(-1);
                 participationRepository.save(participation);
                 redirectAttributes.addFlashAttribute("msgRefus", "La Demande a été refusée !");
-            } else if (participation.getEtat() == 1) {
-                redirectAttributes.addFlashAttribute("msgRefus", "La Demande ne peut pas être refusée car elle est déjà acceptée !");
-            }else if (participation.getEtat() == -1) {
+            } else if (participation.getEtat() == -1) {
                 redirectAttributes.addFlashAttribute("msgRefus", "La Demande a été déjà refusée avant !");
             }
         });
@@ -76,14 +74,12 @@ public class ParticipationServiceImpl implements ParticipationService {
         Optional<Participation> optionalParticipation = participationRepository.findById(id);
 
         optionalParticipation.ifPresent(participation -> {
-            if (participation.getEtat() == 0) {
+            if (participation.getEtat() == 0 || participation.getEtat() == -1) {
                 participation.setEtat(1);
                 participationRepository.save(participation);
                 redirectAttributes.addFlashAttribute("msgAccept", "La Demande a été acceptée !");
             } else if (participation.getEtat() == 1) {
                 redirectAttributes.addFlashAttribute("msgAccept", "La Demande a été déjà acceptée avant !");
-            } else if (participation.getEtat() == -1) {
-                redirectAttributes.addFlashAttribute("msgAccept", "La Demande ne peut pas être acceptée car elle a déjà été refusée !");
             }
         });
 

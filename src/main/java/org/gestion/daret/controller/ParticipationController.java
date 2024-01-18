@@ -46,8 +46,8 @@ public class ParticipationController {
     @GetMapping("/accepterDemande/{id}")
     public String accepterDemande(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
         return participationService.accepterDemande(id, redirectAttributes);
-
     }
+
     @PostMapping("/participer")
     public String participer(HttpSession session, @ModelAttribute("participation") ParticipationDtoinput participation,
                              RedirectAttributes redirectAttributes) throws Exception{
@@ -68,12 +68,12 @@ public class ParticipationController {
         }
         return "redirect:/listeTontines";
     }
-@GetMapping("/listDemandesParticipation")
-    public String listeDesDemandesParticipations(Model model){
-    List<ParticipationDto> participationDtoList = participationService.getAllParticipations();
-    model.addAttribute("participations", participationDtoList);
-        return "listDemandesParticipation";
-}
+    @GetMapping("/listDemandesParticipation")
+        public String listeDesDemandesParticipations(Model model){
+        List<ParticipationDto> participationDtoList = participationService.getAllParticipations();
+        model.addAttribute("participations", participationDtoList);
+            return "listDemandesParticipation";
+    }
 
 
 }
