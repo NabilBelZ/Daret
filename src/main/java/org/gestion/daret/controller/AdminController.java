@@ -102,7 +102,7 @@ public class AdminController {
     }
 
     @GetMapping("/ajouterUser")
-    public String routerToAjouterUser(){
+    public String routerToAjouterUser() {
         return "ajouterUser";
     }
 
