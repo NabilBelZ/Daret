@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -15,6 +17,7 @@ public class Participation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @ManyToOne
     private Daret daret;
 
@@ -23,8 +26,11 @@ public class Participation {
 
     @ManyToMany
     private List<Membre> membre;
+
     private float montantParticipation;
+
     @OneToMany(mappedBy = "participation")
     private List<Tour> tours;
+
     private int etat;
 }

@@ -14,4 +14,6 @@ public interface UserService {
 
     public String seDeconnecter(HttpSession session);
 
+    public String nouveauUtilisateurProcess(UserDto userDto, String passConfirmation, Model model);
+
 }

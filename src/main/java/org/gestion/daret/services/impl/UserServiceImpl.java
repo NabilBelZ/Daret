@@ -37,11 +37,29 @@ public class UserServiceImpl implements UserService {
             user.setPassword(passwordService.hashPassword(userDto.getPassword()));
             userRepository.save(user);
             session.setAttribute("role", userDto.getRole());
-            model.addAttribute("msgSuccess", "You are registered successfully !");
+            model.addAttribute("msgSuccess", "Utilisateur créé avec succès. !");
             return "login";
         } else {
             model.addAttribute("error", "The entered confirmation password does not match the provided password.");
             return "register";
+        }
+    }
+
+    @Override
+    public String nouveauUtilisateurProcess(UserDto userDto, String passConfirmation, Model model) {
+        if (userDto.getPassword().equals(passConfirmation)) {
+            User user = new User();
+            user.setId(userDto.getId());
+            user.setFirstname(userDto.getFirstname());
+            user.setLastname(userDto.getLastname());
+            user.setEmail(userDto.getEmail());
+            user.setPassword(passwordService.hashPassword(userDto.getPassword()));
+            userRepository.save(user);
+            model.addAttribute("msgSuccess", "Utilisateur créé avec succès. !");
+            return "listUsers";
+        } else {
+            model.addAttribute("error", "The entered confirmation password does not match the provided password.");
+            return "ajouterUser";
         }
     }
 

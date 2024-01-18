@@ -5,17 +5,15 @@ import org.gestion.daret.dto.UserDto;
 import org.gestion.daret.models.Daret;
 import org.gestion.daret.models.User;
 import org.gestion.daret.repository.DaretRepository;
+import org.gestion.daret.repository.ParticipationRepository;
 import org.gestion.daret.repository.UserRepository;
 import org.gestion.daret.services.RoleService;
 import org.gestion.daret.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AbstractDependsOnBeanFactoryPostProcessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Controller
@@ -29,6 +27,12 @@ public class AdminController {
 
     @Autowired
     DaretRepository daretRepository;
+
+    @Autowired
+    ParticipationRepository participationRepository;
+
+    @Autowired
+    UserService userService;
 
     @GetMapping("/adminDashboard")
     public String redirectionAdminDashboard(HttpSession session, Model model) throws Exception {
@@ -58,7 +62,9 @@ public class AdminController {
     @GetMapping("/deleteUser/{id}")
     public String DeleteUserProcess(@PathVariable int id) throws Exception{
         User user = userRepository.findById(id).orElseThrow(()-> new Exception("user not found"));
-        userRepository.deleteById(id);
+        if(user != null){
+            userRepository.deleteById(id);
+        }
         return "redirect:/listUsers";
     }
 
@@ -95,8 +101,14 @@ public class AdminController {
         return "redirect:/listUsers";
     }
 
+    @GetMapping("/ajouterUser")
+    public String routerToAjouterUser(){
+        return "ajouterUser";
+    }
 
-
-
+    @PostMapping("/nouveauUtilisateur")
+    public String newUser(@ModelAttribute("user") UserDto userDto, @RequestParam("passConfirmation") String passConfirmation, Model model){
+        return userService.nouveauUtilisateurProcess(userDto, passConfirmation, model);
+    }
 
 }
