@@ -136,9 +136,10 @@
                 <a th:href="@{/}"><img src="/images/logo.png" alt="logo"></a>
             </div>
             <h1>Login</h1>
-            <h3 th:text="${msgSuccess}" style="text-align: center; color: green; padding-bottom: 10px;"></h3>
 
+            <h3 th:text="${msgBanned}" style="text-align: center; color: red; padding-bottom: 10px;"></h3>
             <h3 th:text="${connectionError}" style="text-align: center; color: red; padding-bottom: 10px;"></h3>
+
             <div class="text-input">
                 <input type="email" placeholder="E-mail" name="email" required />
                 <i class='bx bxs-user'></i>

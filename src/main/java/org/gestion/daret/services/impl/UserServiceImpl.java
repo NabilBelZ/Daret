@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
             user.setPassword(passwordService.hashPassword(userDto.getPassword()));
             userRepository.save(user);
             model.addAttribute("msgSuccess", "Utilisateur créé avec succès. !");
-            return "listUsers";
+            return "redirect:/listUsers";
         } else {
             model.addAttribute("error", "The entered confirmation password does not match the provided password.");
             return "ajouterUser";
@@ -66,10 +66,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public String LoginProcess(UserDto userDto, Model model, HttpSession session) {
         try {
-            User storedUser = userRepository.findByEmail(userDto.getEmail())
-                    .orElseThrow(() -> new NoSuchElementException("User not found"));
+            User storedUser = userRepository.findByEmail(userDto.getEmail()).orElseThrow(() -> new NoSuchElementException("User not found"));
 
-            if (passwordService.verifyPassword(userDto.getPassword(), storedUser.getPassword())) {
+            if (passwordService.verifyPassword(userDto.getPassword(), storedUser.getPassword()) && storedUser.getStatus().equals(true)) {
                 session.setAttribute("userId", storedUser.getId());
                 if(storedUser.getRole().equals("admin")){
                     session.setAttribute("role", storedUser.getRole());
@@ -80,7 +79,11 @@ public class UserServiceImpl implements UserService {
                     session.setAttribute("email", storedUser.getEmail());
                     return "redirect:/userDashboard";
                 }
-            } else {
+            } else if(storedUser.getStatus().equals(false)) {
+                model.addAttribute("msgBanned", "L'utilisateur est banni");
+                return "login";
+            }
+            else {
                 model.addAttribute("connectionError", "Email or password invalid");
                 return "login";
 

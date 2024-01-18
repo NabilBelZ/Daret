@@ -101,8 +101,9 @@ public class AdminController {
         return "redirect:/listUsers";
     }
 
-    @GetMapping("/ajouterUser")
-    public String routerToAjouterUser() {
+    @GetMapping("/ajouterUserLink")
+    public String AjouterUserRedirection(Model model) {
+        model.addAttribute("user", new User());
         return "ajouterUser";
     }
 

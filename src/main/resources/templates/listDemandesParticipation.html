@@ -294,8 +294,8 @@
             </thead>
             <tbody>
             <tr th:each="participation : ${participations}">
-              <td th:text="${participation.prenomUser}"></td>
               <td th:text="${participation.nomUser}"></td>
+              <td th:text="${participation.prenomUser}"></td>
               <td th:text="${participation.nomDaret}"></td>
               <td style="color: green" th:text="${participation.montantParticipation}"></td>
               <td style="color: #DF4881FF" th:text="${participation.montantDaret}"></td>
