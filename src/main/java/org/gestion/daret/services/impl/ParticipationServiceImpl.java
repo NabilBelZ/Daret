@@ -37,12 +37,19 @@ public class ParticipationServiceImpl implements ParticipationService {
         return convertToDtoList(participations);
     }
 
+    @Override
+    public List<ParticipationDto> getMembreDaret(int id) {
+        List<Participation> participations = participationRepository.findAllByDaret_Id(id);
+        return convertToDtoList(participations);
+    }
+
     private List<ParticipationDto> convertToDtoList(List<Participation> participations) {
         List<ParticipationDto> participationDtoList = new ArrayList<>();
         for (Participation participation : participations) {
             ParticipationDto participationDto = new ParticipationDto();
             Daret daret = participation.getDaret();
             participationDto.setId(participation.getId());
+            participationDto.setIdDaret(daret.getId());
             participationDto.setNomDaret(daret.getNom());
             User user = participation.getUser();
             participationDto.setNomUser(user.getLastname());
@@ -69,6 +76,24 @@ public class ParticipationServiceImpl implements ParticipationService {
         });
         return "redirect:/listDemandesParticipation";
     }
+
+    @Override
+    public String refuserDemande2(int id , int id_daret, RedirectAttributes redirectAttributes) {
+
+        Optional<Participation> optionalParticipation = participationRepository.findById(id);
+        optionalParticipation.ifPresent(participation -> {
+            if (participation.getEtat() == 0 || participation.getEtat() == 1) {
+                participation.setEtat(-1);
+                participationRepository.save(participation);
+                redirectAttributes.addFlashAttribute("msgRefus", "La Demande a été refusée !");
+            } else if (participation.getEtat() == -1) {
+                redirectAttributes.addFlashAttribute("msgRefus", "La Demande a été déjà refusée avant !");
+            }
+        });
+        redirectAttributes.addAttribute("id_daret", id_daret);
+        return "redirect:/membreDaret/{id_daret}";
+    }
+
     @Override
     public String accepterDemande(int id, RedirectAttributes redirectAttributes) {
         Optional<Participation> optionalParticipation = participationRepository.findById(id);
@@ -87,6 +112,23 @@ public class ParticipationServiceImpl implements ParticipationService {
     }
 
     @Override
+    public String accepterDemande2(int id_participation, int id_daret, RedirectAttributes redirectAttributes) {
+        Optional<Participation> optionalParticipation = participationRepository.findById(id_participation);
+
+        optionalParticipation.ifPresent(participation -> {
+            if (participation.getEtat() == 0 || participation.getEtat() == -1) {
+                participation.setEtat(1);
+                participationRepository.save(participation);
+                redirectAttributes.addFlashAttribute("msgAccept", "La Demande a été acceptée !");
+            } else if (participation.getEtat() == 1) {
+                redirectAttributes.addFlashAttribute("msgAccept", "La Demande a été déjà acceptée avant !");
+            }
+        });
+        redirectAttributes.addAttribute("id_daret", id_daret);
+        return "redirect:/membreDaret/{id_daret}";
+    }
+
+    @Override
     public String mettreEnAttenteDemande(int id, RedirectAttributes redirectAttributes) {
         Optional<Participation> optionalParticipation = participationRepository.findById(id);
 
@@ -100,6 +142,23 @@ public class ParticipationServiceImpl implements ParticipationService {
             }
         });
         return "redirect:/listDemandesParticipation";
+    }
+
+    @Override
+    public String mettreEnAttenteDemande2(int id, int id_daret, RedirectAttributes redirectAttributes) {
+        Optional<Participation> optionalParticipation = participationRepository.findById(id);
+
+        optionalParticipation.ifPresent(participation -> {
+            if (participation.getEtat() == 1 || participation.getEtat() == -1) {
+                participation.setEtat(0);
+                participationRepository.save(participation);
+                redirectAttributes.addFlashAttribute("msgAttente", "La demande a été mise en attente.");
+            } else if (participation.getEtat() == 0) {
+                redirectAttributes.addFlashAttribute("msgAttente2", "La demande est déjà en attente !");
+            }
+        });
+        redirectAttributes.addAttribute("id_daret", id_daret);
+        return "redirect:/membreDaret/{id_daret}";
     }
 
 }

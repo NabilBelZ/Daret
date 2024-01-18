@@ -151,7 +151,7 @@
             <li>
                 <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/listDemandesParticipation">
                     <i><img style="width: 21px" src="/images/9023673_git_pull_request_fill_icon.png"></i>
-                    <span>Liste des demandes de participation</span>
+                    <span>Liste des demandes</span>
                 </a>
             </li>
             <li>
@@ -176,9 +176,6 @@
                 <input class="p-10" type="search" placeholder="Type A Keyword" />
             </div>
             <div class="icons d-flex align-center">
-            <span class="notification p-relative">
-              <i class="fa-regular fa-bell fa-lg"></i>
-            </span>
                 <img src="/imgs/avatar.png" alt="" />
             </div>
         </div>
@@ -194,10 +191,9 @@
                     <h4 class="m-0" th:text="${daret.nom}"></h4>
                     <h6 style="font-size: 14px;transform: translateY(37px); margin-left: 0px; margin-bottom: 0px;margin-right: 75px">Membres : </h6>
                     <div id="yahia" class="team d-grid pb-10">
-
-                        <a href="#"><img src="/imgs/team-01.png" alt="" ></a>
-                        <a href="#" style="transform: translateX(23px)"><img src="/imgs/team-05.png" alt="" ></a>
-                        <a href="#"><img src="/imgs/team-03.png" alt="" style="transform: translateX(48px)"></a>
+                        <a th:href="@{/membreDaret/{id_daret}(id_daret=${daret.id})}"><img src="/imgs/team-01.png"></a>
+                        <a th:href="@{/membreDaret/{id_daret}(id_daret=${daret.id})}" style="transform: translateX(23px)"><img src="/imgs/team-05.png" ></a>
+                        <a th:href="@{/membreDaret/{id_daret}(id_daret=${daret.id})}"><img src="/imgs/team-03.png" style="transform: translateX(48px)"></a>
                     </div>
                     <p class="c-grey m-0 fs-13"><br></p>
                     <a href="/tontines" class="button-1">Retour</a>

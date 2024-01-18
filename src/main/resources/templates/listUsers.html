@@ -212,7 +212,7 @@
             <li>
                 <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/listDemandesParticipation">
                     <i><img style="width: 21px" src="/images/9023673_git_pull_request_fill_icon.png"></i>
-                    <span>Liste des demandes de participation</span>
+                    <span>Liste des demandes</span>
                 </a>
             </li>
 
@@ -238,9 +238,6 @@
                 <input class="p-10" type="search" placeholder="Type A Keyword" />
             </div>
             <div class="icons d-flex align-center">
-          <span class="notification p-relative">
-            <i class="fa-regular fa-bell fa-lg"></i>
-          </span>
                 <img src="imgs/avatar.png" alt="" />
             </div>
         </div>
@@ -349,8 +346,8 @@
                                                     Choisir le rôle
                                                 </button>
                                                 <ul class="dropdown-menu" style="text-align: center;">
-                                                    <li><a class="dropdown-item" th:href="@{/editRoleToUser/{id}(id=${user.id})}">User</a></li>
-                                                    <li><a class="dropdown-item" th:href="@{/editRoleToAdmin/{id}(id=${user.id})}">Admin</a></li>
+                                                    <li><a class="dropdown-item" th:href="@{/editRoleToUser/{id}(id=${user.id})}" th:if="${user.role eq 'admin'}">User</a></li>
+                                                    <li><a class="dropdown-item" th:href="@{/editRoleToAdmin/{id}(id=${user.id})}" th:if="${user.role eq 'user'}">Admin</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -376,8 +373,8 @@
                                                     Modifier le status
                                                 </button>
                                                 <ul class="dropdown-menu" style="text-align: center;">
-                                                    <li><a class="dropdown-item" th:href="@{/editStatusToActive/{id}(id=${user.id})}">Activer</a></li>
-                                                    <li><a class="dropdown-item" th:href="@{/editStatusToSuspended/{id}(id=${user.id})}">Désactiver</a></li>
+                                                    <li><a class="dropdown-item" th:href="@{/editStatusToActive/{id}(id=${user.id})}" th:if="${user.status eq false}">Activer</a></li>
+                                                    <li><a class="dropdown-item" th:href="@{/editStatusToSuspended/{id}(id=${user.id})}" th:if="${user.status eq true}">Désactiver</a></li>
                                                 </ul>
                                             </div>
                                         </div>

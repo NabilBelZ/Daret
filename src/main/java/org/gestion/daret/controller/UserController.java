@@ -95,6 +95,7 @@ public class UserController {
     public String DetailsTontine(HttpSession session){
         return "tontineDetails";
     }
+
     @GetMapping("/mesParticipations")
     public String mesParticipations(){
         return "mesParticipations";

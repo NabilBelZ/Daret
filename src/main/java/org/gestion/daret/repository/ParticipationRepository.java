@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ParticipationRepository extends JpaRepository<Participation, Integer> {
-    //Optional<Participation> save();
 
     List<Participation> findAllByOrderByIdDesc();
-    Optional<Participation> findById(int id);
+
+    List<Participation> findAllByDaret_Id(int id);
+
+    List<Participation> findByDaret(Daret daret);
+
 }

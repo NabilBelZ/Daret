@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ParticipationDto {
     private int id;
+    private int idDaret;
     private String nomDaret;
     private float montantDaret;
     private String nomUser;

@@ -38,14 +38,35 @@ public class ParticipationController {
         this.participationRepository = participationRepository;
         this.daretRepository = daretRepository;
     }
+
+    @GetMapping("/accepterDemande/{id}")
+    public String accepterDemande(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
+        return participationService.accepterDemande(id, redirectAttributes);
+    }
+    @GetMapping("/accepterDemande2/{id}/{idDaret}")
+
+    public String accepterDemande2(@PathVariable("id") int id_participation, @PathVariable("idDaret") int id_daret, RedirectAttributes redirectAttributes){
+        return participationService.accepterDemande2(id_participation, id_daret, redirectAttributes);
+    }
+
     @GetMapping("/refuserDemande/{id}")
     public String refuserDemande(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
         return participationService.refuserDemande(id, redirectAttributes);
 
     }
-    @GetMapping("/accepterDemande/{id}")
-    public String accepterDemande(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
-        return participationService.accepterDemande(id, redirectAttributes);
+    @GetMapping("/refuserDemande2/{id}/{idDaret}")
+    public String refuserDemande2(@PathVariable("id") int id, @PathVariable("idDaret") int id_daret, RedirectAttributes redirectAttributes){
+        return participationService.refuserDemande2(id, id_daret, redirectAttributes);
+    }
+
+    @GetMapping("/mettreEnAttenteDemande/{id}")
+    public String mettreEnAttenteLaDemande(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
+        return participationService.mettreEnAttenteDemande(id, redirectAttributes);
+    }
+
+    @GetMapping("/mettreEnAttenteDemande2/{id}/{idDaret}")
+    public String mettreEnAttenteLaDemande2(@PathVariable("id") int id, @PathVariable("idDaret") int id_daret, RedirectAttributes redirectAttributes){
+        return participationService.mettreEnAttenteDemande2(id, id_daret, redirectAttributes);
     }
 
     @PostMapping("/participer")
@@ -75,10 +96,12 @@ public class ParticipationController {
             return "listDemandesParticipation";
     }
 
-    @GetMapping("/mettreEnAttenteDemande/{id}")
-    public String mettreEnAttenteLaDemande(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
-        return participationService.mettreEnAttenteDemande(id, redirectAttributes);
-    }
+    @GetMapping("/membreDaret/{id_daret}")
+    public String afficherMemebreDaret(@PathVariable("id_daret") int id_daret, Model model) throws Exception{
+        List<ParticipationDto> participations = participationService.getMembreDaret(id_daret);
+        model.addAttribute("participations", participations);
+        return "membreDaret";
+     }
 
 
 }

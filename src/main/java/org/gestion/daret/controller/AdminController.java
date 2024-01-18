@@ -79,6 +79,23 @@ public class AdminController {
     }
 
 
+    @GetMapping("/editStatusToActive/{id}")
+    public String editStatusToActiveProcess(@PathVariable int id) throws Exception{
+        User user = userRepository.findById(id).orElseThrow(()-> new Exception("user not found !"));
+        user.setStatus(true);
+        userRepository.save(user);
+        return "redirect:/listUsers";
+    }
+
+    @GetMapping("/editStatusToSuspended/{id}")
+    public String editStatusToSuspendedProcess(@PathVariable int id) throws Exception{
+        User user = userRepository.findById(id).orElseThrow(()-> new Exception("user not found !"));
+        user.setStatus(false);
+        userRepository.save(user);
+        return "redirect:/listUsers";
+    }
+
+
 
 
 

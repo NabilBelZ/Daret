@@ -86,5 +86,7 @@ public class DaretController {
         model.addAttribute("daret", daretDto);
         return "afficherDaret";
     }
+
+
 }
 
