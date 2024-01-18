@@ -86,4 +86,20 @@ public class ParticipationServiceImpl implements ParticipationService {
         return "redirect:/listDemandesParticipation";
     }
 
+    @Override
+    public String mettreEnAttenteDemande(int id, RedirectAttributes redirectAttributes) {
+        Optional<Participation> optionalParticipation = participationRepository.findById(id);
+
+        optionalParticipation.ifPresent(participation -> {
+            if (participation.getEtat() == 1 || participation.getEtat() == -1) {
+                participation.setEtat(0);
+                participationRepository.save(participation);
+                redirectAttributes.addFlashAttribute("msgAttente", "La demande a été mise en attente.");
+            } else if (participation.getEtat() == 0) {
+                redirectAttributes.addFlashAttribute("msgAttente2", "La demande est déjà en attente !");
+            }
+        });
+        return "redirect:/listDemandesParticipation";
+    }
+
 }

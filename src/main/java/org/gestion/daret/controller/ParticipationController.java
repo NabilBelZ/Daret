@@ -69,10 +69,15 @@ public class ParticipationController {
         return "redirect:/listeTontines";
     }
     @GetMapping("/listDemandesParticipation")
-        public String listeDesDemandesParticipations(Model model){
+    public String listeDesDemandesParticipations(Model model){
         List<ParticipationDto> participationDtoList = participationService.getAllParticipations();
         model.addAttribute("participations", participationDtoList);
             return "listDemandesParticipation";
+    }
+
+    @GetMapping("/mettreEnAttenteDemande/{id}")
+    public String mettreEnAttenteLaDemande(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
+        return participationService.mettreEnAttenteDemande(id, redirectAttributes);
     }
 
 

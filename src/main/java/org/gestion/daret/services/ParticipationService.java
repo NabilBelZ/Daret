@@ -10,12 +10,15 @@ import java.util.List;
 
 @Service
 public interface ParticipationService {
+
     void saveParticipation(Participation participation);
 
+    List<ParticipationDto> getAllParticipations();
 
-        List<ParticipationDto> getAllParticipations();
+    public String refuserDemande(int id, RedirectAttributes redirectAttributes);
 
-public String refuserDemande(int id, RedirectAttributes redirectAttributes);
     public String accepterDemande(int id, RedirectAttributes redirectAttributes);
+
+    public String mettreEnAttenteDemande(int id, RedirectAttributes redirectAttributes);
 
 }

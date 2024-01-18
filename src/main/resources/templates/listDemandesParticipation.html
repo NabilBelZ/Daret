@@ -274,7 +274,8 @@
                 <h2><b>Liste des demandes de participation</b></h2>
                 <h5 th:text="${msgRefus}" style="text-align: center; color: red; margin-bottom: 0px; margin-top: 10px"></h5>
                 <h5 th:text="${msgAccept}" style="text-align: center; color: #07b007; margin-bottom: 0px; margin-top: 10px"></h5>
-
+                <h5 th:text="${msgAttente}" style="text-align: center; color: #07b007; margin-bottom: 0px; margin-top: 10px"></h5>
+                <h5 th:text="${msgAttente2}" style="text-align: center; color: white; margin-bottom: 0px; margin-top: 10px"></h5>
               </div>
 
             </div>
@@ -303,19 +304,20 @@
               <td th:if="${participation.etat == -1}"> <span class="label btn-shape bg-red c-white">Refusée</span></td>
 
               <td class="aaaa">
-                <a onclick="return confirm('ÊTES-VOUS SÛR D\'ACCEPTER CETTE DEMANDE DE PARTICIPATION ?')" th:href="@{/accepterDemande/{id}(id=${participation.id})}">
+                <a onclick="return confirm('êtes-vous sûr d\'accepter cette demande de participation ?')" th:href="@{/accepterDemande/{id}(id=${participation.id})}">
+                  <i> <?xml version="1.0" ?><svg id="Icons" height="23.000002" width="23.000002"viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:#a4ffa6;}</style><linearGradient gradientUnits="userSpaceOnUse" id="linear-gradient" x1="12" x2="12" y1="0.957" y2="22.957"><stop offset="0" stop-color="#71ff7b"/><stop offset="1" stop-color="#27f42c"/></linearGradient></defs><circle class="cls-1" cx="12" cy="12" r="11"/><path class="cls-2" d="M10,17a1,1,0,0,1-.707-.293l-3-3a1,1,0,0,1,1.414-1.414L10,14.586l6.293-6.293a1,1,0,0,1,1.414,1.414l-7,7A1,1,0,0,1,10,17Z"/></svg></i>
+                </a>
 
-                  <i> <?xml version="1.0" ?><svg id="Icons" height="23.000002" width="23.000002"viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:#a4ffa6;}</style><linearGradient gradientUnits="userSpaceOnUse" id="linear-gradient" x1="12" x2="12" y1="0.957" y2="22.957"><stop offset="0" stop-color="#71ff7b"/><stop offset="1" stop-color="#27f42c"/></linearGradient></defs><circle class="cls-1" cx="12" cy="12" r="11"/><path class="cls-2" d="M10,17a1,1,0,0,1-.707-.293l-3-3a1,1,0,0,1,1.414-1.414L10,14.586l6.293-6.293a1,1,0,0,1,1.414,1.414l-7,7A1,1,0,0,1,10,17Z"/></svg>
-                  </i> </a>
-                <a onclick="return confirm('ÊTES-VOUS SÛR DE REFUSER CETTE DEMANDE DE PARTICIPATION ?')" th:href="@{/refuserDemande/{id}(id=${participation.id})}">
+                <a onclick="return confirm('êtes-vous sûr de mettre en attente cette demande de participation ?')" th:href="@{/mettreEnAttenteDemande/{id}(id=${participation.id})}">
+                  <i> <?xml version="1.0" ?> <svg id="Icons" height="23.000002" width="23.000002" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient gradientUnits="userSpaceOnUse" id="a" x1="12" x2="12" y1=".915" y2="23.13"><stop offset="0" stop-color="#ffe6a3" class="stop-color-a6f9ff"></stop><stop offset="1" stop-color="#ffae00" class="stop-color-3ed0f7"></stop></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#a)" class="fillurl(-a)"></circle><path d="M15 16a1 1 0 0 1-.707-.293l-3-3A1 1 0 0 1 11 12V6a1 1 0 0 1 2 0v5.586l2.707 2.707A1 1 0 0 1 15 16Z" fill="#ffffff" class="fill-cffeff"></path></svg>
+                  </i>
+                </a>
 
-                  <i><?xml version="1.0" ?><svg id="Icons"height="23.000002" width="23.000002"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style>.cls-3{fill:url(#linearr-gradient);}.cls-4{fill:#ff7391;}</style><linearGradient gradientUnits="userSpaceOnUse" id="linearr-gradient" x1="12" x2="12" y1="0.787" y2="23.088"><stop offset="0" stop-color="#ff4867"/><stop offset="1" stop-color="#e50031"/></linearGradient></defs><circle class="cls-3" cx="12" cy="12" r="11"/><path class="cls-4" d="M13.414,12l3.293-3.293a1,1,0,1,0-1.414-1.414L12,10.586,8.707,7.293A1,1,0,1,0,7.293,8.707L10.586,12,7.293,15.293a1,1,0,1,0,1.414,1.414L12,13.414l3.293,3.293a1,1,0,0,0,1.414-1.414Z"/></svg>
-                  </i></a>
+                <a onclick="return confirm('êtes-vous sûr de refuser cette demande de participation ?')" th:href="@{/refuserDemande/{id}(id=${participation.id})}">
+                  <i><?xml version="1.0" ?><svg id="Icons" height="23.000002" width="23.000002"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style>.cls-3{fill:url(#linearr-gradient);}.cls-4{fill:#ff7391;}</style><linearGradient gradientUnits="userSpaceOnUse" id="linearr-gradient" x1="12" x2="12" y1="0.787" y2="23.088"><stop offset="0" stop-color="#ff4867"/><stop offset="1" stop-color="#e50031"/></linearGradient></defs><circle class="cls-3" cx="12" cy="12" r="11"/><path class="cls-4" d="M13.414,12l3.293-3.293a1,1,0,1,0-1.414-1.414L12,10.586,8.707,7.293A1,1,0,1,0,7.293,8.707L10.586,12,7.293,15.293a1,1,0,1,0,1.414,1.414L12,13.414l3.293,3.293a1,1,0,0,0,1.414-1.414Z"/></svg></i>
+                </a>
 
               </td>
-
-              <!--  -->
-
 
 
               <!-- Modal edit role -->
