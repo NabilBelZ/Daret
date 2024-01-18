@@ -26,5 +26,5 @@ public class Participation {
     private float montantParticipation;
     @OneToMany(mappedBy = "participation")
     private List<Tour> tours;
-    private boolean etat;
+    private int etat;
 }

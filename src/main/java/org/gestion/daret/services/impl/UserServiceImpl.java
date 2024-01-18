@@ -37,7 +37,8 @@ public class UserServiceImpl implements UserService {
             user.setPassword(passwordService.hashPassword(userDto.getPassword()));
             userRepository.save(user);
             session.setAttribute("role", userDto.getRole());
-            return "registration_success";
+            model.addAttribute("msgSuccess", "You are registered successfully !");
+            return "login";
         } else {
             model.addAttribute("error", "The entered confirmation password does not match the provided password.");
             return "register";

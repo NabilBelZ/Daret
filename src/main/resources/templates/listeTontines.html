@@ -51,7 +51,7 @@
 </head>
 <body>
 <div class="page d-flex">
-    <div class="sidebar bg-white p-20 p-relative" th:if="${session.role}">
+    <div class="sidebar bg-white p-20 p-relative" th:if="${session.role eq 'user'}">
         <div class="logo">
             <a href="/"><img src="/images/logo.png"></a>
         </div>
@@ -70,7 +70,7 @@
             </li>
             <li>
                 <a class=" d-flex align-center fs-14 c-black rad-6 p-10" href="/mesParticipations">
-                    <i class="fa-solid fa-diagram-project fa-fw"></i>
+                    <i><img style="width: 19px" src="/images/10559921_contribution_donation_charity_grant_financial_icon.png"></i>
                     <span>Mes participations</span>
                 </a>
             </li>
@@ -80,7 +80,7 @@
                     <span>Darets</span>
                 </a>
             </li>
-            <li th:if="${session.role eq 'admin'}">
+            <!--<li th:if="${session.role eq 'admin'}">
                 <a class=" d-flex align-center fs-14 c-black rad-6 p-10" href="/ajouterDaret">
                     <i class="fa-solid fa-plus"></i>
                     <span>Créer une Daret</span>
@@ -92,7 +92,7 @@
                     <span>Liste des utilisateurs</span>
                 </a>
             </li>
-            <!-- <li>
+             <li>
                 <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="settings.html">
                     <i class="fa-solid fa-gear fa-fw"></i>
                     <span>Settings</span>
@@ -109,7 +109,7 @@
     <div class="content w-full">
         <!-- Start Head -->
         <div class="head bg-white p-15 between-flex">
-            <a href="/" th:if="${session.role == null}"><img src="images/logo.png" style="width: 150px;"></a>
+            <a href="/" th:if="${session.role ne 'user'}"><img src="images/logo.png" style="width: 150px;"></a>
             <div class="search p-relative">
                 <input class="searchBar p-10" type="text" placeholder="Nom Daret" onkeyup="searchDaret()"/>
             </div>

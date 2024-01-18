@@ -81,9 +81,7 @@
             padding: 12px 15px;
             vertical-align: middle;
         }
-        table.table tr th:first-child {
-            width: 60px;
-        }
+
         table.table tr th:last-child {
             width: 100px;
         }
@@ -213,8 +211,8 @@
             </li>
             <li>
                 <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="/listDemandesParticipation">
-                    <i class="fa-regular fa-circle-user fa-fw"></i>
-                    <span >Liste des demandes de participation</span>
+                    <i><img style="width: 21px" src="/images/9023673_git_pull_request_fill_icon.png"></i>
+                    <span>Liste des demandes de participation</span>
                 </a>
             </li>
 
@@ -269,9 +267,9 @@
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Nom</th>
                             <th>Prénom</th>
+                            <th>Nom</th>
+
                             <th>E-mail</th>
                             <th>Role</th>
                             <th>Etat</th>
@@ -280,7 +278,6 @@
                         </thead>
                         <tbody>
                         <tr th:each="user : ${users}" th:if="${session_email} ne ${user.email}">
-                            <td th:text="${user.id}"></td>
                             <td th:text="${user.firstname}"><img src="" class="avatar"></td>
                             <td th:text="${user.lastname}"></td>
                             <td th:text="${user.email}"></td>
