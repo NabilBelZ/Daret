@@ -397,7 +397,7 @@
             </div>
             <div style="text-align: center;">
 
-                <a href="/tontines" style="background-color: #DF4881FF;" class="visit  fs-14 bg-blue c-white w-fit btn-shape">Retour</a>
+                <a onclick="goBack()" style="background-color: #DF4881FF;" class="visit  fs-14 bg-blue c-white w-fit btn-shape">Retour</a>
             </div>
 
 
@@ -407,5 +407,11 @@
 
     </div>
 </div>
+
 </body>
+<script>
+    function goBack(){
+        window.history.back();
+    }
+</script>
 </html>
