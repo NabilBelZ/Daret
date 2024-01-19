@@ -15,4 +15,5 @@ public interface ParticipationRepository extends JpaRepository<Participation, In
 
     List<Participation> findByDaret(Daret daret);
 
+    List<Participation> findByUserIdAndEtatEquals(int userId, int etat);
 }

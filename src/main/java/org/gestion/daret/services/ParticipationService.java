@@ -1,5 +1,6 @@
 package org.gestion.daret.services;
 
+import org.gestion.daret.dto.MesParticipationDto;
 import org.gestion.daret.dto.ParticipationDto;
 import org.gestion.daret.models.Daret;
 import org.gestion.daret.models.Participation;
@@ -28,5 +29,6 @@ public interface ParticipationService {
     public String mettreEnAttenteDemande2(int id, int id_daret, RedirectAttributes redirectAttributes);
 
     public List<ParticipationDto> getMembreDaret(int id);
+    List<MesParticipationDto> getMesParticipations(int userId);
 
 }

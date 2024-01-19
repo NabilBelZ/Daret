@@ -1,11 +1,14 @@
 package org.gestion.daret.controller;
 
 import jakarta.servlet.http.HttpSession;
+import org.gestion.daret.dto.MesParticipationDto;
+import org.gestion.daret.dto.ParticipationDto;
 import org.gestion.daret.dto.UserDto;
 import org.gestion.daret.models.Daret;
 import org.gestion.daret.models.User;
 import org.gestion.daret.repository.DaretRepository;
 import org.gestion.daret.repository.UserRepository;
+import org.gestion.daret.services.ParticipationService;
 import org.gestion.daret.services.PasswordService;
 import org.gestion.daret.services.RoleService;
 import org.gestion.daret.services.UserService;
@@ -27,7 +30,8 @@ public class UserController {
 
     @Autowired
     private PasswordService passwordService;
-
+    @Autowired
+    private ParticipationService participationService;
     @Autowired
     private UserService userService;
 
@@ -75,6 +79,9 @@ public class UserController {
         if(userId != null && userId != 0){
             User user = userRepository.findById(userId).orElseThrow(()-> new Exception("user not found!"));
             model.addAttribute("user", user);
+            List<MesParticipationDto> mesParticipations = participationService.getMesParticipations(userId);
+
+            model.addAttribute("mesParticipations", mesParticipations);
         }
         return roleService.CheckRole(session);
     }
@@ -96,10 +103,7 @@ public class UserController {
         return "tontineDetails";
     }
 
-    @GetMapping("/mesParticipations")
-    public String mesParticipations(){
-        return "mesParticipations";
-    }
+
 
     @PostMapping("/modifierInfoUser_process")
     public String modifierInfoUser(HttpSession session, @ModelAttribute("user") UserDto userDto) throws Exception{
@@ -146,9 +150,12 @@ public class UserController {
         String email = (String) session.getAttribute("email");
         User user = userRepository.findByEmail(email).orElseThrow(()-> new Exception("user not found"));
         model.addAttribute("user", user);
+        int userId = (int) session.getAttribute("userId");
+
+        List<MesParticipationDto> mesParticipations = participationService.getMesParticipations(userId);
+
+        model.addAttribute("mesParticipations", mesParticipations);
         return "profile";
     }
-
-
 
 }

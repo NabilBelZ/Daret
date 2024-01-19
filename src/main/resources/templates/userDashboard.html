@@ -30,6 +30,14 @@
     .page{
       background-color: #ffc0cb2b;
     }
+    .page h1::before {
+      background-color: white;
+
+    }
+    .page h1::after {
+      background-color: #f5c2c7;
+
+    }
     .welcome, .latest-news, .quick-draft, .targets{
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
@@ -91,7 +99,7 @@
       </div>
     </div>
     <!-- End Head -->
-    <h1 class="p-relative">Dashboard</h1>
+    <h1 style="color: #DF4881" class="p-relative">Dashboard</h1>
     <div class="wrapper d-grid gap-20">
       <!-- Start Welcome Widget -->
       <div class="welcome bg-white rad-10 txt-c-mobile block-mobile">
@@ -108,46 +116,28 @@
           <div>80 <span class="d-block c-grey fs-14 mt-10">Projects</span></div>
           <div>$8500 <span class="d-block c-grey fs-14 mt-10">Earned</span></div>
         </div>
-        <a href="/profile" class="visit d-block fs-14 bg-blue c-white w-fit btn-shape">Profile</a>
+        <a href="/profile" style="background-color: #DF4881" class="visit d-block fs-14 bg-blue c-white w-fit btn-shape">Profil</a>
       </div>
       <!-- End Welcome Widget -->
 
 
       <!-- Start Latest News Widget -->
-      <div class="latest-news p-20 bg-white rad-10 txt-c-mobile">
-        <h2 class="mt-0 mb-20">Dernière tontine</h2>
-        <div class="news-row d-flex align-center">
+      <div  class="latest-news p-20 bg-white rad-10 txt-c-mobile">
+        <h2 class="mt-0 mb-20">Mes dernières participations</h2>
+        <div th:each="participation : ${mesParticipations}" class="news-row d-flex align-center">
           <img src="imgs/news-01.png" alt="" />
           <div class="info">
-            <h3>Created SASS Section</h3>
-            <p class="m-0 fs-14 c-grey">New SASS Examples & Tutorials</p>
+            <h3 th:text="${participation.nomDaret}"></h3>
+            <p th:text="${participation.descriptionDaret}" class="m-0 fs-14 c-grey"></p>
           </div>
-          <div class="btn-shape bg-eee fs-13 label">3 Days Ago</div>
-        </div>
-        <div class="news-row d-flex align-center">
-          <img src="imgs/news-02.png" alt="" />
-          <div class="info">
-            <h3>Changed The Design</h3>
-            <p class="m-0 fs-14 c-grey">A Brand New Website Design</p>
+          <div class="btn-shape bg-green c-white fs-13 label d-flex" >
+            <i style="margin-right: 5px; transform: translateY(2px)"class="fa-solid fa-dollar-sign"></i>
+            <div th:text="${participation.montantParticipation}" ></div>
           </div>
-          <div class="btn-shape bg-eee fs-13 label">5 Days Ago</div>
         </div>
-        <div class="news-row d-flex align-center">
-          <img src="imgs/news-03.png" alt="" />
-          <div class="info">
-            <h3>Team Increased</h3>
-            <p class="m-0 fs-14 c-grey">3 Developers Joined The Team</p>
-          </div>
-          <div class="btn-shape bg-eee fs-13 label">7 Days Ago</div>
-        </div>
-        <div class="news-row d-flex align-center">
-          <img src="imgs/news-04.png" alt="" />
-          <div class="info">
-            <h3>Added Payment Gateway</h3>
-            <p class="m-0 fs-14 c-grey">Many New Payment Gateways Added</p>
-          </div>
-          <div class="btn-shape bg-eee fs-13 label">9 Days Ago</div>
-        </div>
+
+
+
       </div>
       <!-- End Latest News Widget -->
 
@@ -203,98 +193,7 @@
 
 
     <!-- Start Projects Table -->
-    <div class="projects p-20 bg-white rad-10 m-20">
-      <h2 class="mt-0 mb-20">Tontines</h2>
-      <div class="responsive-table">
-        <table class="fs-15 w-full">
-          <thead>
-          <tr>
-            <td>Titre</td>
-            <td>Date de lancement</td>
-            <td>Date d'arrêt</td>
-            <td>Prix</td>
-            <td>Team</td>
-            <td>Status</td>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>Ministry Wikipedia</td>
-            <td>10 May 2022</td>
-            <td>Ministry</td>
-            <td>$5300</td>
-            <td>
-              <img src="imgs/team-01.png" alt="" />
-              <img src="imgs/team-02.png" alt="" />
-              <img src="imgs/team-03.png" alt="" />
-              <img src="imgs/team-05.png" alt="" />
-            </td>
-            <td>
-              <span class="label btn-shape bg-orange c-white">Pending</span>
-            </td>
-          </tr>
-          <tr>
-            <td>Elzero Shop</td>
-            <td>12 Oct 2021</td>
-            <td>Elzero Company</td>
-            <td>$1500</td>
-            <td>
-              <img src="imgs/team-01.png" alt="" />
-              <img src="imgs/team-02.png" alt="" />
-              <img src="imgs/team-05.png" alt="" />
-            </td>
-            <td><span class="label btn-shape bg-blue c-white">In Progress</span></td>
-          </tr>
-          <tr>
-            <td>Bouba App</td>
-            <td>05 Sep 2021</td>
-            <td>Bouba</td>
-            <td>$800</td>
-            <td>
-              <img src="imgs/team-02.png" alt="" />
-              <img src="imgs/team-03.png" alt="" />
-            </td>
-            <td><span class="label btn-shape bg-green c-white">Completed</span></td>
-          </tr>
-          <tr>
-            <td>Mahmoud Website</td>
-            <td>22 May 2021</td>
-            <td>Mahmoud</td>
-            <td>$600</td>
-            <td>
-              <img src="imgs/team-01.png" alt="" />
-              <img src="imgs/team-02.png" alt="" />
-            </td>
-            <td><span class="label btn-shape bg-green c-white">Completed</span></td>
-          </tr>
-          <tr>
-            <td>Sayed Website</td>
-            <td>24 May 2021</td>
-            <td>Sayed</td>
-            <td>$300</td>
-            <td>
-              <img src="imgs/team-01.png" alt="" />
-              <img src="imgs/team-03.png" alt="" />
-            </td>
-            <td><span class="label btn-shape bg-red c-white">Rejected</span></td>
-          </tr>
-          <tr>
-            <td>Arena Application</td>
-            <td>01 Mar 2021</td>
-            <td>Arena Company</td>
-            <td>$2600</td>
-            <td>
-              <img src="imgs/team-01.png" alt="" />
-              <img src="imgs/team-02.png" alt="" />
-              <img src="imgs/team-03.png" alt="" />
-              <img src="imgs/team-04.png" alt="" />
-            </td>
-            <td><span class="label btn-shape bg-green c-white">Completed</span></td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+
     <!-- End Projects Table -->
   </div>
 </div>

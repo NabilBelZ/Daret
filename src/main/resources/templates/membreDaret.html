@@ -260,7 +260,7 @@
                 <!-- <span class="notification p-relative">
                   <i class="fa-regular fa-bell fa-lg"></i>
                 </span> -->
-                <img src="imgs/avatar.png"/>
+                <img src="/imgs/avatar.png"/>
             </div>
         </div>
         <!-- End Head -->
@@ -270,8 +270,12 @@
                 <div class="table-wrapper">
                     <div class="table-title">
                         <div class="row">
-                            <div class="col-xs-5">
-                                <h2><b>Participants</b></h2>
+                            <div class="col-xs-5" >
+                                <h2><b>Liste des participants</b></h2>
+                                <!--  @{/afficherDaret/{id}(id=${daret.id})}    <a href="" style="background-color: #DF4881FF; margin-left: 956px; transform: translateY(-28px)" class="visit d-block fs-14 bg-blue c-white w-fit btn-shape">Retour</a>
+                                  -->
+                                <h5 th:text="${msgAccept1}" style="text-align: center; color: #07b007; margin-bottom: 0px; margin-top: 10px"></h5>
+
                                 <h5 th:text="${msgRefus}" style="text-align: center; color: red; margin-bottom: 0px; margin-top: 10px"></h5>
                                 <h5 th:text="${msgAttente2}" style="text-align: center; color: white; margin-bottom: 0px; margin-top: 10px"></h5>
                             </div>
@@ -330,12 +334,13 @@
         <div class="container">
             <div class="table-responsive">
                 <div class="table-wrapper">
-                    <div class="table-title" style="background-color: #3f3333ad">
+                    <div class="table-title" style="background-color: grey">
                         <div class="row">
                             <div class="col-xs-5">
-                                <h2><b>Demandes de participation</b></h2>
+                                <h2><b>Liste des demandes de participation</b></h2>
                                 <h5 th:text="${msgAccept}" style="text-align: center; color: #07b007; margin-bottom: 0px; margin-top: 10px"></h5>
-                                <h5 th:text="${msgAttente}" style="text-align: center; color: #07b007; margin-bottom: 0px; margin-top: 10px"></h5>
+                                <h5 th:text="${msgAttente}" style="text-align: center; color: orange; margin-bottom: 0px; margin-top: 10px"></h5>
+                                <h5 th:text="${msgRefus1}" style="text-align: center; color: red; margin-bottom: 0px; margin-top: 10px"></h5>
                                 <h5 th:text="${msgAttente2}" style="text-align: center; color: white; margin-bottom: 0px; margin-top: 10px"></h5>
                             </div>
 
@@ -390,6 +395,12 @@
 
                 </div>
             </div>
+            <div style="text-align: center;">
+
+                <a href="/tontines" style="background-color: #DF4881FF;" class="visit  fs-14 bg-blue c-white w-fit btn-shape">Retour</a>
+            </div>
+
+
         </div>
 
 

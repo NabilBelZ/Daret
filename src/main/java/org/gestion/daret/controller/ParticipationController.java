@@ -1,6 +1,7 @@
 package org.gestion.daret.controller;
 
 import jakarta.servlet.http.HttpSession;
+import org.gestion.daret.dto.MesParticipationDto;
 import org.gestion.daret.dto.ParticipationDto;
 import org.gestion.daret.dto.ParticipationDtoinput;
 import org.gestion.daret.models.Daret;
@@ -93,7 +94,7 @@ public class ParticipationController {
     public String listeDesDemandesParticipations(Model model){
         List<ParticipationDto> participationDtoList = participationService.getAllParticipations();
         model.addAttribute("participations", participationDtoList);
-            return "listDemandesParticipation";
+        return "listDemandesParticipation";
     }
 
     @GetMapping("/membreDaret/{id_daret}")
@@ -101,7 +102,16 @@ public class ParticipationController {
         List<ParticipationDto> participations = participationService.getMembreDaret(id_daret);
         model.addAttribute("participations", participations);
         return "membreDaret";
-     }
+    }
+    @GetMapping("/mesParticipations")
+    public String getMesParticipations(HttpSession session, Model model) {
+        int userId = (int) session.getAttribute("userId");
 
+        List<MesParticipationDto> mesParticipations = participationService.getMesParticipations(userId);
+
+        model.addAttribute("mesParticipations", mesParticipations);
+
+        return "mesParticipations";
+    }
 
 }

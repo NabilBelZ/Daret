@@ -1,5 +1,6 @@
 package org.gestion.daret.services.impl;
 
+import org.gestion.daret.dto.MesParticipationDto;
 import org.gestion.daret.dto.ParticipationDto;
 import org.gestion.daret.models.Daret;
 import org.gestion.daret.models.Participation;
@@ -41,6 +42,33 @@ public class ParticipationServiceImpl implements ParticipationService {
     public List<ParticipationDto> getMembreDaret(int id) {
         List<Participation> participations = participationRepository.findAllByDaret_Id(id);
         return convertToDtoList(participations);
+    }
+
+    @Override
+    public List<MesParticipationDto> getMesParticipations(int userId) {
+        List<Participation> participations = participationRepository.findByUserIdAndEtatEquals(userId, 1);
+        List<MesParticipationDto> mesParticipations = convertToMesParticipationDto(participations);
+        return mesParticipations;
+    }
+
+    private List<MesParticipationDto> convertToMesParticipationDto(List<Participation> participations) {
+        List<MesParticipationDto> mesParticipationDtos = new ArrayList<>();
+        for (Participation participation : participations) {
+            MesParticipationDto mesParticipationDto = new MesParticipationDto();
+            mesParticipationDto.setNomDaret(participation.getDaret().getNom());
+            mesParticipationDto.setMontantDaret(participation.getDaret().getMontant());
+            mesParticipationDto.setMontantDaretTotal(participation.getDaret().getMontantTotal());
+            mesParticipationDto.setDateDemarrage(participation.getDaret().getDateDemarrage());
+            mesParticipationDto.setDateFin(participation.getDaret().getDateFin());
+            mesParticipationDto.setPeriodeDaret(participation.getDaret().getPeriode());
+            mesParticipationDto.setPeriodeTour(participation.getDaret().getPeriodeTour());
+            mesParticipationDto.setNbParticipant(participation.getDaret().getNbParticipant());
+            mesParticipationDto.setDescriptionDaret(participation.getDaret().getDescription());
+            mesParticipationDto.setMontantParticipation(participation.getMontantParticipation());
+
+            mesParticipationDtos.add(mesParticipationDto);
+        }
+        return mesParticipationDtos;
     }
 
     private List<ParticipationDto> convertToDtoList(List<Participation> participations) {
