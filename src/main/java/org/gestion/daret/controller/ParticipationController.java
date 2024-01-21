@@ -40,9 +40,9 @@ public class ParticipationController {
         this.daretRepository = daretRepository;
     }
 
-    @GetMapping("/accepterDemande/{id}")
-    public String accepterDemande(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
-        return participationService.accepterDemande(id, redirectAttributes);
+    @GetMapping("/accepterDemande/{id}/{idDaret}")
+    public String accepterDemande(@PathVariable("id") int id, @PathVariable("idDaret") int id_daret, RedirectAttributes redirectAttributes){
+        return participationService.accepterDemande(id, id_daret, redirectAttributes);
     }
     @GetMapping("/accepterDemande2/{id}/{idDaret}")
 
@@ -50,9 +50,9 @@ public class ParticipationController {
         return participationService.accepterDemande2(id_participation, id_daret, redirectAttributes);
     }
 
-    @GetMapping("/refuserDemande/{id}")
-    public String refuserDemande(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
-        return participationService.refuserDemande(id, redirectAttributes);
+    @GetMapping("/refuserDemande/{id}/{idDaret}")
+    public String refuserDemande(@PathVariable("id") int id, @PathVariable("idDaret") int id_daret, RedirectAttributes redirectAttributes){
+        return participationService.refuserDemande(id, id_daret, redirectAttributes);
 
     }
     @GetMapping("/refuserDemande2/{id}/{idDaret}")
@@ -60,9 +60,9 @@ public class ParticipationController {
         return participationService.refuserDemande2(id, id_daret, redirectAttributes);
     }
 
-    @GetMapping("/mettreEnAttenteDemande/{id}")
-    public String mettreEnAttenteLaDemande(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
-        return participationService.mettreEnAttenteDemande(id, redirectAttributes);
+    @GetMapping("/mettreEnAttenteDemande/{id}/{idDaret}")
+    public String mettreEnAttenteLaDemande(@PathVariable("id") int id, @PathVariable("idDaret") int id_daret, RedirectAttributes redirectAttributes){
+        return participationService.mettreEnAttenteDemande(id, id_daret, redirectAttributes);
     }
 
     @GetMapping("/mettreEnAttenteDemande2/{id}/{idDaret}")
@@ -108,8 +108,12 @@ public class ParticipationController {
         int userId = (int) session.getAttribute("userId");
 
         List<MesParticipationDto> mesParticipations = participationService.getMesParticipations(userId);
+        if(mesParticipations.isEmpty()){
+            model.addAttribute("message", "Vous n'avez pris part à aucune tontine.");
+        }else{
+            model.addAttribute("mesParticipations", mesParticipations);
+        }
 
-        model.addAttribute("mesParticipations", mesParticipations);
 
         return "mesParticipations";
     }

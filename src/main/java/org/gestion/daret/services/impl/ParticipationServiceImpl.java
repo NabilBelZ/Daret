@@ -90,12 +90,20 @@ public class ParticipationServiceImpl implements ParticipationService {
         return participationDtoList;
     }
     @Override
-    public String refuserDemande(int id ,RedirectAttributes redirectAttributes) {
-
+    public String refuserDemande(int id, int id_daret, RedirectAttributes redirectAttributes) {
         Optional<Participation> optionalParticipation = participationRepository.findById(id);
         optionalParticipation.ifPresent(participation -> {
             if (participation.getEtat() == 0 || participation.getEtat() == 1) {
                 participation.setEtat(-1);
+                try {
+                    Daret daret = daretRepository.findById(id_daret).orElseThrow(()-> new Exception("Daret not found!"));
+                    if(participation.getEtat() == 1){
+                        daret.setNbParticipant(daret.getNbParticipant() - 1);
+                        daretRepository.save(daret);
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 participationRepository.save(participation);
                 redirectAttributes.addFlashAttribute("msgRefus", "La Demande a été refusée !");
             } else if (participation.getEtat() == -1) {
@@ -114,8 +122,10 @@ public class ParticipationServiceImpl implements ParticipationService {
                 participation.setEtat(-1);
                 try {
                     Daret daret = daretRepository.findById(id_daret).orElseThrow(()-> new Exception("Daret not found!"));
-                    daret.setNbParticipant(daret.getNbParticipant() - 1);
-                    daretRepository.save(daret);
+                    if(participation.getEtat() == 1){
+                        daret.setNbParticipant(daret.getNbParticipant() - 1);
+                        daretRepository.save(daret);
+                    }
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -130,12 +140,19 @@ public class ParticipationServiceImpl implements ParticipationService {
     }
 
     @Override
-    public String accepterDemande(int id, RedirectAttributes redirectAttributes) {
+    public String accepterDemande(int id, int id_daret, RedirectAttributes redirectAttributes) {
         Optional<Participation> optionalParticipation = participationRepository.findById(id);
 
         optionalParticipation.ifPresent(participation -> {
             if (participation.getEtat() == 0 || participation.getEtat() == -1) {
                 participation.setEtat(1);
+                try {
+                    Daret daret = daretRepository.findById(id_daret).orElseThrow(()-> new Exception("Daret not found!"));
+                    daret.setNbParticipant(daret.getNbParticipant() + 1);
+                    daretRepository.save(daret);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 participationRepository.save(participation);
                 redirectAttributes.addFlashAttribute("msgAccept", "La Demande a été acceptée !");
             } else if (participation.getEtat() == 1) {
@@ -171,11 +188,20 @@ public class ParticipationServiceImpl implements ParticipationService {
     }
 
     @Override
-    public String mettreEnAttenteDemande(int id, RedirectAttributes redirectAttributes) {
+    public String mettreEnAttenteDemande(int id, int id_daret, RedirectAttributes redirectAttributes) {
         Optional<Participation> optionalParticipation = participationRepository.findById(id);
 
         optionalParticipation.ifPresent(participation -> {
             if (participation.getEtat() == 1 || participation.getEtat() == -1) {
+                try {
+                    Daret daret = daretRepository.findById(id_daret).orElseThrow(()-> new Exception("Daret not found!"));
+                    if(participation.getEtat() == 1){
+                        daret.setNbParticipant(daret.getNbParticipant() - 1);
+                        daretRepository.save(daret);
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 participation.setEtat(0);
                 participationRepository.save(participation);
                 redirectAttributes.addFlashAttribute("msgAttente", "La demande a été mise en attente.");
@@ -198,11 +224,6 @@ public class ParticipationServiceImpl implements ParticipationService {
                         daret.setNbParticipant(daret.getNbParticipant() - 1);
                         daretRepository.save(daret);
                     }
-                    else if(participation.getEtat() == -1){
-                        daret.setNbParticipant(daret.getNbParticipant() + 1);
-                        daretRepository.save(daret);
-                    }
-
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

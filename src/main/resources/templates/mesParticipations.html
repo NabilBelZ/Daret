@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard</title>
+  <title>Mes participations</title>
   <link rel="stylesheet" href="css/all.min.css" />
   <link rel="stylesheet" href="css/framework.css" />
   <link rel="stylesheet" href="css/master.css" />
@@ -99,20 +99,22 @@
       </div>
     </div>
     <h1 style="color: #DF4881" class="p-relative">Mes Participations</h1>
-    <!-- mesParticipations.html -->
+
+    <h2 th:text="${message}" style="text-align: center"></h2>
+
+
     <div class="projects-page d-grid m-20 gap-20">
 
-      <div style="padding-bottom: 0" th:each="participation : ${mesParticipations}" class="project bg-white p-20 rad-6 p-relative">
+      <div style="padding-bottom: 0; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" th:each="participation : ${mesParticipations}" class="project bg-white p-20 rad-6 p-relative">
         <div class="d-flex">
           <div>
             <h2 style="color:#DF4881" class="m-0" th:text="${participation.nomDaret}"></h2>
             <h4 style="color: grey"class="c-grey mt-10 mb-10 fs-14" th:text="${participation.descriptionDaret}"></h4>
             <div class="d-flex justify-content-start">
-              <p class="fs-14 mt-0">Montant Total de la daret : &nbsp;</p>
+              <p class="fs-14 mt-0">Montant Total Daret : &nbsp;</p>
               <div class="fs-14 c-grey">
-                <i class="fa-solid fa-dollar-sign"></i>
                 <!-- Add participation montant here -->
-                <span  th:text="${participation.montantDaretTotal}"></span>
+                <span  th:text="${participation.montantDaretTotal}"></span> Dh
               </div>
             </div>
             <div class="d-flex justify-content-start">
@@ -141,27 +143,23 @@
               <span   class=" fs-14 c-grey" th:text="${#dates.format(participation.dateFin, 'dd/MM/yyyy')}"></span>
             </div>
             <div  style="padding: 0" class="d-flex justify-content-start">
-              <p style="margin: 0 0 0 0; padding-top: 15px"class=" fs-14">Période de la daret :</p>
+              <p style="margin: 0 0 0 0; padding-top: 15px"class=" fs-14">Période :</p>
               <span style="padding-top: 15px; padding-left: 0px; padding-right: 0px" class="fs-14 c-grey " th:text="${participation.periodeDaret}"></span>
 
             </div>
           </div>
         </div>
         <div style="padding: 0"class="info fs-14 between-flex">
-          <p>Montant de la participation : </p>
+          <p>Cotisation : </p>
           <div class="fs-14 c-grey">
             <i style="margin-left: 5px"class="fa-solid fa-dollar-sign"></i>
-            <!-- Add participation montant here -->
             <span style="margin-right: 70px" th:text="${participation.montantParticipation}"></span>
           </div>
-          <p>Montant de la daret : </p>
+          <p>Cotisation / pers </p>
           <div class="fs-14 c-grey">
-
             <i style="margin-left: 5px"class="fa-solid fa-dollar-sign"></i>
-            <!-- Add participation montant here -->
             <span  th:text="${participation.montantDaret}"></span>
           </div>
-
         </div>
       </div>
     </div>

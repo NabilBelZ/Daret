@@ -16,15 +16,15 @@ public interface ParticipationService {
 
     List<ParticipationDto> getAllParticipations();
 
-    String refuserDemande(int id, RedirectAttributes redirectAttributes);
+    String refuserDemande(int id, int id_daret, RedirectAttributes redirectAttributes);
 
     public String refuserDemande2(int id, int id_daret, RedirectAttributes redirectAttributes);
 
-    public String accepterDemande(int id, RedirectAttributes redirectAttributes);
+    public String accepterDemande(int id, int id_daret, RedirectAttributes redirectAttributes);
 
     public String accepterDemande2(int id, int id_daret, RedirectAttributes redirectAttributes);
 
-    public String mettreEnAttenteDemande(int id, RedirectAttributes redirectAttributes);
+    public String mettreEnAttenteDemande(int id, int id_daret, RedirectAttributes redirectAttributes);
 
     public String mettreEnAttenteDemande2(int id, int id_daret, RedirectAttributes redirectAttributes);
 

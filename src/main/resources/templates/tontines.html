@@ -182,62 +182,51 @@
           <tr>
             <td>Titre</td>
             <td>Description</td>
-            <td>Montant / Participation</td>
-            <td>Montant Total</td>
-            <td>Date De démarrage</td>
-            <td>Date De Fin</td>
-            <td>Période</td>
-            <td>Période Du Tour</td>
-            <td>Nombre de Participants</td>
+            <td>Cotisation / pers</td>
+            <td>Montant</td>
+            <td>Début</td>
+            <td>Fin</td>
+            <td>Nb Participants</td>
             <td>Statut</td>
             <td>Action</td>
           </tr>
           </thead>
           <tbody>
 
-          <tr th:each="daret : ${darets}">
-            <td th:text="${daret.nom}"></td>
-            <td th:text="${daret.description}"></td>
-            <td class="mm" th:text="${daret.montant}"></td>
-            <td class="oo" th:text="${daret.montantTotal}"></td>
-            <td th:text="${daret.dateDemarrage}"></td>
-            <td th:text="${daret.dateFin}"></td>
-            <td class="pp" th:text="${daret.periode}"></td>
-            <td class="tt" th:text="${daret.periodeTour}"></td>
-            <td ><span th:style="${daret.nbParticipant == 0 ? 'color: red;' : 'color: green;'}"
-                                                                  th:text="${daret.nbParticipant}">
-</span></td>
-           <td>  <!--${daret.montantTotal > daret.participations.stream().mapToDouble(p -> p.getMontant()).sum()}and
-                      ${daret.montantTotal <= daret.participations.stream().mapToDouble(p -> p.getMontant()).sum()} and
-                 -->
-              <span id="span" class="label btn-shape bg-info c-white"> <!--th:if="${#dates.createNow().before(daret.dateDebut)}"--> Ouverte</span>
-              <!--<span class="label btn-shape bg-orange c-white" th:if="${#dates.createNow().before(daret.dateFin)}" >Inscription Fermée</span>
-              <span class="label btn-shape bg-green c-white" th:if="${#dates.createNow().equals(daret.dateDebut)}" >Active</span>
-              <span class="label btn-shape bg-red c-white" th:if="${#dates.createNow().after(daret.dateFin)}" >Terminé</span>-->
-            <td>
-            <a th:href="@{/afficherDaret/{id}(id=${daret.id})}">
-              <?xml version="1.0" ?><svg height="23.000002" id="svg8" version="1.1" viewBox="0 0 5.2916671 5.2916673" width="23.000002" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs2"/><g id="layer9" transform="translate(-34.925001,-17.4625)"><g id="FLAT-8"><path d="m 37.570834,17.4625 c -1.458121,0 -2.645833,1.187712 -2.645833,2.645834 0,1.458157 1.187717,2.645833 2.645833,2.645833 1.458111,0 2.645834,-1.187675 2.645834,-2.645833 0,-1.458123 -1.187718,-2.645834 -2.645834,-2.645834 z" id="path337" style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#82bbfb;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.529169;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000"/><path d="m 37.571448,21.13799 c -0.172015,0.003 -0.277285,-0.13961 -0.277741,-0.28024 v -0.84424 c 0.0043,-0.1832 0.141379,-0.27573 0.280196,-0.28017 0.201016,0.008 0.283242,0.1741 0.277744,0.28268 v 0.83936 c -5e-6,0.17975 -0.14622,0.28348 -0.280194,0.28266 z m -0.208003,-1.54778 c -0.0571,-0.0571 -0.08565,-0.1281 -0.08565,-0.2129 0.0057,-0.17529 0.138318,-0.30097 0.29365,-0.29849 0.208672,0.006 0.289046,0.1582 0.292432,0.30095 -0.003,0.19029 -0.145676,0.29402 -0.292432,0.29485 -0.08239,0 -0.15172,-0.0281 -0.208003,-0.0844 z" id="path340" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.50582px;line-height:1.25;font-family:'Anja Eliane accent';-inkscape-font-specification:'Anja Eliane accent, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#007ff9;fill-opacity:1;stroke:none;stroke-width:0.264583"/><path d="m 151.47852,79.158203 a 17.202391,32.202391 69.881832 0 1 -3.5625,1.435547 17.202391,32.202391 69.881832 0 1 -12.34571,3.050781 C 137.31089,85.11131 139.55277,86 142,86 c 4.40646,0 8.15112,-2.874184 9.47852,-6.841797 z" id="path1439" style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#65a3fc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.00001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000" transform="scale(0.26458334)"/></g></g></svg>
-            </a>
+            <tr th:each="daret : ${darets}">
+              <td th:text="${daret.nom}"></td>
+              <td th:text="${daret.description}"></td>
+              <td class="mm" th:text="${daret.montant}"></td>
+              <td class="oo" th:text="${daret.montantTotal}"></td>
+              <td th:text="${#dates.format(daret.dateDemarrage, 'dd/MM/yyyy')}"></td>
+              <td th:text="${#dates.format(daret.dateFin, 'dd/MM/yyyy')}"></td>
+              <td ><span th:style="${daret.nbParticipant == 0 ? 'color: red;' : 'color: green;'}" th:text="${daret.nbParticipant}"></span></td>
+              <td>
+                <th:block th:with="now=${#calendars.createNow().time}">
+                  <span id="span" class="label btn-shape bg-info c-white" th:if="${now.before(daret.dateDemarrage.time)}">Ouverte</span>
+                  <span class="label btn-shape bg-green c-white" th:if="${now >= daret.dateDemarrage and now <= daret.dateFin}">Active</span>
+                  <span class="label btn-shape bg-red c-white" th:if="${now.after(daret.dateFin.time)}">Terminée</span>
+                </th:block>
+              </td>
+              <td>
+                <a th:href="@{/afficherDaret/{id}(id=${daret.id})}">
+                  <?xml version="1.0" ?><svg height="23.000002" id="svg8" version="1.1" viewBox="0 0 5.2916671 5.2916673" width="23.000002" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs2"/><g id="layer9" transform="translate(-34.925001,-17.4625)"><g id="FLAT-8"><path d="m 37.570834,17.4625 c -1.458121,0 -2.645833,1.187712 -2.645833,2.645834 0,1.458157 1.187717,2.645833 2.645833,2.645833 1.458111,0 2.645834,-1.187675 2.645834,-2.645833 0,-1.458123 -1.187718,-2.645834 -2.645834,-2.645834 z" id="path337" style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#82bbfb;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.529169;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000"/><path d="m 37.571448,21.13799 c -0.172015,0.003 -0.277285,-0.13961 -0.277741,-0.28024 v -0.84424 c 0.0043,-0.1832 0.141379,-0.27573 0.280196,-0.28017 0.201016,0.008 0.283242,0.1741 0.277744,0.28268 v 0.83936 c -5e-6,0.17975 -0.14622,0.28348 -0.280194,0.28266 z m -0.208003,-1.54778 c -0.0571,-0.0571 -0.08565,-0.1281 -0.08565,-0.2129 0.0057,-0.17529 0.138318,-0.30097 0.29365,-0.29849 0.208672,0.006 0.289046,0.1582 0.292432,0.30095 -0.003,0.19029 -0.145676,0.29402 -0.292432,0.29485 -0.08239,0 -0.15172,-0.0281 -0.208003,-0.0844 z" id="path340" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.50582px;line-height:1.25;font-family:'Anja Eliane accent';-inkscape-font-specification:'Anja Eliane accent, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#007ff9;fill-opacity:1;stroke:none;stroke-width:0.264583"/><path d="m 151.47852,79.158203 a 17.202391,32.202391 69.881832 0 1 -3.5625,1.435547 17.202391,32.202391 69.881832 0 1 -12.34571,3.050781 C 137.31089,85.11131 139.55277,86 142,86 c 4.40646,0 8.15112,-2.874184 9.47852,-6.841797 z" id="path1439" style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#65a3fc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.00001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000" transform="scale(0.26458334)"/></g></g></svg>
+                </a>
+                <a  th:href="@{/modifierDaret/{id}(id=${daret.id})}" style="text-decoration: none; text-align:center">
 
-            <a  th:href="@{/modifierDaret/{id}(id=${daret.id})}" style="text-decoration: none; text-align:center">
+                  <svg viewBox="0 0 24 24" height="25.000002" width="25.000002" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.626 3.132 9.29 10.466l.008 4.247 4.238-.007 7.331-7.332A9.957 9.957 0 0 1 22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2a9.96 9.96 0 0 1 4.626 1.132zm3.86-1.031 1.413 1.414-9.192 9.192-1.412.003-.002-1.417L20.485 2.1z" fill="#ffb121" class="fill-000000 fill-f2c200"></path></svg>
+                </a>
+                <a onclick="return confirm('ÊTES-VOUS SÛR DE SUPPRIMER CETTE DARET ?')" th:href="@{/deleteDaret/{id}(id=${daret.id})}">
 
-              <svg viewBox="0 0 24 24" height="25.000002" width="25.000002" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.626 3.132 9.29 10.466l.008 4.247 4.238-.007 7.331-7.332A9.957 9.957 0 0 1 22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2a9.96 9.96 0 0 1 4.626 1.132zm3.86-1.031 1.413 1.414-9.192 9.192-1.412.003-.002-1.417L20.485 2.1z" fill="#ffb121" class="fill-000000 fill-f2c200"></path></svg>
-            </a>
-            <a onclick="return confirm('ÊTES-VOUS SÛR DE SUPPRIMER CETTE DARET ?')" th:href="@{/deleteDaret/{id}(id=${daret.id})}">
-
-              <?xml version="1.0" ?><svg id="Icons"height="23.000002" width="23.000002"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:#ff7391;}</style><linearGradient gradientUnits="userSpaceOnUse" id="linear-gradient" x1="12" x2="12" y1="0.787" y2="23.088"><stop offset="0" stop-color="#ff4867"/><stop offset="1" stop-color="#e50031"/></linearGradient></defs><circle class="cls-1" cx="12" cy="12" r="11"/><path class="cls-2" d="M13.414,12l3.293-3.293a1,1,0,1,0-1.414-1.414L12,10.586,8.707,7.293A1,1,0,1,0,7.293,8.707L10.586,12,7.293,15.293a1,1,0,1,0,1.414,1.414L12,13.414l3.293,3.293a1,1,0,0,0,1.414-1.414Z"/></svg>
-            </a></td>
-            </td>
-          </tr>
-
-
-
+                  <?xml version="1.0" ?><svg id="Icons"height="23.000002" width="23.000002"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:#ff7391;}</style><linearGradient gradientUnits="userSpaceOnUse" id="linear-gradient" x1="12" x2="12" y1="0.787" y2="23.088"><stop offset="0" stop-color="#ff4867"/><stop offset="1" stop-color="#e50031"/></linearGradient></defs><circle class="cls-1" cx="12" cy="12" r="11"/><path class="cls-2" d="M13.414,12l3.293-3.293a1,1,0,1,0-1.414-1.414L12,10.586,8.707,7.293A1,1,0,1,0,7.293,8.707L10.586,12,7.293,15.293a1,1,0,1,0,1.414,1.414L12,13.414l3.293,3.293a1,1,0,0,0,1.414-1.414Z"/></svg>
+                </a>
+              </td>
+            </tr>
 
           </tbody>
         </table>
       </div>
     </div>
-    <!-- End Projects Table -->
   </div>
 </div>
 </body>
