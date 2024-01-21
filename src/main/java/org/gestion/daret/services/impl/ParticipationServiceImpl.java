@@ -1,5 +1,6 @@
 package org.gestion.daret.services.impl;
 
+import jakarta.servlet.http.HttpSession;
 import org.gestion.daret.dto.MesParticipationDto;
 import org.gestion.daret.dto.ParticipationDto;
 import org.gestion.daret.models.Daret;
@@ -8,6 +9,7 @@ import org.gestion.daret.models.User;
 import org.gestion.daret.repository.DaretRepository;
 import org.gestion.daret.repository.ParticipationRepository;
 import org.gestion.daret.services.ParticipationService;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -94,7 +96,6 @@ public class ParticipationServiceImpl implements ParticipationService {
         Optional<Participation> optionalParticipation = participationRepository.findById(id);
         optionalParticipation.ifPresent(participation -> {
             if (participation.getEtat() == 0 || participation.getEtat() == 1) {
-                participation.setEtat(-1);
                 try {
                     Daret daret = daretRepository.findById(id_daret).orElseThrow(()-> new Exception("Daret not found!"));
                     if(participation.getEtat() == 1){
@@ -237,5 +238,22 @@ public class ParticipationServiceImpl implements ParticipationService {
         redirectAttributes.addAttribute("id_daret", id_daret);
         return "redirect:/membreDaret/{id_daret}";
     }
+
+    @Override
+    public String supprimerDemande(int id, RedirectAttributes redirectAttributes){
+        participationRepository.deleteById(id);
+        redirectAttributes.addFlashAttribute("msgSuppression","La demande a été supprimée");
+        return "redirect:/listDemandesParticipation";
+    }
+
+    @Override
+    public String supprimerDemande2(int id, int id_daret, RedirectAttributes redirectAttributes){
+        participationRepository.deleteById(id);
+        redirectAttributes.addFlashAttribute("msgSuppression", "La demande a été supprimée");
+        redirectAttributes.addAttribute("id_daret", id_daret);
+        return "redirect:/membreDaret/{id_daret}";
+    }
+
+
 
 }

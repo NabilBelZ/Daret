@@ -11,6 +11,7 @@ import org.gestion.daret.repository.DaretRepository;
 import org.gestion.daret.repository.ParticipationRepository;
 import org.gestion.daret.repository.UserRepository;
 import org.gestion.daret.services.ParticipationService;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,6 +69,16 @@ public class ParticipationController {
     @GetMapping("/mettreEnAttenteDemande2/{id}/{idDaret}")
     public String mettreEnAttenteLaDemande2(@PathVariable("id") int id, @PathVariable("idDaret") int id_daret, RedirectAttributes redirectAttributes){
         return participationService.mettreEnAttenteDemande2(id, id_daret, redirectAttributes);
+    }
+
+    @GetMapping("/supprimerDemande/{id}")
+    public String deleteDemande(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
+        return participationService.supprimerDemande(id, redirectAttributes);
+    }
+
+    @GetMapping("/supprimerDemande2/{id}/{idDaret}")
+    public String deleteDemande(@PathVariable("id") int id, @PathVariable("idDaret") int idDaret, RedirectAttributes redirectAttributes){
+        return participationService.supprimerDemande2(id, idDaret, redirectAttributes);
     }
 
     @PostMapping("/participer")

@@ -87,6 +87,18 @@ public class DaretController {
         return "afficherDaret";
     }
 
+    @GetMapping("/listeTontines")
+    public String listeDesTontines(HttpSession session, Model model){
+        List<Daret> tontines = daretRepository.findAllByEtatIsTrueOrderByIdDesc();
+        model.addAttribute("tontines", tontines);
+        return "listeTontines";
+    }
+
+    @GetMapping("/tontineDetails")
+    public String DetailsTontine(HttpSession session){
+        return "tontineDetails";
+    }
+
 
 }
 

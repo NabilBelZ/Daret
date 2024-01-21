@@ -91,19 +91,6 @@ public class UserController {
         return userService.seDeconnecter(session);
     }
 
-    @GetMapping("/listeTontines")
-    public String listeDesTontines(HttpSession session, Model model){
-        List<Daret> tontines = daretRepository.findAllByEtatIsTrueOrderByIdDesc();
-        model.addAttribute("tontines", tontines);
-        return "listeTontines";
-    }
-
-    @GetMapping("/tontineDetails")
-    public String DetailsTontine(HttpSession session){
-        return "tontineDetails";
-    }
-
-
 
     @PostMapping("/modifierInfoUser_process")
     public String modifierInfoUser(HttpSession session, @ModelAttribute("user") UserDto userDto) throws Exception{
