@@ -41,3 +41,5 @@ public class Daret {
 // bnisba l dik createDaret et UserRegistrationProcess mn ahsan tdir chi fonction fl model li tatkhwi fiha dto f lmodel o tb9a t3yt liha f Service
     // fhad TIMESTAMP KAYNA 2 attributs CreatedAt , Updatedat
 }
+
+

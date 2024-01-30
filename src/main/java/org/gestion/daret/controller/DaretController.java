@@ -4,7 +4,9 @@ import jakarta.servlet.http.HttpSession;
 import org.gestion.daret.dto.DaretDto;
 import org.gestion.daret.dto.UserDto;
 import org.gestion.daret.models.Daret;
+import org.gestion.daret.models.Participation;
 import org.gestion.daret.repository.DaretRepository;
+import org.gestion.daret.repository.ParticipationRepository;
 import org.gestion.daret.repository.UserRepository;
 import org.gestion.daret.services.DaretService;
 import org.gestion.daret.services.PasswordService;
@@ -33,6 +35,9 @@ public class DaretController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ParticipationRepository participationRepository;
 
     //@GetMapping("darets")
     //public ResponseEntity<List<Daret>> getDaret(){
@@ -98,6 +103,8 @@ public class DaretController {
     public String DetailsTontine(HttpSession session){
         return "tontineDetails";
     }
+
+
 
 
 }

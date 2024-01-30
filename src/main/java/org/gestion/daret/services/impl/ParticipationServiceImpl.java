@@ -1,6 +1,5 @@
 package org.gestion.daret.services.impl;
 
-import jakarta.servlet.http.HttpSession;
 import org.gestion.daret.dto.MesParticipationDto;
 import org.gestion.daret.dto.ParticipationDto;
 import org.gestion.daret.models.Daret;
@@ -9,7 +8,6 @@ import org.gestion.daret.models.User;
 import org.gestion.daret.repository.DaretRepository;
 import org.gestion.daret.repository.ParticipationRepository;
 import org.gestion.daret.services.ParticipationService;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;

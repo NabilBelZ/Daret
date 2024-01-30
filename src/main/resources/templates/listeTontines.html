@@ -113,9 +113,9 @@
             <div class="search p-relative">
                 <input class="searchBar p-10" type="text" placeholder="Nom Daret" onkeyup="searchDaret()"/>
             </div>
-            <div class="icons d-flex align-center" th:if="${session.role}">
+            <!-- <div class="icons d-flex align-center" th:if="${session.role}">
                 <img src="imgs/avatar.png" alt="" />
-            </div>
+            </div> -->
         </div>
         <!-- End Head -->
         <h1 class="p-relative">Liste des tontines</h1>
@@ -139,19 +139,23 @@
                     <span style="background-color: #DF4881FF" class="title bg-green c-white btn-shape">
                         <th:block th:with="now=${#calendars.createNow().time}">
                             <a href="#" style="color: white;"
-                               th:if="${session.role != null and now <= tontine.dateFin}"
-                               th:data-bs-toggle="modal" th:data-bs-target="'#participationModal' + ${tontine.id}">Participer</a>
-                            <a href="#" style="color: white;" th:unless="${session.role}" data-bs-toggle="modal" data-bs-target="#erreur_message">Participer</a>
-                            <a href="#" style="color: white;" th:if="${now > tontine.dateFin}" data-bs-toggle="modal" data-bs-target="#erreur_finDelai">Participer</a>
+                               th:if="${session.role != null and now < tontine.dateDemarrage}"
+                               th:data-bs-toggle="modal" th:data-bs-target="'#participationModal' + ${tontine.id}">Participer
+                            </a>
+                            <a href="#" style="color: white;"
+                               th:if="${session.role == null and now < tontine.dateDemarrage}"
+                               th:data-bs-toggle="modal" th:data-bs-target="'#erreur_message'">Participer
+                            </a>
+                            <a href="#" style="color: white;" th:if="${now > tontine.dateDemarrage}" data-bs-toggle="modal" data-bs-target="#erreur_finDelai">Participer</a>
                         </th:block>
                     </span>
 
                     <span class="c-grey"  th:text="${tontine.nbParticipant} + ' Participants'">
                         <i class="fa-regular fa-user"></i>
+                    </span>
 
-                    </span>
-                    <span class="c-red" th:text="${tontine.montantTotal} + ' Dh'">
-                    </span>
+                    <span class="c-red" th:text="${tontine.montantTotal} + ' Dh'"></span>
+
                     <div class="modal fade" id="erreur_finDelai" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="participationModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">

@@ -81,6 +81,7 @@ public class ParticipationController {
         return participationService.supprimerDemande2(id, idDaret, redirectAttributes);
     }
 
+    // participer version safe
     @PostMapping("/participer")
     public String participer(HttpSession session, @ModelAttribute("participation") ParticipationDtoinput participation,
                              RedirectAttributes redirectAttributes) throws Exception{
@@ -101,6 +102,57 @@ public class ParticipationController {
         }
         return "redirect:/listeTontines";
     }
+
+    /*@PostMapping("/participer")
+    public String participer(HttpSession session, @ModelAttribute("participation") ParticipationDtoinput participation,
+                             RedirectAttributes redirectAttributes) throws Exception{
+
+        Optional<Integer> idDaret = participationRepository.findDaretIdById(participation.getId());
+
+        List<ParticipationDto> participations = participationService.getMembreDaretParticiper(idDaret);
+
+        model.addAttribute("participations", participations);
+        float sommeCotisation = 0;
+        for(ParticipationDto participationDto : participations){
+            if(participationDto.getEtat() == 1){
+                sommeCotisation += participationDto.getMontantParticipation();
+            }
+        }
+        model.addAttribute("sommeCotisation", sommeCotisation);
+        return "membreDaret";
+
+
+        Participation newparticipation = new Participation();
+        newparticipation.setEtat(0);
+
+        Optional<Daret> daret = daretRepository.findById(participation.getId());
+        if (daret.isPresent()) {
+            Participation p = new Participation();
+            p.setMontantParticipation(participation.getMontantParticipation());
+            p.setDaret(daret.get());
+            p.setEtat(0);
+            User user = userRepository.findById((Integer) session.getAttribute("userId")).orElseThrow(()-> new Exception("user not found!"));
+            p.setUser(user);
+            participationRepository.save(p);
+            redirectAttributes.addFlashAttribute("msgsuccess", "Votre demande a été envoyée !");
+        }
+        return "redirect:/listeTontines";
+    }*/
+
+    @GetMapping("/membreDaret/{id_daret}")
+    public String afficherMemebreDaret(@PathVariable("id_daret") int id_daret, Model model) throws Exception{
+        List<ParticipationDto> participations = participationService.getMembreDaret(id_daret);
+        model.addAttribute("participations", participations);
+        float sommeCotisation = 0;
+        for(ParticipationDto participationDto : participations){
+            if(participationDto.getEtat() == 1){
+                sommeCotisation += participationDto.getMontantParticipation();
+            }
+        }
+        model.addAttribute("sommeCotisation", sommeCotisation);
+        return "membreDaret";
+    }
+
     @GetMapping("/listDemandesParticipation")
     public String listeDesDemandesParticipations(Model model){
         List<ParticipationDto> participationDtoList = participationService.getAllParticipations();
@@ -108,12 +160,6 @@ public class ParticipationController {
         return "listDemandesParticipation";
     }
 
-    @GetMapping("/membreDaret/{id_daret}")
-    public String afficherMemebreDaret(@PathVariable("id_daret") int id_daret, Model model) throws Exception{
-        List<ParticipationDto> participations = participationService.getMembreDaret(id_daret);
-        model.addAttribute("participations", participations);
-        return "membreDaret";
-    }
     @GetMapping("/mesParticipations")
     public String getMesParticipations(HttpSession session, Model model) {
         int userId = (int) session.getAttribute("userId");

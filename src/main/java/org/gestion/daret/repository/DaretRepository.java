@@ -10,11 +10,6 @@ import java.util.Optional;
 @Repository
 public interface DaretRepository extends JpaRepository<Daret, Integer> {
     Optional<Daret> findById(int id);
-
-
     List<Daret> findAllByEtatIsTrueOrderByIdDesc();
 
-
-
- //Optional<Daret> save();
 }

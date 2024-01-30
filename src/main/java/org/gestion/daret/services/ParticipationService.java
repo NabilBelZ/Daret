@@ -1,15 +1,13 @@
 package org.gestion.daret.services;
 
-import jakarta.servlet.http.HttpSession;
 import org.gestion.daret.dto.MesParticipationDto;
 import org.gestion.daret.dto.ParticipationDto;
-import org.gestion.daret.models.Daret;
 import org.gestion.daret.models.Participation;
-import org.hibernate.Session;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface ParticipationService {
@@ -36,5 +34,6 @@ public interface ParticipationService {
 
     public List<ParticipationDto> getMembreDaret(int id);
     List<MesParticipationDto> getMesParticipations(int userId);
+
 
 }

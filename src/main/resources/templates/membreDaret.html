@@ -8,8 +8,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
     <link th:href="@{/css/all.min.css}" rel="stylesheet" />
     <link th:href="@{/css/framework.css}" rel="stylesheet" />
     <link th:href="@{/css/master.css}" rel="stylesheet" />
@@ -375,7 +381,28 @@
                             <td th:if="${participation.etat == -1}"> <span class="label btn-shape bg-red c-white">Refusée</span></td>
 
                             <td class="aaaa">
-                                <a onclick="return confirm('êtes-vous sûr d\'accepter cette demande de participation ?')" th:href="@{/accepterDemande2/{id}/{idDaret}(id=${participation.id}, idDaret=${participation.idDaret})}">
+                                <a href="#" th:if="${sommeCotisation >= participation.montantDaret}" th:data-bs-toggle="modal" th:data-bs-target="'#erreur_message'">
+                                    <i><?xml version="1.0" ?><svg id="Icons" height="23.000002" width="23.000002"viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:#a4ffa6;}</style><linearGradient gradientUnits="userSpaceOnUse" id="linear-gradient" x1="12" x2="12" y1="0.957" y2="22.957"><stop offset="0" stop-color="#71ff7b"/><stop offset="1" stop-color="#27f42c"/></linearGradient></defs><circle class="cls-1" cx="12" cy="12" r="11"/><path class="cls-2" d="M10,17a1,1,0,0,1-.707-.293l-3-3a1,1,0,0,1,1.414-1.414L10,14.586l6.293-6.293a1,1,0,0,1,1.414,1.414l-7,7A1,1,0,0,1,10,17Z"/></svg></i>
+                                </a>
+
+                                    <div class="modal fade" id="erreur_message" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="participationModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Attention !</h5>
+                                                    <button type="button" class="btn-close tahiri"  data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Attention ! La tontine a déjà collecté les cotisations nécessaires.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary tahiri"  data-bs-dismiss="modal">Fermer</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                <a th:if="${sommeCotisation < participation.montantDaret}" onclick="return confirm('êtes-vous sûr d\'accepter cette demande de participation ?')" th:href="@{/accepterDemande2/{id}/{idDaret}(id=${participation.id}, idDaret=${participation.idDaret})}">
                                     <i><?xml version="1.0" ?><svg id="Icons" height="23.000002" width="23.000002"viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:#a4ffa6;}</style><linearGradient gradientUnits="userSpaceOnUse" id="linear-gradient" x1="12" x2="12" y1="0.957" y2="22.957"><stop offset="0" stop-color="#71ff7b"/><stop offset="1" stop-color="#27f42c"/></linearGradient></defs><circle class="cls-1" cx="12" cy="12" r="11"/><path class="cls-2" d="M10,17a1,1,0,0,1-.707-.293l-3-3a1,1,0,0,1,1.414-1.414L10,14.586l6.293-6.293a1,1,0,0,1,1.414,1.414l-7,7A1,1,0,0,1,10,17Z"/></svg></i>
                                 </a>
 
@@ -404,7 +431,7 @@
             </div>
             <div style="text-align: center;">
 
-                <a onclick="goBack()" style="background-color: #DF4881FF;" class="visit  fs-14 bg-blue c-white w-fit btn-shape">Retour</a>
+                <a onclick="goBack()" style="background-color: #DF4881FF; cursor: pointer;" class="visit  fs-14 bg-blue c-white w-fit btn-shape">Retour</a>
             </div>
 
 
