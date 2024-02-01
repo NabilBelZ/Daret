@@ -103,40 +103,33 @@ public class ParticipationController {
         return "redirect:/listeTontines";
     }
 
+    // solde check added
     /*@PostMapping("/participer")
     public String participer(HttpSession session, @ModelAttribute("participation") ParticipationDtoinput participation,
                              RedirectAttributes redirectAttributes) throws Exception{
 
-        Optional<Integer> idDaret = participationRepository.findDaretIdById(participation.getId());
+        User user = userRepository.findById((Integer) session.getAttribute("userId")).orElseThrow(()-> new Exception("user not found!"));
 
-        List<ParticipationDto> participations = participationService.getMembreDaretParticiper(idDaret);
+        if(user.getSolde() >= participation.getMontantParticipation()){
+            Participation newparticipation = new Participation();
+            newparticipation.setEtat(0);
 
-        model.addAttribute("participations", participations);
-        float sommeCotisation = 0;
-        for(ParticipationDto participationDto : participations){
-            if(participationDto.getEtat() == 1){
-                sommeCotisation += participationDto.getMontantParticipation();
+            Optional<Daret> daret = daretRepository.findById(participation.getId());
+            if (daret.isPresent()) {
+                Participation p = new Participation();
+                p.setMontantParticipation(participation.getMontantParticipation());
+                p.setDaret(daret.get());
+                p.setEtat(0);
+                p.setUser(user);
+                participationRepository.save(p);
+                redirectAttributes.addFlashAttribute("msgsuccess", "Votre demande a été envoyée !");
             }
+            return "redirect:/listeTontines";
+        }else{
+            redirectAttributes.addFlashAttribute("msgSoldeInsuffisant", "Solde insuffisant ! Veuillez penser à recharger votre compte.");
         }
-        model.addAttribute("sommeCotisation", sommeCotisation);
-        return "membreDaret";
 
 
-        Participation newparticipation = new Participation();
-        newparticipation.setEtat(0);
-
-        Optional<Daret> daret = daretRepository.findById(participation.getId());
-        if (daret.isPresent()) {
-            Participation p = new Participation();
-            p.setMontantParticipation(participation.getMontantParticipation());
-            p.setDaret(daret.get());
-            p.setEtat(0);
-            User user = userRepository.findById((Integer) session.getAttribute("userId")).orElseThrow(()-> new Exception("user not found!"));
-            p.setUser(user);
-            participationRepository.save(p);
-            redirectAttributes.addFlashAttribute("msgsuccess", "Votre demande a été envoyée !");
-        }
-        return "redirect:/listeTontines";
     }*/
 
     @GetMapping("/membreDaret/{id_daret}")

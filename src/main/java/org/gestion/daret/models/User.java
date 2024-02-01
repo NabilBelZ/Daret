@@ -42,4 +42,6 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Participation> participation;
+
+    private double solde;
 }

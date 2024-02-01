@@ -71,7 +71,7 @@
         }
         .inscform{
             margin-top: 20px;
-            height: 697px;
+            height: 600px;
             margin-bottom: 20px;
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
@@ -175,7 +175,16 @@
             padding-bottom: 0px;
             border-top-left-radius: calc(0.3rem - 1px);
             border-top-right-radius: calc(0.3rem - 1px);
-
+        }
+        .textareaNabil{
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            resize: vertical;
         }
 
     </style>
@@ -282,7 +291,8 @@
                             <div class="row">
                                 <div class="form-group col-12">
                                     <label id="lbl1" class="mb-2">Description</label>
-                                    <textarea id="mytextarea" name="description" rows="6" cols="35" th:utext="${daret.description}"></textarea>
+                                    <!-- <textarea id="mytextarea" name="description" rows="6" cols="35" th:utext="${daret.description}"></textarea> -->
+                                    <textarea class="textareaNabil" th:text="${daret.description}" name="description"></textarea>
                                 </div>
                             </div>
 

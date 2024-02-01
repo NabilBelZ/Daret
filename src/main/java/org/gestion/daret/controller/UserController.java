@@ -13,12 +13,11 @@ import org.gestion.daret.services.PasswordService;
 import org.gestion.daret.services.RoleService;
 import org.gestion.daret.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -145,4 +144,18 @@ public class UserController {
         return "profile";
     }
 
+
+    @PostMapping("/ajouterSoldeProcess")
+    public String processForm(HttpSession session, @RequestParam("amount") double amount, Model model, RedirectAttributes redirectAttributes) throws Exception{
+        int userId = (Integer) session.getAttribute("userId");
+        User user = userRepository.findById(userId).orElseThrow(()-> new Exception("user not found"));
+
+        double nvSolde = user.getSolde() + amount;
+        user.setSolde(nvSolde);
+        userRepository.save(user);
+
+        redirectAttributes.addFlashAttribute("msgAjoutMontant","Votre solde a été augmenté avec succès");
+
+        return "redirect:/userDashboard";
+    }
 }
