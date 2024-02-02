@@ -18,8 +18,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Controller
 public class ParticipationController {
@@ -95,6 +97,7 @@ public class ParticipationController {
             p.setMontantParticipation(participation.getMontantParticipation());
             p.setDaret(daret.get());
             p.setEtat(0);
+            p.setTour(0);
             User user = userRepository.findById((Integer) session.getAttribute("userId")).orElseThrow(()-> new Exception("user not found!"));
             p.setUser(user);
             participationRepository.save(p);
@@ -136,6 +139,8 @@ public class ParticipationController {
     public String afficherMemebreDaret(@PathVariable("id_daret") int id_daret, Model model) throws Exception{
         List<ParticipationDto> participations = participationService.getMembreDaret(id_daret);
         model.addAttribute("participations", participations);
+        //besoin d'id daret pour le traitement de génération
+        model.addAttribute("idDaret",id_daret);
         float sommeCotisation = 0;
         for(ParticipationDto participationDto : participations){
             if(participationDto.getEtat() == 1){
@@ -167,5 +172,61 @@ public class ParticipationController {
 
         return "mesParticipations";
     }
+
+    @GetMapping("/genererTours/{id_daret}")
+    public String genererTour(@PathVariable int id_daret, Model model) {
+
+        List<ParticipationDto> participations = participationService.getMembreDaret(id_daret);
+        List<ParticipationDto> listParticipantValides = new ArrayList<>();
+        int nbParticipantsValides = 0;
+
+        for (ParticipationDto participationDto : participations) {
+            if (participationDto.getEtat() == 1) {
+                listParticipantValides.add(participationDto);
+                nbParticipantsValides++;
+            }
+        }
+
+        Random random = new Random();
+        for (ParticipationDto participationDto : listParticipantValides) {
+            int tour;
+            boolean tourExiste;
+            do {
+                tour = random.nextInt(nbParticipantsValides) + 1;
+                tourExiste = false;
+                for (ParticipationDto otherParticipant : listParticipantValides) {
+                    if (otherParticipant.getTour() == tour && otherParticipant != participationDto) {
+                        tourExiste = true;
+                        break;
+                    }
+                }
+            } while (tourExiste);
+
+            participationDto.setTour(tour);
+        }
+
+        // Ajouter les participations non valides à la liste
+        for (ParticipationDto participationDto : participations) {
+            if (participationDto.getEtat() != 1) {
+                listParticipantValides.add(participationDto);
+            }
+        }
+
+        model.addAttribute("participations", listParticipantValides);
+
+        float sommeCotisation = 0;
+        for (ParticipationDto participationDto : listParticipantValides) {
+            if (participationDto.getEtat() == 1) {
+                sommeCotisation += participationDto.getMontantParticipation();
+            }
+        }
+        model.addAttribute("sommeCotisation", sommeCotisation);
+
+
+
+        return "membreDaret";
+    }
+
+
 
 }

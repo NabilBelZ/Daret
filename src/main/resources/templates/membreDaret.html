@@ -271,6 +271,10 @@
         </div>
         <!-- End Head -->
 
+        <div style="text-align: center; margin-top: 20px;">
+            <a th:href="@{/genererTours/{id}(id= ${idDaret})}" style="background-color: #DF4881FF; cursor: pointer;" class="visit  fs-14 bg-blue c-white w-fit btn-shape">Générer les tours</a>
+        </div>
+
         <div class="container">
             <div class="table-responsive">
                 <div class="table-wrapper">
@@ -294,6 +298,7 @@
                             <th>Prénom</th>
                             <th>Nom</th>
                             <th>Daret</th>
+                            <th>Tour</th>
                             <th>Montant de la participation</th>
                             <th>Montant de la daret</th>
                             <th class="thth">Statut de la demande</th>
@@ -305,6 +310,7 @@
                             <td th:text="${participation.prenomUser}"></td>
                             <td th:text="${participation.nomUser}"></td>
                             <td th:text="${participation.nomDaret}"></td>
+                            <td th:text="${participation.tour}"></td>
                             <td style="color: green" th:text="${participation.montantParticipation}"></td>
                             <td style="color: #DF4881FF" th:text="${participation.montantDaret}"></td>
                             <td th:if="${participation.etat == 0}"> <span class="label btn-shape bg-orange c-white">En attente</span></td>
@@ -381,8 +387,8 @@
                             <td th:if="${participation.etat == -1}"> <span class="label btn-shape bg-red c-white">Refusée</span></td>
 
                             <td class="aaaa">
-                                <a href="#" th:if="${sommeCotisation >= participation.montantDaret}" th:data-bs-toggle="modal" th:data-bs-target="'#erreur_message'">
-                                    <i><?xml version="1.0" ?><svg id="Icons" height="23.000002" width="23.000002"viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:#a4ffa6;}</style><linearGradient gradientUnits="userSpaceOnUse" id="linear-gradient" x1="12" x2="12" y1="0.957" y2="22.957"><stop offset="0" stop-color="#71ff7b"/><stop offset="1" stop-color="#27f42c"/></linearGradient></defs><circle class="cls-1" cx="12" cy="12" r="11"/><path class="cls-2" d="M10,17a1,1,0,0,1-.707-.293l-3-3a1,1,0,0,1,1.414-1.414L10,14.586l6.293-6.293a1,1,0,0,1,1.414,1.414l-7,7A1,1,0,0,1,10,17Z"/></svg></i>
+                                <a href="#" th:if="${sommeCotisation >= participation.montantDaret * 10}" th:data-bs-toggle="modal" th:data-bs-target="'#erreur_message'">
+                                    <i><?xml version="1.0" ?><svg id="Icons" height="23.000002" width="23.000002" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:#a4ffa6;}</style><linearGradient gradientUnits="userSpaceOnUse" id="linear-gradient" x1="12" x2="12" y1="0.957" y2="22.957"><stop offset="0" stop-color="#71ff7b"/><stop offset="1" stop-color="#27f42c"/></linearGradient></defs><circle class="cls-1" cx="12" cy="12" r="11"/><path class="cls-2" d="M10,17a1,1,0,0,1-.707-.293l-3-3a1,1,0,0,1,1.414-1.414L10,14.586l6.293-6.293a1,1,0,0,1,1.414,1.414l-7,7A1,1,0,0,1,10,17Z"/></svg></i>
                                 </a>
 
                                     <div class="modal fade" id="erreur_message" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="participationModalLabel" aria-hidden="true">
@@ -402,7 +408,7 @@
                                         </div>
                                     </div>
 
-                                <a th:if="${sommeCotisation < participation.montantDaret}" onclick="return confirm('êtes-vous sûr d\'accepter cette demande de participation ?')" th:href="@{/accepterDemande2/{id}/{idDaret}(id=${participation.id}, idDaret=${participation.idDaret})}">
+                                <a th:if="${sommeCotisation < participation.montantDaret * 10}" onclick="return confirm('êtes-vous sûr d\'accepter cette demande de participation ?')" th:href="@{/accepterDemande2/{id}/{idDaret}(id=${participation.id}, idDaret=${participation.idDaret})}">
                                     <i><?xml version="1.0" ?><svg id="Icons" height="23.000002" width="23.000002"viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:#a4ffa6;}</style><linearGradient gradientUnits="userSpaceOnUse" id="linear-gradient" x1="12" x2="12" y1="0.957" y2="22.957"><stop offset="0" stop-color="#71ff7b"/><stop offset="1" stop-color="#27f42c"/></linearGradient></defs><circle class="cls-1" cx="12" cy="12" r="11"/><path class="cls-2" d="M10,17a1,1,0,0,1-.707-.293l-3-3a1,1,0,0,1,1.414-1.414L10,14.586l6.293-6.293a1,1,0,0,1,1.414,1.414l-7,7A1,1,0,0,1,10,17Z"/></svg></i>
                                 </a>
 

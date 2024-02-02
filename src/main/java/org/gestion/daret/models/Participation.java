@@ -33,4 +33,6 @@ public class Participation {
     private List<Tour> tours;
 
     private int etat;
+
+    private int tour = 0;
 }
