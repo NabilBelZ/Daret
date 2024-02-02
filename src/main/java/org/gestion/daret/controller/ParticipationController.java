@@ -20,10 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 public class ParticipationController {
@@ -255,6 +252,44 @@ public class ParticipationController {
         // Retourner la vue
         return "membreDaret";
     }
+
+    @GetMapping("/virementMontant/{id_daret}")
+    public String virementArgent(@PathVariable int id_daret) {
+        List<ParticipationDto> participations = participationService.getMembreDaret(id_daret);
+        List<ParticipationDto> listParticipantValides = new ArrayList<>();
+
+        for (ParticipationDto participationDto : participations) {
+            if (participationDto.getEtat() == 1) {
+                listParticipantValides.add(participationDto);
+            }
+        }
+
+        listParticipantValides.sort(Comparator.comparingInt(ParticipationDto::getTour).reversed());
+
+        for (ParticipationDto participationDto : listParticipantValides) {
+
+            if ("non".equals(participationDto.getMontantRecu())) {
+                User user = userRepository.findById(participationDto.getIdUser())
+                        .orElseThrow(() -> new RuntimeException("User not found"));
+
+                double virement = user.getSolde() + participationDto.getMontantTotalDaret();
+                user.setSolde(virement);
+                userRepository.save(user);
+                Optional<Participation> optionalParticipation = participationRepository.findById(participationDto.getId());
+                if(optionalParticipation.isPresent()){
+                    Participation p = optionalParticipation.get();
+                    p.setMontantRecu("oui");
+                    participationRepository.save(p);
+                }
+
+
+            }
+        }
+
+        // Redirect to the specified URL after processing
+        return "redirect:/membreDaret/" + id_daret;
+    }
+
 
 }
 

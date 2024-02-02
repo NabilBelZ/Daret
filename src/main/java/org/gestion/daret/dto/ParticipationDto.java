@@ -13,9 +13,11 @@ public class ParticipationDto {
     private String nomDaret;
     private float montantDaret;
     private String nomUser;
+    private int idUser;
     private String prenomUser;
     private float montantParticipation;
     private int etat;
     private int tour;
     private float montantTotalDaret;
+    private String montantRecu;
 }

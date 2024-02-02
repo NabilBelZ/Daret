@@ -38,4 +38,6 @@ public class Participation {
     private int etat;
 
     private int tour = 0;
+
+    private String montantRecu = "non";
 }

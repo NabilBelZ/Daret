@@ -93,6 +93,8 @@ public class ParticipationServiceImpl implements ParticipationService {
             participationDto.setMontantDaret(daret.getMontant());
             participationDto.setMontantParticipation(participation.getMontantParticipation());
             participationDto.setEtat(participation.getEtat());
+            participationDto.setIdUser(user.getId());
+            participationDto.setMontantRecu(participation.getMontantRecu());
             participationDtoList.add(participationDto);
         }
         return participationDtoList;
