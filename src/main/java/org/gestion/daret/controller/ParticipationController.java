@@ -250,7 +250,7 @@ public class ParticipationController {
 
 
         // Retourner la vue
-        return "membreDaret";
+        return "redirect:/membreDaret/" + id_daret;
     }
 
     @GetMapping("/virementMontant/{id_daret}")
