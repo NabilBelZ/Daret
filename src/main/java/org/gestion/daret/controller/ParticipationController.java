@@ -49,8 +49,8 @@ public class ParticipationController {
     }
 
     @GetMapping("/accepterDemande/{id}/{idDaret}")
-    public String accepterDemande(@PathVariable("id") int id, @PathVariable("idDaret") int id_daret, RedirectAttributes redirectAttributes){
-        return participationService.accepterDemande(id, id_daret, redirectAttributes);
+    public String accepterDemande(HttpSession session, @PathVariable("id") int id, @PathVariable("idDaret") int id_daret, RedirectAttributes redirectAttributes){
+        return participationService.accepterDemande(session, id, id_daret, redirectAttributes);
     }
     @GetMapping("/accepterDemande2/{id}/{idDaret}")
 

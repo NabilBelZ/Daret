@@ -1,5 +1,6 @@
 package org.gestion.daret.services;
 
+import jakarta.servlet.http.HttpSession;
 import org.gestion.daret.dto.MesParticipationDto;
 import org.gestion.daret.dto.ParticipationDto;
 import org.gestion.daret.models.Participation;
@@ -20,7 +21,7 @@ public interface ParticipationService {
 
     public String refuserDemande2(int id, int id_daret, RedirectAttributes redirectAttributes);
 
-    public String accepterDemande(int id, int id_daret, RedirectAttributes redirectAttributes);
+    public String accepterDemande(HttpSession session, int id, int id_daret, RedirectAttributes redirectAttributes);
 
     public String accepterDemande2(int id, int id_daret, RedirectAttributes redirectAttributes);
 
