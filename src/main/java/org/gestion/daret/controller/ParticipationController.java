@@ -6,6 +6,7 @@ import org.gestion.daret.dto.ParticipationDto;
 import org.gestion.daret.dto.ParticipationDtoinput;
 import org.gestion.daret.models.Daret;
 import org.gestion.daret.models.Participation;
+import org.gestion.daret.models.Tour;
 import org.gestion.daret.models.User;
 import org.gestion.daret.repository.DaretRepository;
 import org.gestion.daret.repository.ParticipationRepository;
@@ -146,9 +147,15 @@ public class ParticipationController {
         //besoin d'id daret pour le traitement de génération
         model.addAttribute("idDaret",id_daret);
         float sommeCotisation = 0;
+        boolean tourEmpty = false;
         for(ParticipationDto participationDto : participations){
             if(participationDto.getEtat() == 1){
                 sommeCotisation += participationDto.getMontantParticipation();
+
+                if (participationDto.getTour() == 0) {
+                    tourEmpty = true;
+                    model.addAttribute("TourEmpty", tourEmpty);
+                }
             }
         }
         model.addAttribute("sommeCotisation", sommeCotisation);
@@ -184,6 +191,8 @@ public class ParticipationController {
 
         List<ParticipationDto> participations = participationService.getMembreDaret(id_daret);
         List<ParticipationDto> listParticipantValides = new ArrayList<>();
+
+        boolean TourEmpty = false;
 
         for (ParticipationDto participationDto : participations) {
             if (participationDto.getEtat() == 1) {
@@ -240,6 +249,8 @@ public class ParticipationController {
         }
 
         model.addAttribute("sommeCotisation", sommeCotisation);
+
+
 
         // Retourner la vue
         return "membreDaret";

@@ -271,7 +271,7 @@
         </div>
         <!-- End Head -->
 
-        <div style="text-align: center; margin-top: 20px;">
+        <div style="text-align: center; margin-top: 20px;" th:if="${TourEmpty}">
             <a th:href="@{/genererTours/{id}(id= ${idDaret})}" style="background-color: #DF4881FF; cursor: pointer;" class="visit  fs-14 bg-blue c-white w-fit btn-shape">Générer les tours</a>
         </div>
 

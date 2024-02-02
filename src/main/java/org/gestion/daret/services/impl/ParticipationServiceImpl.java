@@ -96,16 +96,19 @@ public class ParticipationServiceImpl implements ParticipationService {
         Optional<Participation> optionalParticipation = participationRepository.findById(id);
         optionalParticipation.ifPresent(participation -> {
             if (participation.getEtat() == 0 || participation.getEtat() == 1) {
-                participation.setEtat(-1);
+
                 try {
                     Daret daret = daretRepository.findById(id_daret).orElseThrow(()-> new Exception("Daret not found!"));
                     if(participation.getEtat() == 1){
+
                         daret.setNbParticipant(daret.getNbParticipant() - 1);
                         daretRepository.save(daret);
                     }
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
+                participation.setEtat(-1);
+                participation.setTour(0);
                 participationRepository.save(participation);
                 redirectAttributes.addFlashAttribute("msgRefus", "La Demande a été refusée !");
             } else if (participation.getEtat() == -1) {
@@ -121,7 +124,6 @@ public class ParticipationServiceImpl implements ParticipationService {
         Optional<Participation> optionalParticipation = participationRepository.findById(id);
         optionalParticipation.ifPresent(participation -> {
             if (participation.getEtat() == 0 || participation.getEtat() == 1) {
-                participation.setEtat(-1);
                 try {
                     Daret daret = daretRepository.findById(id_daret).orElseThrow(()-> new Exception("Daret not found!"));
                     if(participation.getEtat() == 1){
@@ -131,6 +133,8 @@ public class ParticipationServiceImpl implements ParticipationService {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
+                participation.setEtat(-1);
+                participation.setTour(0);
                 participationRepository.save(participation);
                 redirectAttributes.addFlashAttribute("msgRefus", "La Demande a été refusée !");
             } else if (participation.getEtat() == -1) {
