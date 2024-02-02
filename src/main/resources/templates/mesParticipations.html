@@ -182,11 +182,17 @@
             </div>
             <div class="d-flex justify-content-start">
               <p class="fs-14 mt-0">Nombre des participants: &nbsp;</p>
-              <div th:if="${participation.nbParticipant > 0}"class="fs-14 c-grey">
+              <div th:if="${participation.nbParticipant > 0}" class="fs-14 c-grey">
                 <span th:text="${participation.nbParticipant}"></span>
               </div>
               <div th:if="${participation.nbParticipant == 0}" class="fs-14 c-red">
                 <span th:text="${participation.nbParticipant}"></span>
+              </div>
+            </div>
+            <div class="d-flex justify-content-start">
+              <p class="fs-14 mt-0">Mon tour: &nbsp;</p>
+              <div class="fs-14 c-grey">
+                <span th:text="${participation.tour}"></span>
               </div>
             </div>
           </div>

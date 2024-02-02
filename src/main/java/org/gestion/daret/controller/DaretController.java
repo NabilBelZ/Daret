@@ -103,6 +103,7 @@ public class DaretController {
         Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
+            //double soldeCheck = user.getSolde();
             model.addAttribute("user", user);
             List<Daret> tontines = daretRepository.findAllByEtatIsTrueOrderByIdDesc();
             model.addAttribute("tontines", tontines);

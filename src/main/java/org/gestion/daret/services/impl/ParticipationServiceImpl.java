@@ -70,6 +70,7 @@ public class ParticipationServiceImpl implements ParticipationService {
             mesParticipationDto.setNbParticipant(participation.getDaret().getNbParticipant());
             mesParticipationDto.setDescriptionDaret(participation.getDaret().getDescription());
             mesParticipationDto.setMontantParticipation(participation.getMontantParticipation());
+            mesParticipationDto.setTour(participation.getTour());
 
             mesParticipationDtos.add(mesParticipationDto);
         }
@@ -184,7 +185,8 @@ public class ParticipationServiceImpl implements ParticipationService {
     @Override
     public String accepterDemande2(int id_participation, int id_daret, RedirectAttributes redirectAttributes){
         Optional<Participation> optionalParticipation = participationRepository.findById(id_participation);
-
+        User user = optionalParticipation.get().getUser();
+        int userId = user.getId();
         optionalParticipation.ifPresent(participation -> {
             if (participation.getEtat() == 0 || participation.getEtat() == -1) {
                 participation.setEtat(1);
@@ -192,6 +194,13 @@ public class ParticipationServiceImpl implements ParticipationService {
                     Daret daret = daretRepository.findById(id_daret).orElseThrow(()-> new Exception("Daret not found!"));
                     daret.setNbParticipant(daret.getNbParticipant() + 1);
                     daretRepository.save(daret);
+
+                    User user2 = userRepository.findById(userId).orElseThrow(()-> new Exception("user not found"));
+                    double nvSolde = user2.getSolde() - daret.getMontantTotal();
+                    user2.setSolde(nvSolde);
+
+                    userRepository.save(user2);
+
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

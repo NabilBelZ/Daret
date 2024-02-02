@@ -190,12 +190,16 @@
                     <span style="background-color: #DF4881FF" class="title bg-green c-white btn-shape">
                         <th:block th:with="now=${#calendars.createNow().time}">
                             <a href="#" style="color: white;"
-                               th:if="${session.role != null and now < tontine.dateDemarrage}"
+                               th:if="${session.role != null and now < tontine.dateDemarrage and user.solde >= tontine.montantTotal}"
                                th:data-bs-toggle="modal" th:data-bs-target="'#participationModal' + ${tontine.id}">Participer
                             </a>
                             <a href="#" style="color: white;"
                                th:if="${session.role == null and now < tontine.dateDemarrage}"
                                th:data-bs-toggle="modal" th:data-bs-target="'#erreur_message'">Participer
+                            </a>
+                            <a href="#" style="color: white;"
+                               th:if="${session.role != null and now < tontine.dateDemarrage and user.solde < tontine.montantTotal}"
+                               th:data-bs-toggle="modal" th:data-bs-target="'#soldErreur'">Participer
                             </a>
                             <a href="#" style="color: white;" th:if="${now > tontine.dateDemarrage}" data-bs-toggle="modal" data-bs-target="#erreur_finDelai">Participer</a>
                         </th:block>
@@ -206,7 +210,7 @@
                     </span>
 
                     <span class="c-red" th:text="${tontine.montantTotal} + ' Dh'"></span>
-
+                    <!-- Modals -->
                     <div class="modal fade" id="erreur_finDelai" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="participationModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -236,6 +240,22 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary tahiri"  data-bs-dismiss="modal">Fermer</button>
                                     <a class="btn btn-primary" href="/login">Login</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="soldErreur" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="participationModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Solde insuffisant !</h5>
+                                    <button type="button" class="btn-close tahiri"  data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Vous ne pouvez pas candidater à cette tontine car vous n'avez pas assez de solde. <br> Pensez à recharger votre Wallet!
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary tahiri"  data-bs-dismiss="modal">Fermer</button>
                                 </div>
                             </div>
                         </div>

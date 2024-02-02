@@ -95,7 +95,6 @@ public class ParticipationController {
 
         Participation newparticipation = new Participation();
         newparticipation.setEtat(0);
-
         Optional<Daret> daret = daretRepository.findById(participation.getId());
         if (daret.isPresent()) {
             Participation p = new Participation();
@@ -106,6 +105,7 @@ public class ParticipationController {
             User user = userRepository.findById((Integer) session.getAttribute("userId")).orElseThrow(()-> new Exception("user not found!"));
             p.setUser(user);
             participationRepository.save(p);
+            double soldeCheck = user.getSolde();
             redirectAttributes.addFlashAttribute("msgsuccess", "Votre demande a été envoyée !");
         }
         return "redirect:/listeTontines";
