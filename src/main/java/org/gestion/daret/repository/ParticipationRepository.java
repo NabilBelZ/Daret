@@ -20,4 +20,7 @@ public interface ParticipationRepository extends JpaRepository<Participation, In
     Participation findByDaretIdAndUserId(int idDaret, int userId);
 
     Optional<Integer> findDaretIdById(int participationId);
+
+    Optional<Participation> findById(int id);
+
 }

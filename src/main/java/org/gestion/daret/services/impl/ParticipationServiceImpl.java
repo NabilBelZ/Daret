@@ -70,15 +70,17 @@ public class ParticipationServiceImpl implements ParticipationService {
         }
         return mesParticipationDtos;
     }
-
-    private List<ParticipationDto> convertToDtoList(List<Participation> participations) {
+@Override
+    public List<ParticipationDto> convertToDtoList(List<Participation> participations) {
         List<ParticipationDto> participationDtoList = new ArrayList<>();
         for (Participation participation : participations) {
             ParticipationDto participationDto = new ParticipationDto();
             Daret daret = participation.getDaret();
             participationDto.setId(participation.getId());
+            participationDto.setTour(participation.getTour());
             participationDto.setIdDaret(daret.getId());
             participationDto.setNomDaret(daret.getNom());
+            participationDto.setMontantTotalDaret(daret.getMontantTotal());
             User user = participation.getUser();
             participationDto.setNomUser(user.getLastname());
             participationDto.setPrenomUser(user.getFirstname());
@@ -94,6 +96,7 @@ public class ParticipationServiceImpl implements ParticipationService {
         Optional<Participation> optionalParticipation = participationRepository.findById(id);
         optionalParticipation.ifPresent(participation -> {
             if (participation.getEtat() == 0 || participation.getEtat() == 1) {
+                participation.setEtat(-1);
                 try {
                     Daret daret = daretRepository.findById(id_daret).orElseThrow(()-> new Exception("Daret not found!"));
                     if(participation.getEtat() == 1){
@@ -223,6 +226,7 @@ public class ParticipationServiceImpl implements ParticipationService {
                         daret.setNbParticipant(daret.getNbParticipant() - 1);
                         daretRepository.save(daret);
                     }
+
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

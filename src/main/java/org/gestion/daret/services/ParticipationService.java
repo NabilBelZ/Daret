@@ -33,7 +33,10 @@ public interface ParticipationService {
     public String supprimerDemande2(int id, int id_daret, RedirectAttributes redirectAttributes);
 
     public List<ParticipationDto> getMembreDaret(int id);
+
     List<MesParticipationDto> getMesParticipations(int userId);
+
+    public List<ParticipationDto> convertToDtoList(List<Participation> participations);
 
 
 }

@@ -25,4 +25,6 @@ public class Tour {
     private Daret daret;
     @ManyToOne
     private Participation participation;
+   //@ManyToOne
+   //private Membre Membre;
 }

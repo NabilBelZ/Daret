@@ -24,8 +24,11 @@ public class Participation {
     @ManyToOne
     private User user;
 
+    //@OneToMany
     @ManyToMany
     private List<Membre> membre;
+
+
 
     private float montantParticipation;
 

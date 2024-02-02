@@ -70,6 +70,56 @@
                 </a>
             </li>
             <li>
+                <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="#" th:data-bs-toggle="modal" th:data-bs-target="'#wallet'">
+                    <i><img style="width: 19px" src="/images/wallet.png"></i>
+                    <span>Wallet</span>
+                </a>
+                <div class="modal fade" id="wallet" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="participationModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Wallet</h5>
+                                <button type="button" class="btn-close tahiri"  data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" style="text-align: center">
+                                Votre sole actuelle est <br>
+                                <div class="wallet">
+                                    <h4  style="color: green"><b th:text="${user.solde}"></b> Dh</h4>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#" th:data-bs-toggle="modal" th:data-bs-target="'#ajoutSolde'" class="btn btn-success" onmouseover="this.style.backgroundColor='#198754';">Ajouter solde</a>
+                                <button type="button" class="btn btn-secondary tahiri" data-bs-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- MODAL : Ajouter solde -->
+                <div class="modal fade" id="ajoutSolde" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="participationModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Wallet</h5>
+                                <button type="button" class="btn-close tahiri"  data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" style="text-align: center">
+                                <form action="/ajouterSoldeProcess" method="post">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="amount">
+                                        <span class="input-group-text">Dh</span>
+                                    </div>
+                                    <br>
+                                    <input type="submit" value="Ajouter" class="btn btn-success">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary tahiri" data-bs-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
                 <a class=" d-flex align-center fs-14 c-black rad-6 p-10" href="/mesParticipations">
                     <i><img style="width: 19px" src="/images/10559921_contribution_donation_charity_grant_financial_icon.png"></i>
                     <span>Mes participations</span>

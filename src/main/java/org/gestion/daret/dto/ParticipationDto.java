@@ -17,4 +17,5 @@ public class ParticipationDto {
     private float montantParticipation;
     private int etat;
     private int tour;
+    private float montantTotalDaret;
 }

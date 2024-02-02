@@ -5,6 +5,7 @@ import org.gestion.daret.dto.DaretDto;
 import org.gestion.daret.dto.UserDto;
 import org.gestion.daret.models.Daret;
 import org.gestion.daret.models.Participation;
+import org.gestion.daret.models.User;
 import org.gestion.daret.repository.DaretRepository;
 import org.gestion.daret.repository.ParticipationRepository;
 import org.gestion.daret.repository.UserRepository;
@@ -22,6 +23,7 @@ import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 
@@ -29,6 +31,9 @@ public class DaretController {
 
     @Autowired
     private DaretRepository daretRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private DaretService daretService;
@@ -93,11 +98,18 @@ public class DaretController {
     }
 
     @GetMapping("/listeTontines")
-    public String listeDesTontines(HttpSession session, Model model){
-        List<Daret> tontines = daretRepository.findAllByEtatIsTrueOrderByIdDesc();
-        model.addAttribute("tontines", tontines);
+    public String listeDesTontines(HttpSession session, Model model) {
+        int userId = (int) session.getAttribute("userId");
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            model.addAttribute("user", user);
+            List<Daret> tontines = daretRepository.findAllByEtatIsTrueOrderByIdDesc();
+            model.addAttribute("tontines", tontines);
+        }
         return "listeTontines";
     }
+
 
     @GetMapping("/tontineDetails")
     public String DetailsTontine(HttpSession session){

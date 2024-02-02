@@ -11,6 +11,7 @@ import org.gestion.daret.repository.DaretRepository;
 import org.gestion.daret.repository.ParticipationRepository;
 import org.gestion.daret.repository.UserRepository;
 import org.gestion.daret.services.ParticipationService;
+import org.gestion.daret.services.UserService;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,9 @@ public class ParticipationController {
     private ParticipationRepository participationRepository;
     @Autowired
     private ParticipationService participationService;
+    @Autowired
+    private UserService userService;
+
 
     @Autowired
     private DaretRepository daretRepository;
@@ -161,15 +165,17 @@ public class ParticipationController {
     @GetMapping("/mesParticipations")
     public String getMesParticipations(HttpSession session, Model model) {
         int userId = (int) session.getAttribute("userId");
-
-        List<MesParticipationDto> mesParticipations = participationService.getMesParticipations(userId);
-        if(mesParticipations.isEmpty()){
-            model.addAttribute("message", "Vous n'avez pris part à aucune tontine.");
-        }else{
-            model.addAttribute("mesParticipations", mesParticipations);
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            model.addAttribute("user", user);
+            List<MesParticipationDto> mesParticipations = participationService.getMesParticipations(userId);
+            if (mesParticipations.isEmpty()) {
+                model.addAttribute("message", "Vous n'avez pris part à aucune daret.");
+            } else {
+                model.addAttribute("mesParticipations", mesParticipations);
+            }
         }
-
-
         return "mesParticipations";
     }
 
@@ -178,55 +184,70 @@ public class ParticipationController {
 
         List<ParticipationDto> participations = participationService.getMembreDaret(id_daret);
         List<ParticipationDto> listParticipantValides = new ArrayList<>();
-        int nbParticipantsValides = 0;
 
         for (ParticipationDto participationDto : participations) {
             if (participationDto.getEtat() == 1) {
                 listParticipantValides.add(participationDto);
-                nbParticipantsValides++;
             }
         }
 
+        int nbParticipantsValides = listParticipantValides.size();
         Random random = new Random();
+
         for (ParticipationDto participationDto : listParticipantValides) {
             int tour;
-            boolean tourExiste;
+            boolean tourExists;
             do {
                 tour = random.nextInt(nbParticipantsValides) + 1;
-                tourExiste = false;
+                tourExists = false;
                 for (ParticipationDto otherParticipant : listParticipantValides) {
                     if (otherParticipant.getTour() == tour && otherParticipant != participationDto) {
-                        tourExiste = true;
+                        tourExists = true;
                         break;
                     }
                 }
-            } while (tourExiste);
+            } while (tourExists);
 
             participationDto.setTour(tour);
-        }
 
-        // Ajouter les participations non valides à la liste
-        for (ParticipationDto participationDto : participations) {
-            if (participationDto.getEtat() != 1) {
-                listParticipantValides.add(participationDto);
+            Optional<Participation> optionalParticipation = participationRepository.findById(participationDto.getId());
+            if (optionalParticipation.isPresent()) {
+                Participation participation = optionalParticipation.get();
+                participation.setTour(participationDto.getTour());
+                participationRepository.save(participation);
             }
         }
 
+        // Ajouter les participations non valides à la liste
+        List<ParticipationDto> listParticipantNonValides = new ArrayList<>();
+        for (ParticipationDto participationDto : participations) {
+            if (participationDto.getEtat() != 1) {
+                listParticipantNonValides.add(participationDto);
+            }
+        }
+
+        listParticipantValides.addAll(listParticipantNonValides);
+
+        // Mettre à jour le modèle avec la liste mise à jour
         model.addAttribute("participations", listParticipantValides);
 
+        // Calculer la somme des cotisations
         float sommeCotisation = 0;
         for (ParticipationDto participationDto : listParticipantValides) {
             if (participationDto.getEtat() == 1) {
                 sommeCotisation += participationDto.getMontantParticipation();
             }
         }
+
         model.addAttribute("sommeCotisation", sommeCotisation);
 
-
-
+        // Retourner la vue
         return "membreDaret";
     }
 
-
-
 }
+
+
+
+
+

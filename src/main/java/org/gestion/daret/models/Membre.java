@@ -25,4 +25,6 @@ public class Membre {
    // private List<Tour> tourDeRole;
     @ManyToMany
     private List<Participation> participations;
+    //@OneToMany
+    //private Participation participation;
 }
