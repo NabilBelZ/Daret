@@ -284,7 +284,7 @@ public class ParticipationController {
             }
         }
 
-        // Redirect to the specified URL after processing
+
         return "redirect:/membreDaret/" + id_daret;
     }
 
