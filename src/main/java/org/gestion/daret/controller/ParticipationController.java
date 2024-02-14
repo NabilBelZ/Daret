@@ -288,7 +288,6 @@ public class ParticipationController {
         return "redirect:/membreDaret/" + id_daret;
     }
 
-
 }
 
 
