@@ -281,8 +281,6 @@ public class ParticipationController {
                     p.setMontantRecu("oui");
                     participationRepository.save(p);
                 }
-
-
             }
         }
 
