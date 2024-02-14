@@ -267,18 +267,50 @@ public class ParticipationServiceImpl implements ParticipationService {
         redirectAttributes.addAttribute("id_daret", id_daret);
         return "redirect:/membreDaret/{id_daret}";
     }
-
     @Override
-    public String supprimerDemande(int id, RedirectAttributes redirectAttributes){
-        participationRepository.deleteById(id);
-        redirectAttributes.addFlashAttribute("msgSuppression","La demande a été supprimée");
+    public String supprimerDemande(int id, int id_daret, RedirectAttributes redirectAttributes){
+        Optional<Participation> optionalParticipation = participationRepository.findById(id);
+
+        optionalParticipation.ifPresent(participation -> {
+            try {
+                Daret daret = daretRepository.findById(id_daret).orElseThrow(() -> new Exception("Daret not found!"));
+
+                if (participation.getEtat() == 1) {
+                    daret.setNbParticipant(daret.getNbParticipant() - 1);
+                    daretRepository.save(daret);
+                }
+
+                participationRepository.deleteById(id);
+                redirectAttributes.addFlashAttribute("msgSuppression", "La demande a été supprimée");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        redirectAttributes.addAttribute("id_daret", id_daret);
         return "redirect:/listDemandesParticipation";
     }
 
     @Override
-    public String supprimerDemande2(int id, int id_daret, RedirectAttributes redirectAttributes){
-        participationRepository.deleteById(id);
-        redirectAttributes.addFlashAttribute("msgSuppression", "La demande a été supprimée");
+    public String supprimerDemande2(int id, int id_daret, RedirectAttributes redirectAttributes) {
+        Optional<Participation> optionalParticipation = participationRepository.findById(id);
+
+        optionalParticipation.ifPresent(participation -> {
+            try {
+                Daret daret = daretRepository.findById(id_daret).orElseThrow(() -> new Exception("Daret not found!"));
+
+                if (participation.getEtat() == 1) {
+                    daret.setNbParticipant(daret.getNbParticipant() - 1);
+                    daretRepository.save(daret);
+                }
+
+                participationRepository.deleteById(id);
+                redirectAttributes.addFlashAttribute("msgSuppression", "La demande a été supprimée");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         redirectAttributes.addAttribute("id_daret", id_daret);
         return "redirect:/membreDaret/{id_daret}";
     }

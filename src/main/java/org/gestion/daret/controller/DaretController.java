@@ -99,12 +99,18 @@ public class DaretController {
 
     @GetMapping("/listeTontines")
     public String listeDesTontines(HttpSession session, Model model) {
-        int userId = (int) session.getAttribute("userId");
-        Optional<User> optionalUser = userRepository.findById(userId);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            //double soldeCheck = user.getSolde();
-            model.addAttribute("user", user);
+        if(session.getAttributeNames().hasMoreElements()){
+            int userId = (int) session.getAttribute("userId");
+            Optional<User> optionalUser = userRepository.findById(userId);
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+                //double soldeCheck = user.getSolde();
+                model.addAttribute("user", user);
+                List<Daret> tontines = daretRepository.findAllByEtatIsTrueOrderByIdDesc();
+                model.addAttribute("tontines", tontines);
+            }
+        }
+        else{
             List<Daret> tontines = daretRepository.findAllByEtatIsTrueOrderByIdDesc();
             model.addAttribute("tontines", tontines);
         }

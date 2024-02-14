@@ -29,7 +29,7 @@ public interface ParticipationService {
 
     public String mettreEnAttenteDemande2(int id, int id_daret, RedirectAttributes redirectAttributes);
 
-    public String supprimerDemande(int id, RedirectAttributes redirectAttributes);
+    public String supprimerDemande(int id, int id_daret, RedirectAttributes redirectAttributes);
 
     public String supprimerDemande2(int id, int id_daret, RedirectAttributes redirectAttributes);
 

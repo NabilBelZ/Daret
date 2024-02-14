@@ -75,13 +75,13 @@ public class ParticipationController {
         return participationService.mettreEnAttenteDemande2(id, id_daret, redirectAttributes);
     }
 
-    @GetMapping("/supprimerDemande/{id}")
-    public String deleteDemande(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
-        return participationService.supprimerDemande(id, redirectAttributes);
+    @GetMapping("/supprimerDemande/{id}/{idDaret}")
+    public String deleteDemande(@PathVariable("id") int id, @PathVariable("idDaret") int idDaret,RedirectAttributes redirectAttributes){
+        return participationService.supprimerDemande(id, idDaret,redirectAttributes);
     }
 
     @GetMapping("/supprimerDemande2/{id}/{idDaret}")
-    public String deleteDemande(@PathVariable("id") int id, @PathVariable("idDaret") int idDaret, RedirectAttributes redirectAttributes){
+    public String deleteDemande2(@PathVariable("id") int id, @PathVariable("idDaret") int idDaret, RedirectAttributes redirectAttributes){
         return participationService.supprimerDemande2(id, idDaret, redirectAttributes);
     }
 
